@@ -1,0 +1,43 @@
+.MarkdownRenderer h1 {
+    @apply text-3xl font-bold my-4;
+}
+
+.MarkdownRenderer h2 {
+    @apply text-2xl font-bold my-3;
+}
+
+.MarkdownRenderer h3 {
+    @apply text-xl font-bold my-2;
+}
+
+.MarkdownRenderer h4 {
+    @apply text-lg font-bold my-2;
+}
+
+.MarkdownRenderer h5 {
+    @apply text-base font-bold my-2;
+}
+
+.MarkdownRenderer h6 {
+    @apply text-sm font-bold my-2;
+}
+
+.MarkdownRenderer p {
+    @apply my-4;
+}
+
+.MarkdownRenderer ol {
+    @apply list-decimal list-inside pl-2 my-2.5;
+}
+
+.MarkdownRenderer ul {
+    @apply list-disc list-inside pl-2 my-2.5;
+}
+
+.MarkdownRenderer pre {
+    @apply p-4 bg-secondary break-words rounded-md my-4 whitespace-break-spaces text-sm border;
+}
+
+.MarkdownRenderer .document-link {
+    @apply p-4 border rounded block my-2 font-medium text-xs bg-gray-50 hover:bg-gray-100/50 transition-colors;
+}
