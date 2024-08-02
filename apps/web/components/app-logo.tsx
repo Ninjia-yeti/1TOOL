@@ -18,7 +18,15 @@ function LogoImage({
         height={32}
         className="w-[32px] lg:w-[32px] mr-2"
       />
-      <span>Zap Tech</span>
+      <span className='
+        text-xl
+        font-bold
+        text-primary
+        dark:text-primary/70
+        lg:text-xl
+        lg:font-bold
+        lg:tracking-wider
+      '>Imigr-e</span>
     </div>
   );
 }

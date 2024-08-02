@@ -21,10 +21,39 @@ import { Trans } from '@kit/ui/trans';
 import billingConfig from '~/config/billing.config';
 import pathsConfig from '~/config/paths.config';
 import { withI18n } from '~/lib/i18n/with-i18n';
+import { Dialog, DialogContent, DialogTrigger } from '@kit/ui/dialog';
 
 function Home() {
   return (
     <div className={'mt-4 flex flex-col space-y-24 py-14'}>
+      <section className="py-12 px-4">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+          Você está prestes a ser apresentado à Revolução no <span className="text-orange-500">Processamento</span> de Vistos Americanos
+          que vai redefinir o mercado de assessoria de imigração americana.
+        </h1>
+        <p className="text-lg md:text-xl mb-8">
+          Transforme Seu Escritório de Assessoria de Imigração Americana e Aumente Seus Lucros com a Imigr-e Vistos,
+          nossa Solução Avançada de Preenchimento e Envio Automático de Formulários (DS-160) para o Consulado Americano.
+        </p>
+        <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg">
+                CLIQUE E ASSISTA O VÍDEO
+              </button>
+            </DialogTrigger>
+            <DialogContent>
+              <video controls>
+                <source src="video-url.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </DialogContent>
+          </Dialog>
+          <button className="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg">
+            Pegue seu acesso ao Imigr-e Vistos
+          </button>
+        </div>
+      </section>
       <Hero
         pill={
           <Pill label={'New'}>
