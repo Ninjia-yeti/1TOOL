@@ -16,6 +16,7 @@ import { Trans } from '@kit/ui/trans';
 
 import featuresFlagConfig from '~/config/feature-flags.config';
 import pathsConfig from '~/config/paths.config';
+import Image from 'next/image';
 
 const ModeToggle = dynamic(
   () => import('@kit/ui/mode-toggle').then((mod) => mod.ModeToggle),
@@ -65,30 +66,45 @@ function SuspendedPersonalAccountDropdown(props: { user: User | null }) {
 
 function AuthButtons() {
   return (
-    <div className={'flex space-x-2'}>
-      <div className={'hidden space-x-0.5 md:flex'}>
-        <If condition={features.enableThemeToggle}>
+    <div className={'flex gap-12'}>
+      <div className={'hidden space-x-0.5 md:flex items-center '}>
+        {/* <If condition={features.enableThemeToggle}>
           <ModeToggle />
-        </If>
-
-        <Button asChild variant={'ghost'}>
+        </If> */}
+        <div
+          className='
+            flex
+            items-center
+            gap-4
+          '
+        >
+          <Image src='/images/Flag.svg' alt='flag' width={27} height={27} />
+          <span>English(US)</span>
+        </div>
+      </div>
+      <div
+        className='
+          flex
+          gap-4
+          items-center
+        '
+      >
+        <Button asChild variant={'outline'} className="group p-4 py-6 flex gap-4">
           <Link href={pathsConfig.auth.signIn}>
-            <Trans i18nKey={'auth:signIn'} />
+            {/* <Trans i18nKey={'auth:signIn'} /> */}
+            <Image src='/images/icons/User.svg' alt='flag' width={28} height={23} />
+            Entrar
+          </Link>
+        </Button>
+        <Button asChild className="group p-4 py-6 flex gap-4" variant={'default'}>
+          <Link href={pathsConfig.auth.signUp}>
+            {/* <Trans i18nKey={'auth:signUp'} /> */}
+            <Image src='/images/icons/Group.svg' alt='flag' width={28} height={23} />
+            Cadastre-se
           </Link>
         </Button>
       </div>
 
-      <Button asChild className="group" variant={'default'}>
-        <Link href={pathsConfig.auth.signUp}>
-          <Trans i18nKey={'auth:signUp'} />
-
-          <ArrowRightIcon
-            className={
-              'ml-1 hidden h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 lg:block'
-            }
-          />
-        </Link>
-      </Button>
     </div>
   );
 }

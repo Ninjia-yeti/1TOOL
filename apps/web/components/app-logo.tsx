@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 function LogoImage({
   className,
-  width = 105,
+  width = 224,
 }: {
   className?: string;
   width?: number;
@@ -12,21 +12,12 @@ function LogoImage({
   return (
     <div className={cn('flex items-center', className)}>
       <Image
-        src="/images/icon-logo-light.png"
+        src="/images/logo.png"
         alt="Imigre Logo"
         width={width}
-        height={32}
-        className="w-[32px] lg:w-[32px] mr-2"
+        height={167}
+        className="w-[224px] lg:w-[224px] mr-2"
       />
-      <span className='
-        text-xl
-        font-bold
-        text-primary
-        dark:text-primary/70
-        lg:text-xl
-        lg:font-bold
-        lg:tracking-wider
-      '>Imigr-e</span>
     </div>
   );
 }

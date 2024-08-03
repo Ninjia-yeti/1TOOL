@@ -15,25 +15,22 @@ import { SiteNavigationItem } from './site-navigation-item';
 
 const links = {
   Blog: {
-    label: 'marketing:blog',
+    label: 'A Imigr-e',
     path: '/blog',
   },
   Docs: {
-    label: 'marketing:documentation',
+    label: 'teste',
     path: '/docs',
   },
   Pricing: {
-    label: 'marketing:pricing',
+    label: 'Dúvidas?',
     path: '/pricing',
   },
   FAQ: {
-    label: 'marketing:faq',
+    label: 'Blog',
     path: '/faq',
   },
-  Contact: {
-    label: 'marketing:contact',
-    path: '/contact',
-  },
+
 };
 
 export function SiteNavigation() {
@@ -50,7 +47,7 @@ export function SiteNavigation() {
       <div className={'hidden items-center justify-center md:flex'}>
         <NavigationMenu
           className={
-            'rounded-full border border-gray-100 px-4 py-2 dark:border-primary/10'
+            'rounded-full px-4 py-2 '
           }
         >
           <NavigationMenuList className={'space-x-4'}>

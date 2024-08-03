@@ -12,7 +12,7 @@ async function SiteLayout(props: React.PropsWithChildren) {
   } = await client.auth.getUser();
 
   return (
-    <div className={'flex min-h-[100vh] flex-col'}>
+    <div className={'flex min-h-[100vh] flex-col min-w-[calc(90vw)]'}>
       <SiteHeader user={user} />
 
       {props.children}
