@@ -136,7 +136,14 @@ function Home() {
         </div>
         <div className='w-full flex items-center'>
           <div className='w-full border-[1px] border-white'></div>
-          <div className=' min-w-[70%] w-full border-[1px] border-white p-2 rounded-lg font-bold text-center'>
+          <div className='hidden md:block lg:block w-full border-[1px] border-white p-2 rounded-lg font-bold text-center'>
+            A hora de agir é
+            <span className='text-[#FE7638]'>
+              AGORA
+            </span>
+            !
+          </div>
+          <div className='block md:hidden lg:hidden min-w-[70%] w-full border-[1px] border-white p-2 rounded-lg font-bold text-center'>
             A hora de agir é
             <span className='text-[#FE7638]'>
               AGORA

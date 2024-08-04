@@ -3,11 +3,11 @@ import { Button } from "../../shadcn/button";
 import { Input } from "../../shadcn/input";
 export const Footer = () => {
   return (
-    <footer className=" text-white bg-[#1B2151] ">
-      <div className="px-60">
-        <div className="flex py-20 justify-between">
-          <div className="w-[40%]">
-            <div className="py-20">
+    <footer className=" text-white bg-[#1B2151] border-0">
+      <div className="hidden md:block lg:block px-60">
+        <div className="flex py-20 lg:flex-row md:flex-col justify-between">
+          <div className="w-full lg:w-[40%]">
+            <div className="py-20 pt-40">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
             </div>
             <div className="flex gap-4">
@@ -63,7 +63,7 @@ export const Footer = () => {
                     hello@imigre.ai
                   </div>
                 </div>
-                <Input placeholder="Digite o seu Email" className="bg-white py-8 w-[250px]" />
+                <Input placeholder="Digite o seu Email" className="bg-white text-black py-8 w-[250px]" />
                 <div>
                   <Button variant={'default'} className="bg-[#00B6FF] py-8 px-16">
                     Inscreva-se
@@ -75,10 +75,13 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="px-20">
-        <div className="px-20 py-8 border-t border-white/25 flex justify-between">
-          <div>Copyright © 2024 | Todos os direitos reservados | Imigr-e</div>
-          <div>Política de Privacidade | Termos de Uso | Legal | Vendas estornos | Sitemap</div>
+      <div className="px-4 md:px-20 lg:px-20">
+        <div className="px-4 md:px-20 lg:px-20 py-8 border-t border-white/25 flex flex-col md:flex-row lg:flex-row justify-between">
+          <div className="hidden md:block lg:block">Copyright © 2024 | Todos os direitos reservados | Imigr-e</div>
+          <div className="hidden md:block lg:block">Política de Privacidade | Termos de Uso | Legal | Vendas estornos | Sitemap</div>
+          <div className="block md:hidden lg:hidden w-full text-center">Copyright © 2024 </div>
+          <div className="block md:hidden lg:hidden w-full text-center">Todos os direitos reservados  imigr-e</div>
+
         </div>
       </div>
 
