@@ -14,6 +14,7 @@ export * from './newsletter-signup';
 export * from './newsletter-signup-container';
 export * from './sponsors';
 export * from './about';
-export * from './how-it-works';
+export * from './services';
 export * from './team';
 export * from './features';
+export * from './feedbacks';

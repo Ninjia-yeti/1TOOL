@@ -10,7 +10,8 @@ import {
   CtaButton,
   Features,
   Hero,
-  HowItWorks,
+  Services,
+  Feedbacks,
   Pill,
   SecondaryHero,
   Sponsors,
@@ -158,7 +159,7 @@ function Home() {
         <p className='text-center'>
           Apresentamos a solução que irá revolucionar seu escritório e <br /> colocá-lo à frente da concorrência.
         </p>
-        <HowItWorks />
+        <Services />
         <div className='flex w-full px-2 md:px-4 lg:px-4 justify-center'>
           <CtaButton className='py-4 md:py-7 lg:py-7 bg-[#FE7638] '>
             <Link href={'/'} className=''>
@@ -177,6 +178,7 @@ function Home() {
       <Features />
       <About />
       <Team /> */}
+      <Feedbacks />
 
       <div className='bg-[#1B2151] py-16 w-full text-white'>
         <div className='text-center'>

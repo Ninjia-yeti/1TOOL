@@ -63,7 +63,7 @@ export const Footer = () => {
                     hello@imigre.ai
                   </div>
                 </div>
-                <Input placeholder="Digite o seu Email" className="bg-white text-black py-8 w-[250px]" />
+                <Input placeholder="Digite o seu Email" className="bg-white text-black py-8 w-[300px]" />
                 <div>
                   <Button variant={'default'} className="bg-[#00B6FF] py-8 px-16">
                     Inscreva-se
