@@ -66,8 +66,8 @@ function SuspendedPersonalAccountDropdown(props: { user: User | null }) {
 
 function AuthButtons() {
   return (
-    <div className={'flex gap-12'}>
-      <div className={'hidden space-x-0.5 md:flex items-center '}>
+    <div className={'flex gap-6'}>
+      <div className={'hidden space-x-0.5 lg:flex items-center '}>
         {/* <If condition={features.enableThemeToggle}>
           <ModeToggle />
         </If> */}
@@ -79,13 +79,13 @@ function AuthButtons() {
           '
         >
           <Image src='/images/Flag.svg' alt='flag' width={27} height={27} />
-          <span>English(US)</span>
+          <span className='hidden  lg:block'>English(US)</span>
         </div>
       </div>
       <div
         className='
           flex
-          gap-4
+          gap-2
           items-center
         '
       >
