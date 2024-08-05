@@ -11,6 +11,7 @@ import { generateRootMetadata } from '~/lib/root-metdata';
 import { Chatbot } from '@kit/chatbot';
 
 import '../styles/globals.css';
+import '../styles/carousel.css';
 
 export default async function RootLayout({
   children,

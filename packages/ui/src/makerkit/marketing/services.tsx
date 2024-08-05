@@ -1,11 +1,10 @@
 'use client'
 import { Card, CardContent, CardHeader, CardTitle } from "../../shadcn/card";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -103,7 +102,7 @@ export const Services = () => {
       <div className="hidden  lg:block w-full">
         <Slider {...settings}>
           {features.map(({ icon, title, description }: FeatureProps) => (
-            <div className="p-4">
+            <div key={title} className="p-4">
               <Card
                 key={title}
                 className="text-white border-[#464F97] h-[350px]"
@@ -125,7 +124,7 @@ export const Services = () => {
       <div className="hidden md:block lg:hidden w-full">
         <Slider {...settings} slidesToShow={3}>
           {features.map(({ icon, title, description }: FeatureProps) => (
-            <div className="p-4">
+            <div key={title} className="p-4">
               <Card
                 key={title}
                 className="text-white border-[#464F97] h-[420px]"
@@ -153,7 +152,7 @@ export const Services = () => {
           prevArrow={SamplePrevArrow()}
         >
           {features.map(({ icon, title, description }: FeatureProps) => (
-            <div className="p-4">
+            <div key={title} className="p-4">
               <Card
                 key={title}
                 className="text-white border-[#464F97] "

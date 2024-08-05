@@ -210,31 +210,3 @@ function Home() {
 
 export default withI18n(Home);
 
-function MainCallToActionButton() {
-  return (
-    <div className={'flex space-x-4'}>
-      <CtaButton>
-        <Link href={'/auth/sign-up'}>
-          <span className={'flex items-center space-x-0.5'}>
-            <span>
-              <Trans i18nKey={'common:getStarted'} />
-            </span>
-
-            <ArrowRightIcon
-              className={
-                'h-4 animate-in fade-in slide-in-from-left-8' +
-                ' delay-1000 duration-1000 zoom-in fill-mode-both'
-              }
-            />
-          </span>
-        </Link>
-      </CtaButton>
-
-      <CtaButton variant={'link'}>
-        <Link href={'/contact'}>
-          <Trans i18nKey={'common:contactUs'} />
-        </Link>
-      </CtaButton>
-    </div>
-  );
-}
