@@ -174,8 +174,9 @@ function Home() {
           </CtaButton>
         </div>
       </div>
-      <Feedbacks />
-
+      <div className='relative w-full  text-white '>
+        <Feedbacks />
+      </div>
       <div className='bg-[#1B2151] py-16 w-full text-white'>
         <div className='text-center'>
           <p className='text-2xl py-16  md:text-4xl lg:text-4xl  sm:px-4 md:px-0 lg:px-0 text-center font-bold'>

@@ -66,12 +66,12 @@ interface ArrowProps {
   onClick: () => void
 }
 
-function SampleNextArrow(props?: ArrowProps) {
+function NextArrow(props?: ArrowProps) {
   const receivedProps = props ?? { className: '', style: {}, onClick: () => { } };
   const { className, onClick } = receivedProps;
   return (
     <div
-      className={`${className} text-white`}
+      className={`${className} text-[#00B6FF]`}
       onClick={onClick}
     >
       <ChevronRight />
@@ -79,13 +79,12 @@ function SampleNextArrow(props?: ArrowProps) {
   );
 }
 
-function SamplePrevArrow(props?: ArrowProps) {
+function PrevArrow(props?: ArrowProps) {
   const receivedProps = props ?? { className: '', style: {}, onClick: () => { } };
   const { className, style, onClick } = receivedProps;
   return (
     <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
+      className={`${className} text-[#00B6FF]`}
       onClick={onClick}
     >
       <ChevronLeft />
@@ -148,8 +147,8 @@ export const Services = () => {
           {...settings}
           slidesToShow={1}
           arrows={true}
-          nextArrow={SampleNextArrow()}
-          prevArrow={SamplePrevArrow()}
+          nextArrow={NextArrow()}
+          prevArrow={PrevArrow()}
         >
           {features.map(({ icon, title, description }: FeatureProps) => (
             <div key={title} className="p-4">
