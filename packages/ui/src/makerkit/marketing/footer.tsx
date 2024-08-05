@@ -1,95 +1,92 @@
-import { forwardRef } from 'react';
-
-import { cn } from '../../utils';
-
-interface FooterSection {
-  heading: React.ReactNode;
-  links: Array<{
-    href: string;
-    label: React.ReactNode;
-  }>;
-}
-
-interface FooterProps extends React.HTMLAttributes<HTMLElement> {
-  logo: React.ReactNode;
-  description: React.ReactNode;
-  copyright: React.ReactNode;
-  sections: FooterSection[];
-}
-
-export const Footer = forwardRef<HTMLElement, FooterProps>(
-  function MarketingFooterComponent(
-    { className, logo, description, copyright, sections, ...props },
-    ref,
-  ) {
-    return (
-      <footer
-        ref={ref}
-        className={cn(
-          'site-footer relative mt-auto w-full py-8 2xl:py-16',
-          className,
-        )}
-        {...props}
-      >
-        <div className="container">
-          <div className="flex flex-col space-y-8 lg:flex-row lg:space-y-0">
-            <div className="flex w-full space-x-2 lg:w-4/12 xl:w-4/12 xl:space-x-6 2xl:space-x-8">
-              <div className="flex flex-col space-y-4">
-                <div>{logo}</div>
-                <div className="flex flex-col space-y-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground">
-                      {description}
-                    </p>
-                  </div>
-                  <div className="flex text-xs text-muted-foreground">
-                    <p>{copyright}</p>
+import Image from "next/image";
+import { Button } from "../../shadcn/button";
+import { Input } from "../../shadcn/input";
+export const Footer = () => {
+  return (
+    <footer className=" text-white bg-[#1B2151] border-0">
+      <div className="hidden md:block lg:block px-60">
+        <div className="flex py-20 lg:flex-row md:flex-col justify-between">
+          <div className="w-full lg:w-[40%]">
+            <div className="py-20 pt-40">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+            </div>
+            <div className="flex gap-4">
+              <Image alt="social" src='/images/socials/social_1.svg' width={40} height={40} />
+              <Image alt="social" src='/images/socials/social_2.svg' width={40} height={40} />
+              <Image alt="social" src='/images/socials/social_3.svg' width={40} height={40} />
+              <Image alt="social" src='/images/socials/social_4.svg' width={40} height={40} />
+              <Image alt="social" src='/images/socials/social_5.svg' width={40} height={40} />
+              <Image alt="social" src='/images/socials/social_6.svg' width={40} height={40} />
+            </div>
+          </div>
+          <div className="flex gap-20">
+            <div>
+              <div className="text-2xl py-20 font-bold">
+                Institucional
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-4 items-center">
+                  <Image alt="triangle" src={'/images/Icons/Triangle.svg'} width={10} height={10}></Image>
+                  <div className="flex gap-4">
+                    Nossos Processos
                   </div>
                 </div>
+                <div className="flex gap-4 items-center">
+                  <Image alt="triangle" src={'/images/Icons/Triangle.svg'} width={10} height={10}></Image>
+                  <div className="flex gap-4">
+                    Blog
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center">
+                  <Image alt="triangle" src={'/images/Icons/Triangle.svg'} width={10} height={10}></Image>
+                  <div className="flex gap-4">
+                    Comunidade
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center">
+                  <Image alt="triangle" src={'/images/Icons/Triangle.svg'} width={10} height={10}></Image>
+                  <div className="flex gap-4">
+                    Quem Somos
+                  </div>
+                </div>
+
               </div>
             </div>
-
-            <div className="flex w-full flex-col space-y-8 lg:flex-row lg:justify-end lg:space-x-6 lg:space-y-0 xl:space-x-16">
-              {sections.map((section, index) => (
-                <div key={index}>
-                  <div className="flex flex-col space-y-2.5">
-                    <FooterSectionHeading>
-                      {section.heading}
-                    </FooterSectionHeading>
-
-                    <FooterSectionList>
-                      {section.links.map((link, linkIndex) => (
-                        <FooterLink key={linkIndex} href={link.href}>
-                          {link.label}
-                        </FooterLink>
-                      ))}
-                    </FooterSectionList>
+            <div>
+              <div className="text-2xl py-20 font-bold">
+                Contato
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-4 items-center">
+                  <Image alt="triangle" src={'/images/Icons/Mail.svg'} width={20} height={20}></Image>
+                  <div className="flex gap-4">
+                    hello@imigre.ai
                   </div>
                 </div>
-              ))}
+                <Input placeholder="Digite o seu Email" className="bg-white text-black py-8 w-[300px]" />
+                <div>
+                  <Button variant={'default'} className="bg-[#00B6FF] py-8 px-16">
+                    Inscreva-se
+                  </Button>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
-      </footer>
-    );
-  },
-);
+      </div>
+      <div className="px-4 md:px-20 lg:px-20">
+        <div className="px-4 md:px-20 lg:px-20 py-8 border-t border-white/25 flex flex-col md:flex-row lg:flex-row justify-between">
+          <div className="hidden md:block lg:block">Copyright © 2024 | Todos os direitos reservados | Imigr-e</div>
+          <div className="hidden md:block lg:block">Política de Privacidade | Termos de Uso | Legal | Vendas estornos | Sitemap</div>
+          <div className="block md:hidden lg:hidden w-full text-center">Copyright © 2024 </div>
+          <div className="block md:hidden lg:hidden w-full text-center">Todos os direitos reservados  imigr-e</div>
 
-function FooterSectionHeading(props: React.PropsWithChildren) {
-  return <span className="font-heading">{props.children}</span>;
-}
+        </div>
+      </div>
 
-function FooterSectionList(props: React.PropsWithChildren) {
-  return <ul className="flex flex-col space-y-2.5">{props.children}</ul>;
-}
-
-function FooterLink({
-  href,
-  children,
-}: React.PropsWithChildren<{ href: string }>) {
-  return (
-    <li className="text-sm text-muted-foreground hover:underline [&>a]:transition-colors">
-      <a href={href}>{children}</a>
-    </li>
+    </footer >
   );
 }
+
+

@@ -44,7 +44,7 @@ export function SiteNavigation() {
 
   return (
     <>
-      <div className={'hidden items-center justify-center md:flex'}>
+      <div className={'hidden items-center justify-center lg:flex'}>
         <NavigationMenu
           className={
             'rounded-full px-4 py-2 '
@@ -56,7 +56,7 @@ export function SiteNavigation() {
         </NavigationMenu>
       </div>
 
-      <div className={'flex justify-start sm:items-center md:hidden'}>
+      <div className={'flex justify-start sm:items-center lg:hidden'}>
         <MobileDropdown />
       </div>
     </>
