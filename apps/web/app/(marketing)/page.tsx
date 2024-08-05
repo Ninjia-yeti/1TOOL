@@ -153,10 +153,10 @@ function Home() {
           </div>
           <div className='w-full border-[1px] border-white'></div>
         </div>
-        <p className='font-bold text-4xl text-center'>
+        <p className='font-bold text-4xl px-4 text-center'>
           Se você deseja aumentar sua eficiência, reduzir custos e expandir seus serviços.
         </p>
-        <p className='text-center'>
+        <p className='text-center px-4'>
           Apresentamos a solução que irá revolucionar seu escritório e <br /> colocá-lo à frente da concorrência.
         </p>
         <Services />
