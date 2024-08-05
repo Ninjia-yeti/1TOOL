@@ -174,10 +174,6 @@ function Home() {
           </CtaButton>
         </div>
       </div>
-      {/* <Sponsors />
-      <Features />
-      <About />
-      <Team /> */}
       <Feedbacks />
 
       <div className='bg-[#1B2151] py-16 w-full text-white'>

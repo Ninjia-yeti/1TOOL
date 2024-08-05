@@ -3,9 +3,6 @@ import { GiftIcon, MapIcon, MedalIcon, PlaneIcon } from "./icons";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
-import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -47,38 +44,6 @@ const features: FeatureProps[] = [
     },
 ];
 
-// interface ArrowProps {
-//     className: string,
-//     style: object,
-//     onClick: () => void
-// }
-
-// function SampleNextArrow(props?: ArrowProps) {
-//     const receivedProps = props ?? { className: '', style: {}, onClick: () => { } };
-//     const { className, onClick } = receivedProps;
-//     return (
-//         <div
-//             className={`${className} text-white`}
-//             onClick={onClick}
-//         >
-//             <ChevronRight />
-//         </div>
-//     );
-// }
-
-// function SamplePrevArrow(props?: ArrowProps) {
-//     const receivedProps = props ?? { className: '', style: {}, onClick: () => { } };
-//     const { className, style, onClick } = receivedProps;
-//     return (
-//         <div
-//             className={className}
-//             style={{ ...style, display: "block", background: "green" }}
-//             onClick={onClick}
-//         >
-//             <ChevronLeft />
-//         </div>
-//     );
-// }
 
 export const Feedbacks = () => {
     return (
@@ -97,17 +62,7 @@ export const Feedbacks = () => {
                 </div>
                 <div className="">
                     <div className="w-full">
-                        <Slider {...settings}>
-                            {/* {features.map(({ avatar, position, name, description, rate }: FeatureProps) => (
-                                <div key={name} className="p-4 border border-[#00B6FF] rounded-lg">
-                                    {rate}
-                                    <div className="py-4">
-                                        {description}
-                                    </div>
-                                </div>
 
-                            ))} */}
-                        </Slider>
                     </div>
                 </div>
             </div>
