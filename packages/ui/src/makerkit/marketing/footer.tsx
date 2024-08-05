@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Button } from "../../shadcn/button";
 import { Input } from "../../shadcn/input";
 export const Footer = () => {

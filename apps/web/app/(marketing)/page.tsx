@@ -153,10 +153,10 @@ function Home() {
           </div>
           <div className='w-full border-[1px] border-white'></div>
         </div>
-        <p className='font-bold text-4xl text-center'>
+        <p className='font-bold text-4xl px-4 text-center'>
           Se você deseja aumentar sua eficiência, reduzir custos e expandir seus serviços.
         </p>
-        <p className='text-center'>
+        <p className='text-center px-4'>
           Apresentamos a solução que irá revolucionar seu escritório e <br /> colocá-lo à frente da concorrência.
         </p>
         <Services />
@@ -174,12 +174,9 @@ function Home() {
           </CtaButton>
         </div>
       </div>
-      {/* <Sponsors />
-      <Features />
-      <About />
-      <Team /> */}
-      <Feedbacks />
-
+      <div className='relative w-full  text-white '>
+        <Feedbacks />
+      </div>
       <div className='bg-[#1B2151] py-16 w-full text-white'>
         <div className='text-center'>
           <p className='text-2xl py-16  md:text-4xl lg:text-4xl  sm:px-4 md:px-0 lg:px-0 text-center font-bold'>
@@ -214,31 +211,3 @@ function Home() {
 
 export default withI18n(Home);
 
-function MainCallToActionButton() {
-  return (
-    <div className={'flex space-x-4'}>
-      <CtaButton>
-        <Link href={'/auth/sign-up'}>
-          <span className={'flex items-center space-x-0.5'}>
-            <span>
-              <Trans i18nKey={'common:getStarted'} />
-            </span>
-
-            <ArrowRightIcon
-              className={
-                'h-4 animate-in fade-in slide-in-from-left-8' +
-                ' delay-1000 duration-1000 zoom-in fill-mode-both'
-              }
-            />
-          </span>
-        </Link>
-      </CtaButton>
-
-      <CtaButton variant={'link'}>
-        <Link href={'/contact'}>
-          <Trans i18nKey={'common:contactUs'} />
-        </Link>
-      </CtaButton>
-    </div>
-  );
-}

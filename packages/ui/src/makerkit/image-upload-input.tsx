@@ -3,7 +3,7 @@
 import type { FormEvent, MouseEventHandler } from 'react';
 import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 import { UploadCloud, X } from 'lucide-react';
 
