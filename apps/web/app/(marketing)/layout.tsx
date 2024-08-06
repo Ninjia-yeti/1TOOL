@@ -14,7 +14,6 @@ async function SiteLayout(props: React.PropsWithChildren) {
   return (
     <div className={'flex min-h-[100vh] flex-col min-w-[calc(90vw)]'}>
       <SiteHeader user={user} />
-
       {props.children}
 
       <SiteFooter />

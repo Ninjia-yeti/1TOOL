@@ -107,3 +107,7 @@ Optimize dropdowns for mobile
 .site-footer > .container:before {
   top: 0;
 }
+
+body{
+  overflow-x: hidden;
+}

@@ -28,11 +28,11 @@ export function Sidebar(props: {
   collapsed?: boolean;
   className?: string;
   children:
-    | React.ReactNode
-    | ((props: {
-        collapsed: boolean;
-        setCollapsed: (collapsed: boolean) => void;
-      }) => React.ReactNode);
+  | React.ReactNode
+  | ((props: {
+    collapsed: boolean;
+    setCollapsed: (collapsed: boolean) => void;
+  }) => React.ReactNode);
 }) {
   const [collapsed, setCollapsed] = useState(props.collapsed ?? false);
 

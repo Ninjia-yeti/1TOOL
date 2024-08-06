@@ -17,7 +17,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(
       <div
         ref={ref}
         className={cn(
-          'sticky top-0 w-full shadow-lg h-full grow  py-2 backdrop-blur-md z-20',
+          'z-30 sticky top-0 w-full shadow-lg h-full grow  py-1 backdrop-blur-md',
           className,
         )}
         {...props}
