@@ -18,4 +18,4 @@ export * from './services';
 export * from './team';
 export * from './features';
 export * from './feedbacks';
-export * from './viewport-trigger';
+export * from './animated-element';
