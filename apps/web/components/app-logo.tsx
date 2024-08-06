@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 function LogoImage({
   className,
-  width = 224,
+  width = 200,
 }: {
   className?: string;
   width?: number;
@@ -15,8 +15,8 @@ function LogoImage({
         src="/images/logo.png"
         alt="Imigre Logo"
         width={width}
-        height={167}
-        className="w-[224px] lg:w-[224px] mr-2"
+        height={150}
+        className="w-[200px] lg:w-[200px] mr-2"
       />
     </div>
   );
