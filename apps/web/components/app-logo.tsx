@@ -17,8 +17,8 @@ function LogoImage({
         src={`/images/${mode === 'footer' ? 'Logo-footer' : 'Logo'}.png`}
         alt="Imigre Logo"
         width={width}
-        height={150}
-        className="w-[200px] lg:w-[200px] mr-2"
+        height={80}
+        className="w-[100px] lg:w-[100px] mr-2"
       />
     </div>
   );

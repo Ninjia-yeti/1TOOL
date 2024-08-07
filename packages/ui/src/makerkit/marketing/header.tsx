@@ -17,16 +17,16 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(
       <div
         ref={ref}
         className={cn(
-          'z-30 sticky flex items-center bg-white  h-[73px] top-0 w-full shadow-lg  grow  py-1 backdrop-blur-md',
+          'z-30 sticky flex items-center bg-white h-[63px] top-0 w-full shadow-lg grow py-1 backdrop-blur-md text-[#1B2151]',
           className,
         )}
         {...props}
       >
         <div className="px-4 py-2 md:px-40 lg:px-40 w-full">
-          <div className="grid  grid-cols-3 md:flex items-center justify-between">
+          <div className="grid grid-cols-3 md:flex items-center justify-between">
             <div>{logo}</div>
             <div className="order-first md:order-none">{navigation}</div>
-            <div className="hidden lg:flex  items-center justify-end space-x-1">
+            <div className="hidden lg:flex items-center justify-end space-x-1">
               {actions}
             </div>
           </div>
