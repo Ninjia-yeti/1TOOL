@@ -5,11 +5,11 @@ import { WithAnimation } from "./animated-element";
 export const Footer = () => {
   return (
     <footer className=" text-white bg-[#1B2151] border-0">
-      <div className="hidden md:block lg:block px-60">
+      <div className="hidden md:block lg:block md:px-20 lg:px-60 ">
         <div className="flex py-20 lg:flex-row md:flex-col justify-between">
           <div className="w-full lg:w-[40%]">
             <WithAnimation mode='up'>
-              <div className="py-20 pt-40">
+              <div className="py-20 text-[16px] pt-40">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
               </div>
             </WithAnimation>
@@ -27,7 +27,7 @@ export const Footer = () => {
           <div className="flex gap-20">
             <div>
               <WithAnimation mode='up'>
-                <div className="text-2xl py-20 font-bold">
+                <div className="text-[24px] py-20 font-bold">
                   Institucional
                 </div>
               </WithAnimation>
@@ -69,7 +69,7 @@ export const Footer = () => {
             </div>
             <div>
               <WithAnimation mode='up'>
-                <div className="text-2xl py-20 font-bold">
+                <div className="text-[24px] py-20 font-bold">
                   Contato
                 </div>
               </WithAnimation>
@@ -97,7 +97,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="px-4 md:px-20 lg:px-20">
+      <div className="px-4 md:px-20 lg:px-20 text-[12px]">
         <div className="px-4 md:px-20 lg:px-20 py-5 border-t border-white/25 flex flex-col md:flex-row lg:flex-row justify-between">
           <div className="hidden md:block lg:block">Copyright © 2024 | Todos os direitos reservados | Imigr-e</div>
           <div className="hidden md:block lg:block">Política de Privacidade | Termos de Uso | Legal | Vendas estornos | Sitemap</div>
