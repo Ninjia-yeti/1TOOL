@@ -66,7 +66,7 @@ function SuspendedPersonalAccountDropdown(props: { user: User | null }) {
 
 function AuthButtons() {
   return (
-    <div className={'flex gap-6'}>
+    <div className={'flex gap-[50px]'}>
       <div className={'hidden space-x-0.5 lg:flex items-center '}>
         {/* <If condition={features.enableThemeToggle}>
           <ModeToggle />
@@ -85,11 +85,11 @@ function AuthButtons() {
       <div
         className='
           flex
-          gap-2
+          gap-[20px]
           items-center
         '
       >
-        <Button asChild variant={'outline'} className="group p-4 py-6 flex gap-4">
+        <Button asChild variant={'outline'} className="group bg-transparent p-4 py-6 flex gap-4">
           <Link href={pathsConfig.auth.signIn}>
             {/* <Trans i18nKey={'auth:signIn'} /> */}
             <Image src='/images/icons/User.svg' alt='flag' width={28} height={23} />

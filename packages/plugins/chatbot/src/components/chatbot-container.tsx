@@ -150,7 +150,6 @@ export function ChatbotContainer(props: ChatBotProps) {
         </ChatbotContentContainer>
       </If>
 
-      <ChatbotBubble />
     </>
   );
 }
@@ -262,9 +261,9 @@ function ChatBotMessage({ message }: { message: Message }) {
 
   const style = isUser
     ? {
-        backgroundColor: primaryColor,
-        color: textColor,
-      }
+      backgroundColor: primaryColor,
+      color: textColor,
+    }
     : {};
 
   return (
@@ -405,11 +404,11 @@ function DefaultPromptsContainer({
 function ClickablePrompt(
   props: React.PropsWithChildren<
     | {
-        onClick: () => void;
-      }
+      onClick: () => void;
+    }
     | {
-        href: string;
-      }
+      href: string;
+    }
   >,
 ) {
   const className = `p-1.5 rounded-md text-xs inline-flex border 
@@ -498,9 +497,9 @@ function ChatbotContentContainer(
     <div
       className={cn(
         'animate-in fade-in slide-in-from-bottom-24 fixed z-50 duration-200' +
-          ' bg-background font-sans md:rounded-lg' +
-          ' h-[60vh] w-full md:w-[40vw] xl:w-[26vw]' +
-          ' zoom-in-90 border shadow-2xl',
+        ' bg-background font-sans md:rounded-lg' +
+        ' h-[60vh] w-full md:w-[40vw] xl:w-[26vw]' +
+        ' zoom-in-90 border shadow-2xl',
         className,
       )}
     >

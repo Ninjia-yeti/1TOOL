@@ -109,10 +109,16 @@ export const Services = () => {
                 <CardHeader>
                   <CardTitle className="py-4 font-bold grid gap-8 place-items-center">
                     {icon}
-                    {title}
+                    <div className="text-[24px] font-bold">
+                      {title}
+                    </div>
                   </CardTitle>
                 </CardHeader>
-                <CardContent>{description}</CardContent>
+                <CardContent>
+                  <div className="text-[16px]">
+                    {description}
+                  </div>
+                </CardContent>
               </Card>
             </div>
 
@@ -142,7 +148,7 @@ export const Services = () => {
         </Slider>
 
       </div>
-      <div className="sm:block md:hidden lg:hidden m-auto w-[80%]">
+      <div className="sm:block md:hidden lg:hidden m-auto w-[85%]">
         <Slider
           {...settings}
           slidesToShow={1}

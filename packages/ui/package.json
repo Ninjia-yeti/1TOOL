@@ -34,6 +34,7 @@
     "cmdk": "1.0.0",
     "framer-motion": "^11.3.21",
     "input-otp": "1.2.4",
+    "lottie-react": "^2.4.0",
     "lucide-react": "^0.414.0",
     "react-intersection-observer": "^9.13.0",
     "react-slick": "^0.30.2",

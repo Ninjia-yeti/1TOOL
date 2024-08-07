@@ -97,11 +97,11 @@ export const Feedbacks = () => {
             <div className="w-full flex  flex-col md:flex-row lg:flex-row justify-between">
                 <div className="w-full md:w-[40%] lg:w-[40%] px-8 md:px-20 lg:px-20 ">
                     <div>
-                        <div className="text-[#00B6FF] font-bold">feedback dos Clientes</div>
-                        <div className="text-2xl font-bold text-[#1B2151] py-2">
+                        <div className="text-[#00B6FF] text-[35px] md:text-[17px] lg:text-[17px] font-bold">feedback dos Clientes</div>
+                        <div className="text-[32px] leading-[40px] md:text-[35px] lg:text-[35px] font-bold text-[#1B2151] py-2">
                             O Que Nossos Clientes Estão Dizendo:
                         </div>
-                        <div className="text-[#6E6E6E] pt-4">
+                        <div className="text-[20px]  md:text-[17px] lg:text-[17px] text-[#6E6E6E] pt-4">
                             O que nos motiva é o sucesso e a satisfação dos nossos clientes. Suas conquistas e feedback positivo são o combustível que impulsiona nossa dedicação.
                         </div>
                     </div>
@@ -119,16 +119,16 @@ export const Feedbacks = () => {
                                             ))
                                         }
                                     </div>
-                                    <div className="pt-2 pb-8 text-[#6E6E6E]">
+                                    <div className="pt-2 text-[17px] pb-8 text-[#6E6E6E]">
                                         {aFeedback.description}
                                     </div>
                                     <div className="flex items-center gap-2">
                                         {aFeedback.avatar}
                                         <div>
-                                            <div className="text-[#1B1717] font-bold leading-3	">
+                                            <div className="text-[#1B1717] text-[14px] font-bold leading-3	">
                                                 {aFeedback.name}
                                             </div>
-                                            <div className="text-[#232960]">
+                                            <div className="text-[#232960] text-[13px]">
                                                 {aFeedback.position}
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@ export const Feedbacks = () => {
                         ))}
                     </Slider>
                 </div>
-                <div className="sm:block md:hidden lg:hidden w-[80%] m-auto md:w-[60%] lg:w-[60%] py-8 text-black">
+                <div className="sm:block md:hidden lg:hidden w-[85%] m-auto md:w-[60%] lg:w-[60%] py-8 text-black">
                     <Slider
                         {...settings}
                         slidesToShow={1}
