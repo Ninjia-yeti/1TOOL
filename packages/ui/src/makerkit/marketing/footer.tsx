@@ -2,12 +2,21 @@ import Image from "next/legacy/image";
 import { Button } from "../../shadcn/button";
 import { Input } from "../../shadcn/input";
 import { WithAnimation } from "./animated-element";
-export const Footer = () => {
+
+
+interface FooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  logo?: React.ReactNode;
+}
+
+export const Footer = ({ logo }: FooterProps) => {
   return (
     <footer className=" text-white bg-[#1B2151] border-0">
       <div className="hidden md:block lg:block md:px-20 lg:px-60 ">
         <div className="flex py-20 lg:flex-row md:flex-col justify-between">
           <div className="w-full lg:w-[40%]">
+            {/* <WithAnimation mode='zoom'>
+              {logo}
+            </WithAnimation> */}
             <WithAnimation mode='up'>
               <div className="py-20 text-[16px] pt-40">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.

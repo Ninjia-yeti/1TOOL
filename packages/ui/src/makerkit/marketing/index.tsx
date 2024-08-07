@@ -19,3 +19,4 @@ export * from './team';
 export * from './features';
 export * from './feedbacks';
 export * from './animated-element';
+export * from './lottie-loader'

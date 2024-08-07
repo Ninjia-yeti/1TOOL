@@ -9,6 +9,8 @@ import {
   Feedbacks,
 } from '@kit/ui/marketing';
 import { WithAnimation } from '@kit/ui/marketing';
+import { LottieLoader } from '@kit/ui/marketing';
+import flag from '~/(marketing)/_components/lottie-jsons/flag.json';
 
 import { Trans } from '@kit/ui/trans';
 
@@ -42,9 +44,9 @@ function Home() {
       </section >
       <section
         className='hidden md:flex lg:flex relative w-full px-4 md:px-8 lg:px-8  m-0 items-center justify-center'>
-        <div className=' absolute w-[30vw] top-[-28vw] right-0'>
+        <div className=' absolute rotate-6 w-[30vw] top-[-21vw] right-0'>
           <WithAnimation mode='zoom'>
-            <Image src={'/images/flag-usa.svg'} alt='flag' width={357} height={398} layout='responsive' />
+            <LottieLoader animationPath={flag} />
           </WithAnimation>
         </div>
         <WithAnimation mode='up'>
@@ -182,9 +184,9 @@ function Home() {
         </WithAnimation>
       </div>
       <div className='relative w-full bg-[#1B2151] py-10 my-6 text-white flex flex-col gap-20'>
-        <div className='  rotate-45 absolute top-[-19vw] left-[-3vw] w-[20vw]'>
+        <div className='  rotate-45 absolute top-[-10vw] left-0 w-[20vw]'>
           <WithAnimation mode='zoom'>
-            <Image src={'/images/flag-usa.svg'} alt='flag' width={357} height={398} layout='responsive' />
+            <LottieLoader animationPath={flag} />
           </WithAnimation>
         </div>
         <div className=' text-[20px] md:text-[32px] lg:text-[32px] w-full flex items-center'>
