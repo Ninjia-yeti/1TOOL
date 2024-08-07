@@ -4,6 +4,6 @@ import { AppLogo } from '~/components/app-logo';
 
 export function SiteFooter() {
   return (
-    <Footer logo={<AppLogo />} />
+    <Footer logo={<AppLogo mode='footer' />} />
   );
 }

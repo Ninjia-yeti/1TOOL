@@ -13,12 +13,12 @@ export const Footer = ({ logo }: FooterProps) => {
     <footer className=" text-white bg-[#1B2151] border-0">
       <div className="hidden md:block lg:block md:px-20 lg:px-60 ">
         <div className="flex py-20 lg:flex-row md:flex-col justify-between">
-          <div className="w-full lg:w-[40%]">
-            {/* <WithAnimation mode='zoom'>
+          <div className="w-full pt-16 lg:w-[40%]">
+            <WithAnimation mode='zoom'>
               {logo}
-            </WithAnimation> */}
+            </WithAnimation>
             <WithAnimation mode='up'>
-              <div className="py-20 text-[16px] pt-40">
+              <div className="pb-20 pt-10 text-[16px] ">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
               </div>
             </WithAnimation>
@@ -36,7 +36,7 @@ export const Footer = ({ logo }: FooterProps) => {
           <div className="flex gap-20">
             <div>
               <WithAnimation mode='up'>
-                <div className="text-[24px] py-20 font-bold">
+                <div className="text-[24px] pt-20 pb-10 font-bold">
                   Institucional
                 </div>
               </WithAnimation>
@@ -78,7 +78,7 @@ export const Footer = ({ logo }: FooterProps) => {
             </div>
             <div>
               <WithAnimation mode='up'>
-                <div className="text-[24px] py-20 font-bold">
+                <div className="text-[24px] pt-20 pb-10 font-bold">
                   Contato
                 </div>
               </WithAnimation>
