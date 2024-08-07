@@ -92,7 +92,7 @@ function AuthButtons() {
         <Button asChild variant={'outline'} className="group bg-transparent p-4 py-6 flex gap-4">
           <Link href={pathsConfig.auth.signIn}>
             {/* <Trans i18nKey={'auth:signIn'} /> */}
-            <Image src='/images/icons/User_white.svg' alt='flag' width={28} height={23} />
+            <Image src='/images/icons/User.svg' alt='flag' width={28} height={23} />
             Entrar
           </Link>
         </Button>
