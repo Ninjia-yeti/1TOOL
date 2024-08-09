@@ -63,7 +63,6 @@ export function ContactPhoneNumber() {
                                     </Label>
                                     <Input
                                         id="phoneNumber"
-                                        defaultValue="Pedro Duarte"
                                         className="col-span-3"
                                     />
                                 </div>
@@ -71,7 +70,7 @@ export function ContactPhoneNumber() {
                                     <Label htmlFor="username">
                                         <Trans i18nKey={'contact:phoneNumberType'} />
                                     </Label>
-                                    <div className='flex flex-col gap-2 pt-2'>
+                                    <div className='flex flex-col gap-4 pt-2'>
                                         {
                                             phoneNumberTypes.map((a, idx) => (
                                                 <div key={idx} className='flex gap-2 items-center'>
