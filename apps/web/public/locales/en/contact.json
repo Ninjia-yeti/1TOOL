@@ -1,0 +1,18 @@
+{
+  "contactTabLabel": "Contact Settings",
+  "contactTabDescription": "Manage your contact settings",
+  "contactTab": "Contacts",
+  "phoneNumbers": "Phone Numbers",
+  "phoneNumber": "Phone Number",
+  "phoneNumbersDescription": "Add or Edit Phone numbers",
+  "phoneNumberDescription": "Make changes to your phone number here. Click save when you're done.",
+  "addPhoneNumber": "Create New",
+  "phoneNumberType": "Phone number type(select all that apply)",
+  "dayTime": "DayTime",
+  "evening": "Evening",
+  "fax": "Fax",
+  "home": "Home",
+  "mobile": "Mobile",
+  "work": "Work",
+  "other": "Other"
+}
