@@ -248,6 +248,52 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_phone_numbers: {
+        Row: {
+          created_at: string
+          id: number
+          number: string | null
+          type: string | null
+          user: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          number?: string | null
+          type?: string | null
+          user?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          number?: string | null
+          type?: string | null
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "phone_numbers_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_numbers_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_numbers_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       conversations: {
         Row: {
           created_at: string
@@ -316,53 +362,6 @@ export type Database = {
           metadata?: Json
         }
         Relationships: []
-      }
-      feedback_submissions: {
-        Row: {
-          attachment_url: string | null
-          created_at: string
-          device_info: Json | null
-          email: string | null
-          id: number
-          metadata: Json | null
-          screen_name: string | null
-          text: string
-          type: Database["public"]["Enums"]["feedback_type"]
-          user_id: string | null
-        }
-        Insert: {
-          attachment_url?: string | null
-          created_at?: string
-          device_info?: Json | null
-          email?: string | null
-          id?: number
-          metadata?: Json | null
-          screen_name?: string | null
-          text: string
-          type: Database["public"]["Enums"]["feedback_type"]
-          user_id?: string | null
-        }
-        Update: {
-          attachment_url?: string | null
-          created_at?: string
-          device_info?: Json | null
-          email?: string | null
-          id?: number
-          metadata?: Json | null
-          screen_name?: string | null
-          text?: string
-          type?: Database["public"]["Enums"]["feedback_type"]
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "feedback_submissions_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       invitations: {
         Row: {
@@ -1136,7 +1135,6 @@ export type Database = {
         | "members.manage"
         | "invites.manage"
       billing_provider: "stripe" | "lemon-squeezy" | "paddle"
-      feedback_type: "question" | "bug" | "feedback"
       message_type: "ai" | "db" | "user"
       notification_channel: "in_app" | "email"
       notification_type: "info" | "warning" | "error"

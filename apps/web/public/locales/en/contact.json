@@ -14,5 +14,6 @@
   "home": "Home",
   "mobile": "Mobile",
   "work": "Work",
-  "other": "Other"
+  "other": "Other",
+  "errorTitle": "Sorry, something went wrong."
 }

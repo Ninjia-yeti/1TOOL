@@ -20,13 +20,62 @@ import {
 import { Label } from '@kit/ui/label';
 import { Input } from '@kit/ui/input';
 import { Checkbox } from '@kit/ui/checkbox';
-import React from 'react';
+import { Alert, AlertDescription, AlertTitle } from '@kit/ui/alert';
+import { If } from '@kit/ui/if';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
+import React, { useCallback, useState } from 'react';
 
+import { createPersonalContactPhone } from '../_lib/server/server-actions';
 
+export interface numberProps {
+    number: string;
+    type: string;
+}
 
 
 export function ContactPhoneNumber() {
     const phoneNumberTypes = ['dayTime', 'evening', 'fax', 'home', 'mobile', 'work', 'other'];
+    const [error, setError] = useState(true);
+    const [currentNumber, setCurrentNumber] = useState<numberProps>({
+        number: '',
+        type: ''
+    });
+    const { t } = useTranslation('');
+
+    const createToaster = useCallback(
+        (promise: () => Promise<unknown>) => {
+            return toast.promise(promise, {
+                success: t(`createPhoneNumberSuccess`),
+                error: t(`createPhoneNumberError`),
+                loading: t(`createPhoneNumberLoading`),
+            });
+        },
+        [t],
+    );
+
+    const handleCheckBoxChange = (numberType: string) => {
+        const currentType = currentNumber?.type.split(',');
+
+        const isExist = currentType.some((a) => a === numberType);
+        let nextType = currentType;
+        if (isExist) {
+            nextType = currentType.filter((a) => a !== numberType);
+        } else {
+            nextType = [...currentType, numberType];
+        }
+
+        setCurrentNumber({ ...currentNumber, type: nextType.join(',') })
+    }
+
+    const saveNumber = useCallback(() => {
+        const promise = async () => {
+            const result = await createPersonalContactPhone(currentNumber);
+            console.log(result);
+        }
+        createToaster(promise);
+    }, [currentNumber, createToaster])
     return (
         <div>
             <Card>
@@ -63,6 +112,8 @@ export function ContactPhoneNumber() {
                                     </Label>
                                     <Input
                                         id="phoneNumber"
+                                        onChange={(e) => { setCurrentNumber({ ...currentNumber, number: e.target.value }) }}
+                                        value={currentNumber?.number}
                                         className="col-span-3"
                                     />
                                 </div>
@@ -74,7 +125,11 @@ export function ContactPhoneNumber() {
                                         {
                                             phoneNumberTypes.map((a, idx) => (
                                                 <div key={idx} className='flex gap-2 items-center'>
-                                                    <Checkbox id={a} />
+                                                    <Checkbox
+                                                        onClick={() => handleCheckBoxChange(a)}
+                                                        checked={currentNumber?.type.split(',').some((b) => b === a)}
+                                                        id={a}
+                                                    />
                                                     <Label
                                                         htmlFor={a}
                                                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -87,8 +142,11 @@ export function ContactPhoneNumber() {
                                     </div>
                                 </div>
                             </div>
+                            <If condition={error}>
+                                <ErrorAlert />
+                            </If>
                             <DialogFooter>
-                                <Button type="submit">Save changes</Button>
+                                <Button onClick={saveNumber} type="submit">Save changes</Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
@@ -114,3 +172,19 @@ export function ContactPhoneNumber() {
     );
 }
 
+
+function ErrorAlert() {
+    return (
+        <Alert variant={'destructive'}>
+            <ExclamationTriangleIcon className={'h-4'} />
+
+            <AlertTitle>
+                <Trans i18nKey={'contact:errorTitle'} />
+            </AlertTitle>
+
+            <AlertDescription>
+                error
+            </AlertDescription>
+        </Alert>
+    );
+}
