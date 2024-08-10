@@ -6,7 +6,7 @@ import { getSupabaseServerActionClient } from '@kit/supabase/server-actions-clie
 import { requireUser } from '@kit/supabase/require-user';
 
 
-import { PersonalContactPhoneSchema } from '../schema/personal-contact-schema';
+import { PersonalContactPhoneSchema, PersonalContactPhoneDeleteSchema } from '../schema/personal-contact-schema';
 
 
 export const createPersonalContactPhone = enhanceAction(
@@ -18,10 +18,7 @@ export const createPersonalContactPhone = enhanceAction(
     const parsedPhoneNumber = PersonalContactPhoneSchema.parse(payload);
     const { data, error } = await client.from('contact_phone_numbers')
       .insert({ ...parsedPhoneNumber, user: userId });
-
     if (error) {
-      console.log(error);
-
       throw new Error(`Failed to save Content`);
     }
     return redirect('/home/contact');
@@ -30,4 +27,27 @@ export const createPersonalContactPhone = enhanceAction(
     schema: PersonalContactPhoneSchema,
   },
 );
+
+export const deletePersonalContactPhone = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    try {
+      const response = await client.from('contact_phone_numbers')
+        .delete()
+        .eq('id', payload.id)
+        .select();
+      console.log(response);
+    } catch (error) {
+      if (error) {
+        throw new Error(`Failed to delete Content`);
+      }
+    } finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactPhoneDeleteSchema
+  }
+)
 

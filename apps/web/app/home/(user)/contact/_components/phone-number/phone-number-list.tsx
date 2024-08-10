@@ -17,8 +17,9 @@ export async function PhoneNumberList() {
             <PhoneNumberListItem
                 phoneNumber={
                     {
-                        number: a.number ?? '',
-                        type: a.type ?? ''
+                        id: a.id,
+                        type: a.type ?? '',
+                        number: a.number ?? ''
                     }
                 }
             />

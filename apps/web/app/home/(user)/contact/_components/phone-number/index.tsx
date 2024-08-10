@@ -15,6 +15,7 @@ import { PhoneNumberList } from './phone-number-list';
 import { ContactPhoneNumberAddForm } from './phone-number-add-form';
 
 export interface NumberProps {
+    id?: number
     number: string;
     type: string;
 }
