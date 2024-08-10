@@ -6,7 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@kit/ui/tabs";
-import { ContactPhoneNumber } from './contact-phone-number';
+import { ContactPhoneNumber } from './phone-number';
 
 
 const contactList = [

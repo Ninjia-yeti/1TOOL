@@ -1,6 +1,6 @@
 'use server';
 
-
+import { redirect } from 'next/navigation';
 import { enhanceAction } from '@kit/next/actions';
 import { getSupabaseServerActionClient } from '@kit/supabase/server-actions-client';
 import { requireUser } from '@kit/supabase/require-user';
@@ -24,7 +24,7 @@ export const createPersonalContactPhone = enhanceAction(
 
       throw new Error(`Failed to save Content`);
     }
-    return data;
+    return redirect('/home/contact');
   },
   {
     schema: PersonalContactPhoneSchema,
