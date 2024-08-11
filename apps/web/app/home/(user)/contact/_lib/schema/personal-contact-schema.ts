@@ -4,6 +4,11 @@ export const PersonalContactPhoneSchema = z.object({
   number: z.string().min(1),
   type: z.string().min(1),
 });
+export const PersonalContactPhoneEditSchema = z.object({
+  number: z.string().min(1),
+  type: z.string().min(1),
+  id: z.number(),
+});
 export const PersonalContactPhoneDeleteSchema = z.object({
   id: z.number()
 });

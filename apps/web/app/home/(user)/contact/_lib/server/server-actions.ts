@@ -6,25 +6,61 @@ import { getSupabaseServerActionClient } from '@kit/supabase/server-actions-clie
 import { requireUser } from '@kit/supabase/require-user';
 
 
-import { PersonalContactPhoneSchema, PersonalContactPhoneDeleteSchema } from '../schema/personal-contact-schema';
+import { PersonalContactPhoneSchema, PersonalContactPhoneDeleteSchema, PersonalContactPhoneEditSchema } from '../schema/personal-contact-schema';
 
 
 export const createPersonalContactPhone = enhanceAction(
   async function (payload) {
-
     const client = getSupabaseServerActionClient();
     const auth = await requireUser(client);
     const userId = auth.data?.id;
-    const parsedPhoneNumber = PersonalContactPhoneSchema.parse(payload);
-    const { data, error } = await client.from('contact_phone_numbers')
-      .insert({ ...parsedPhoneNumber, user: userId });
-    if (error) {
-      throw new Error(`Failed to save Content`);
+    try {
+      const { error } = await client.from('contact_phone_numbers')
+        .insert(
+          {
+            number: payload.number,
+            type: payload.type,
+            user: userId
+          }
+        );
+      if (error) {
+        throw new Error(`Failed to save number`);
+      }
     }
-    return redirect('/home/contact');
+    catch (error) {
+      throw new Error(`Failed to save number error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
   },
   {
     schema: PersonalContactPhoneSchema,
+  },
+);
+export const editPersonalContactPhone = enhanceAction(
+  async function (payload) {
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_phone_numbers')
+        .update({
+          number: payload.number,
+          type: payload.type
+        })
+        .eq('id', payload.id)
+      if (error) {
+        throw new Error(`Failed to edit number`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to edit number error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactPhoneEditSchema,
   },
 );
 
@@ -33,15 +69,15 @@ export const deletePersonalContactPhone = enhanceAction(
 
     const client = getSupabaseServerActionClient();
     try {
-      const response = await client.from('contact_phone_numbers')
+      const { data, error } = await client.from('contact_phone_numbers')
         .delete()
         .eq('id', payload.id)
         .select();
-      console.log(response);
-    } catch (error) {
       if (error) {
-        throw new Error(`Failed to delete Content`);
+        throw new Error(`Failed to delete number`);
       }
+    } catch (error) {
+      throw new Error(`Failed to delete number. error:${error}`);
     } finally {
       return redirect('/home/contact');
     }

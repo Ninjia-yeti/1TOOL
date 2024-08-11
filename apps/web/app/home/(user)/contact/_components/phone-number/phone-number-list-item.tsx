@@ -19,14 +19,15 @@ import {
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { NumberProps } from ".";
+import { NumberSafeProps } from ".";
 import { deletePersonalContactPhone } from '../../_lib/server/server-actions';
+import { PhoneNumberForm } from './phone-number-form';
 
-interface NumberPropsSafe extends NumberProps {
-    id: number
-}
+import { ClientOnly } from '~/home/(user)/_components/client-only';
 
-export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberPropsSafe }) {
+
+
+export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafeProps }) {
     const [error, setError] = useState(false);
 
     const { t } = useTranslation('');
@@ -45,7 +46,7 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberPropsS
     const deleteNumber = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContactPhone({ id: phoneNumber.id })
+                await deletePersonalContactPhone({ id: phoneNumber.id ?? 0 })
             }
             catch (e) {
                 setError(true);
@@ -59,7 +60,7 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberPropsS
         return (
             <div className='flex gap-2 flex-wrap'>
                 {types.map((a) => (
-                    <div className='bg-neutral-300 dark:bg-slate-800 text-white p-2 px-4 rounded-lg'>
+                    <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
                         <Trans i18nKey={`contact:${a}`} />
                     </div>
                 ))}
@@ -67,41 +68,52 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberPropsS
         )
     }
     return (
-        <Card>
-            <CardContent className='flex flex-col gap-2 p-2 px-4'>
-                <div className='text-xl'>
-                    {phoneNumber.number}
-                </div>
-                <div>
-                    {renderTypes(phoneNumber.type)}
-                </div>
-                <div className='flex flex-wrap'>
-                    <Button variant={'ghost'}>
-                        <Trans i18nKey={'common:edit'} />
-                    </Button>
-                    <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                            <Button variant={'ghost'}>
-                                <Trans i18nKey={'common:delete'} />
-                            </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                            <AlertDialogHeader>
-                                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    This action cannot be undone. This will permanently delete your
-                                    phone number from our servers.
-                                </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={deleteNumber}>Continue</AlertDialogAction>
-                            </AlertDialogFooter>
-                        </AlertDialogContent>
-                    </AlertDialog>
+        <>
+            <ClientOnly>
+                <Card>
+                    <CardContent className='flex flex-col gap-2 p-2 px-4'>
+                        <div className='text-xl'>
+                            {phoneNumber.number}
+                        </div>
+                        <div>
+                            {renderTypes(phoneNumber.type)}
+                        </div>
+                        <div className='flex flex-wrap'>
+                            <PhoneNumberForm
+                                trigger={
+                                    <Button variant={'ghost'}>
+                                        <Trans i18nKey={'common:edit'} />
+                                    </Button>
+                                }
+                                mode='edit'
+                                number={phoneNumber}
+                            />
+                            <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <Button variant={'ghost'}>
+                                        <Trans i18nKey={'common:delete'} />
+                                    </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This action cannot be undone. This will permanently delete your
+                                            phone number from our servers.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                        <AlertDialogAction onClick={deleteNumber}>Continue</AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
 
-                </div>
-            </CardContent>
-        </Card>
+                        </div>
+                    </CardContent>
+                </Card>
+            </ClientOnly>
+        </>
+
     )
 }

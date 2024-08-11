@@ -12,12 +12,14 @@ import { Trans } from '@kit/ui/trans';
 
 
 import { PhoneNumberList } from './phone-number-list';
-import { ContactPhoneNumberAddForm } from './phone-number-add-form';
+import { PhoneNumberAdd } from './phone-number-add';
 
 export interface NumberProps {
-    id?: number
     number: string;
     type: string;
+}
+export interface NumberSafeProps extends NumberProps {
+    id?: number
 }
 
 
@@ -34,8 +36,7 @@ export async function ContactPhoneNumber() {
                 </CardDescription>
             </CardHeader>
             <CardContent className={'space-y-4'}>
-
-                <ContactPhoneNumberAddForm />
+                <PhoneNumberAdd />
                 <PhoneNumberList />
 
             </CardContent>
