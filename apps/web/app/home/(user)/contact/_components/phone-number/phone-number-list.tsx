@@ -1,13 +1,13 @@
 import { getSupabaseServerComponentClient } from '@kit/supabase/server-component-client';
 import { PhoneNumberListItem } from './phone-number-list-item';
 import { ErrorAlert } from '../errorAlert';
+import { loadUserWorkspace } from '~/home/(user)/_lib/server/load-user-workspace';
 
 export async function PhoneNumberList() {
 
     const supabase = getSupabaseServerComponentClient();
-
-    const { data, error } = await supabase.from('contact_phone_numbers').select('*');
-
+    const { user } = await loadUserWorkspace();
+    const { data, error } = await supabase.from('contact_phone_numbers').select('*').eq("user", user.id);
     if (error) {
         return <ErrorAlert error='An error occured while fetching contact informatioin' />
     }
