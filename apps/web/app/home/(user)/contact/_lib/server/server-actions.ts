@@ -108,7 +108,6 @@ export const createPersonalContactAddress = enhanceAction(
         .insert(
           {
             ...payload,
-            countrys: '',
             user: userId
           }
         );
