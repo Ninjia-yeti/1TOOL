@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { NumberSafeProps } from ".";
 import { deletePersonalContactPhone } from '../../_lib/server/server-actions';
-import { PhoneNumberForm } from './phone-number-form';
+import { AddressForm } from './address-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 
@@ -59,8 +59,8 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafePr
         const types = type.split(',').filter((a) => a !== '');
         return (
             <div className='flex gap-2 flex-wrap'>
-                {types.map((a, idx) => (
-                    <div key={idx} className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
+                {types.map((a) => (
+                    <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
                         <Trans i18nKey={`contact:${a}`} />
                     </div>
                 ))}
@@ -79,7 +79,7 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafePr
                             {renderTypes(phoneNumber.type)}
                         </div>
                         <div className='flex flex-wrap'>
-                            <PhoneNumberForm
+                            <AddressForm
                                 trigger={
                                     <Button variant={'ghost'}>
                                         <Trans i18nKey={'common:edit'} />

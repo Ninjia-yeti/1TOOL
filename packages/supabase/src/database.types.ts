@@ -248,6 +248,115 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_addresses: {
+        Row: {
+          address: string | null
+          city: string | null
+          county: string | null
+          created_at: string
+          currentPhysicalAddress: boolean | null
+          foreignAddress: boolean | null
+          from: string | null
+          id: number
+          inCareOF: string | null
+          intendedAddress: boolean | null
+          investmentProperty: boolean | null
+          mailingAddress: boolean | null
+          mostRecentForeignAddress: boolean | null
+          postalCode: string | null
+          previousAddress: boolean | null
+          province: string | null
+          recentForeignAddress: boolean | null
+          recentlyFearedPersecution: boolean | null
+          safeMailingAddress: boolean | null
+          shareWithSpouse: boolean | null
+          state: string | null
+          to: string | null
+          type: string | null
+          typeValue: string | null
+          user: string | null
+          zipCode: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          county?: string | null
+          created_at?: string
+          currentPhysicalAddress?: boolean | null
+          foreignAddress?: boolean | null
+          from?: string | null
+          id?: number
+          inCareOF?: string | null
+          intendedAddress?: boolean | null
+          investmentProperty?: boolean | null
+          mailingAddress?: boolean | null
+          mostRecentForeignAddress?: boolean | null
+          postalCode?: string | null
+          previousAddress?: boolean | null
+          province?: string | null
+          recentForeignAddress?: boolean | null
+          recentlyFearedPersecution?: boolean | null
+          safeMailingAddress?: boolean | null
+          shareWithSpouse?: boolean | null
+          state?: string | null
+          to?: string | null
+          type?: string | null
+          typeValue?: string | null
+          user?: string | null
+          zipCode?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          county?: string | null
+          created_at?: string
+          currentPhysicalAddress?: boolean | null
+          foreignAddress?: boolean | null
+          from?: string | null
+          id?: number
+          inCareOF?: string | null
+          intendedAddress?: boolean | null
+          investmentProperty?: boolean | null
+          mailingAddress?: boolean | null
+          mostRecentForeignAddress?: boolean | null
+          postalCode?: string | null
+          previousAddress?: boolean | null
+          province?: string | null
+          recentForeignAddress?: boolean | null
+          recentlyFearedPersecution?: boolean | null
+          safeMailingAddress?: boolean | null
+          shareWithSpouse?: boolean | null
+          state?: string | null
+          to?: string | null
+          type?: string | null
+          typeValue?: string | null
+          user?: string | null
+          zipCode?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_contact_address_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_contact_address_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_contact_address_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_phone_numbers: {
         Row: {
           created_at: string

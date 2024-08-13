@@ -7,6 +7,7 @@ import {
   TabsTrigger,
 } from "@kit/ui/tabs";
 import { ContactPhoneNumber } from './phone-number';
+import { ContactAddress } from "./address";
 
 
 const contactList = [
@@ -16,7 +17,7 @@ const contactList = [
   },
   {
     label: 'Addresses',
-    component: null,
+    component: <ContactAddress />,
   },
   {
     label: 'Periods of Stay',

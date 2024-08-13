@@ -6,7 +6,12 @@ import { getSupabaseServerActionClient } from '@kit/supabase/server-actions-clie
 import { requireUser } from '@kit/supabase/require-user';
 
 
-import { PersonalContactPhoneSchema, PersonalContactPhoneDeleteSchema, PersonalContactPhoneEditSchema } from '../schema/personal-contact-schema';
+import {
+  PersonalContactPhoneSchema,
+  PersonalContactPhoneDeleteSchema,
+  PersonalContactPhoneEditSchema,
+  PersonalContactAddressSchema
+} from '../schema/personal-contact-schema';
 
 
 export const createPersonalContactPhone = enhanceAction(
@@ -86,4 +91,40 @@ export const deletePersonalContactPhone = enhanceAction(
     schema: PersonalContactPhoneDeleteSchema
   }
 )
+
+export const createPersonalContactAddress = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    const auth = await requireUser(client);
+    const userId = auth.data?.id;
+    try {
+      console.log({
+        ...payload,
+        user: userId
+      });
+
+      const { error } = await client.from('contact_addresses')
+        .insert(
+          {
+            ...payload,
+            user: userId
+          }
+        );
+
+      if (error) {
+        throw new Error(`Failed to save address`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to save address error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactAddressSchema,
+  },
+);
 
