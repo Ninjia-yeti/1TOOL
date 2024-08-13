@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 
-const IdSchema = z.object({
+export const IdSchema = z.object({
   id: z.number(),
 })
 

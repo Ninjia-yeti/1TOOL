@@ -250,91 +250,91 @@ export type Database = {
       }
       contact_addresses: {
         Row: {
-          address: string | null
-          city: string | null
-          country: string | null
-          county: string | null
+          address: string
+          city: string
+          country: string
+          county: string
           created_at: string
-          currentPhysicalAddress: boolean | null
-          foreignAddress: boolean | null
-          from: string | null
+          currentPhysicalAddress: boolean
+          foreignAddress: boolean
+          from: string
           id: number
-          inCareOf: string | null
-          intendedAddress: boolean | null
-          investmentProperty: boolean | null
-          mailingAddress: boolean | null
-          mostRecentForeignAddress: boolean | null
-          postalCode: string | null
-          previousAddress: boolean | null
-          province: string | null
-          recentForeignAddress: boolean | null
-          recentlyFearedPersecution: boolean | null
-          safeMailingAddress: boolean | null
-          shareWithSpouse: boolean | null
-          state: string | null
-          to: string | null
-          type: string | null
-          typeValue: string | null
+          inCareOf: string
+          intendedAddress: boolean
+          investmentProperty: boolean
+          mailingAddress: boolean
+          mostRecentForeignAddress: boolean
+          postalCode: string
+          previousAddress: boolean
+          province: string
+          recentForeignAddress: boolean
+          recentlyFearedPersecution: boolean
+          safeMailingAddress: boolean
+          shareWithSpouse: boolean
+          state: string
+          to: string
+          type: string
+          typeValue: string
           user: string | null
-          zipCode: string | null
+          zipCode: string
         }
         Insert: {
-          address?: string | null
-          city?: string | null
-          country?: string | null
-          county?: string | null
+          address?: string
+          city?: string
+          country?: string
+          county?: string
           created_at?: string
-          currentPhysicalAddress?: boolean | null
-          foreignAddress?: boolean | null
-          from?: string | null
+          currentPhysicalAddress: boolean
+          foreignAddress: boolean
+          from?: string
           id?: number
-          inCareOf?: string | null
-          intendedAddress?: boolean | null
-          investmentProperty?: boolean | null
-          mailingAddress?: boolean | null
-          mostRecentForeignAddress?: boolean | null
-          postalCode?: string | null
-          previousAddress?: boolean | null
-          province?: string | null
-          recentForeignAddress?: boolean | null
-          recentlyFearedPersecution?: boolean | null
-          safeMailingAddress?: boolean | null
-          shareWithSpouse?: boolean | null
-          state?: string | null
-          to?: string | null
-          type?: string | null
-          typeValue?: string | null
+          inCareOf?: string
+          intendedAddress: boolean
+          investmentProperty: boolean
+          mailingAddress: boolean
+          mostRecentForeignAddress: boolean
+          postalCode?: string
+          previousAddress: boolean
+          province?: string
+          recentForeignAddress: boolean
+          recentlyFearedPersecution: boolean
+          safeMailingAddress: boolean
+          shareWithSpouse: boolean
+          state?: string
+          to?: string
+          type?: string
+          typeValue?: string
           user?: string | null
-          zipCode?: string | null
+          zipCode?: string
         }
         Update: {
-          address?: string | null
-          city?: string | null
-          country?: string | null
-          county?: string | null
+          address?: string
+          city?: string
+          country?: string
+          county?: string
           created_at?: string
-          currentPhysicalAddress?: boolean | null
-          foreignAddress?: boolean | null
-          from?: string | null
+          currentPhysicalAddress?: boolean
+          foreignAddress?: boolean
+          from?: string
           id?: number
-          inCareOf?: string | null
-          intendedAddress?: boolean | null
-          investmentProperty?: boolean | null
-          mailingAddress?: boolean | null
-          mostRecentForeignAddress?: boolean | null
-          postalCode?: string | null
-          previousAddress?: boolean | null
-          province?: string | null
-          recentForeignAddress?: boolean | null
-          recentlyFearedPersecution?: boolean | null
-          safeMailingAddress?: boolean | null
-          shareWithSpouse?: boolean | null
-          state?: string | null
-          to?: string | null
-          type?: string | null
-          typeValue?: string | null
+          inCareOf?: string
+          intendedAddress?: boolean
+          investmentProperty?: boolean
+          mailingAddress?: boolean
+          mostRecentForeignAddress?: boolean
+          postalCode?: string
+          previousAddress?: boolean
+          province?: string
+          recentForeignAddress?: boolean
+          recentlyFearedPersecution?: boolean
+          safeMailingAddress?: boolean
+          shareWithSpouse?: boolean
+          state?: string
+          to?: string
+          type?: string
+          typeValue?: string
           user?: string | null
-          zipCode?: string | null
+          zipCode?: string
         }
         Relationships: [
           {

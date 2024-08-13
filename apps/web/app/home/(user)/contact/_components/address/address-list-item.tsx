@@ -19,15 +19,19 @@ import {
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { NumberSafeProps } from ".";
 import { deletePersonalContactPhone } from '../../_lib/server/server-actions';
 import { AddressForm } from './address-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 
+import { z } from 'zod';
+import { PersonalContactAddressSchema, IdSchema } from '../../_lib/schema/personal-contact-schema';
+const PersonalContactAddressSafeSchema = PersonalContactAddressSchema.merge(IdSchema)
+export type PersonalContactAddressProps = z.infer<typeof PersonalContactAddressSafeSchema>;
 
 
-export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafeProps }) {
+
+export function AddressListItem({ address }: { address: PersonalContactAddressProps }) {
     const [error, setError] = useState(false);
 
     const { t } = useTranslation('');
@@ -43,17 +47,17 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafePr
         [t],
     );
 
-    const deleteNumber = useCallback(() => {
+    const deleteAddress = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContactPhone({ id: phoneNumber.id ?? 0 })
+                await deletePersonalContactPhone({ id: address.id })
             }
             catch (e) {
                 setError(true);
             }
         }
         createToaster(promise)
-    }, [phoneNumber, createToaster])
+    }, [address, createToaster])
 
     const renderTypes = (type: string) => {
         const types = type.split(',').filter((a) => a !== '');
@@ -73,10 +77,10 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafePr
                 <Card>
                     <CardContent className='flex flex-col gap-2 p-2 px-4'>
                         <div className='text-xl'>
-                            {phoneNumber.number}
+                            {address.address}
                         </div>
                         <div>
-                            {renderTypes(phoneNumber.type)}
+                            {renderTypes(address.type)}
                         </div>
                         <div className='flex flex-wrap'>
                             <AddressForm
@@ -85,8 +89,8 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafePr
                                         <Trans i18nKey={'common:edit'} />
                                     </Button>
                                 }
-                                mode='edit'
-                                number={phoneNumber}
+                            // mode='edit'
+                            // number={phoneNumber}
                             />
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
@@ -104,7 +108,7 @@ export function PhoneNumberListItem({ phoneNumber }: { phoneNumber: NumberSafePr
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={deleteNumber}>Continue</AlertDialogAction>
+                                        <AlertDialogAction onClick={deleteAddress}>Continue</AlertDialogAction>
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>

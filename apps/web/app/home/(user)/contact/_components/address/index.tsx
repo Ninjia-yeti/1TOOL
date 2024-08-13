@@ -11,17 +11,8 @@ import { Trans } from '@kit/ui/trans';
 
 
 
-// import { PhoneNumberList } from './phone-number-list';
+import { AddressList } from './address-list';
 import { AddressAdd } from './address-add';
-
-export interface NumberProps {
-    number: string;
-    type: string;
-}
-export interface NumberSafeProps extends NumberProps {
-    id?: number
-}
-
 
 export async function ContactAddress() {
     return (
@@ -37,7 +28,7 @@ export async function ContactAddress() {
             </CardHeader>
             <CardContent className={'space-y-4'}>
                 <AddressAdd />
-                {/* <PhoneNumberList /> */}
+                <AddressList />
 
             </CardContent>
         </Card>
