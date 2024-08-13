@@ -12,17 +12,21 @@ export async function PhoneNumberList() {
         return <ErrorAlert error='An error occured while fetching contact informatioin' />
     }
 
-    return data.map((a, idx) => (
-        <div key={idx}>
-            <PhoneNumberListItem
-                phoneNumber={
-                    {
-                        id: a.id,
-                        type: a.type ?? '',
-                        number: a.number ?? ''
-                    }
-                }
-            />
+    return (
+        <div className='grid grid-cols-2 gap-4'>
+            {data.map((a, idx) => (
+                <div key={idx}>
+                    <PhoneNumberListItem
+                        phoneNumber={
+                            {
+                                id: a.id,
+                                type: a.type ?? '',
+                                number: a.number ?? ''
+                            }
+                        }
+                    />
+                </div>
+            ))}
         </div>
-    ))
+    )
 }

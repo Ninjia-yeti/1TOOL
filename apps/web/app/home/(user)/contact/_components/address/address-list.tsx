@@ -12,11 +12,19 @@ export async function AddressList() {
         return <ErrorAlert error='An error occured while fetching contact informatioin' />
     }
 
-    return data.map((a, idx) => (
-        <div key={idx}>
-            <AddressListItem
-                address={a}
-            />
+    return (
+        <div className='grid grid-cols-2 gap-4'>
+            {data.map((a, idx) => (
+                <div key={idx}>
+                    <div>
+                        <AddressListItem
+                            address={a}
+                        />
+                    </div>
+                </div>
+            ))}
         </div>
-    ))
+    )
+
+
 }

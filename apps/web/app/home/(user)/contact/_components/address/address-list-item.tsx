@@ -19,17 +19,21 @@ import {
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { deletePersonalContactPhone } from '../../_lib/server/server-actions';
+import { deletePersonalContactAddress } from '../../_lib/server/server-actions';
 import { AddressForm } from './address-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
+import { renderDate } from '../common/contact-date-selector';
+import Flag from 'react-flagkit';
 
-import { z } from 'zod';
-import { PersonalContactAddressSchema, IdSchema } from '../../_lib/schema/personal-contact-schema';
-const PersonalContactAddressSafeSchema = PersonalContactAddressSchema.merge(IdSchema)
-export type PersonalContactAddressProps = z.infer<typeof PersonalContactAddressSafeSchema>;
+import { CountryForValue } from './address-country-select';
+import { PersonalContactAddressProps } from '.'
 
 
+
+type Address = {
+    [key: string]: string | number | boolean;
+};
 
 export function AddressListItem({ address }: { address: PersonalContactAddressProps }) {
     const [error, setError] = useState(false);
@@ -50,7 +54,7 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
     const deleteAddress = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContactPhone({ id: address.id })
+                await deletePersonalContactAddress({ id: address.id })
             }
             catch (e) {
                 setError(true);
@@ -59,15 +63,23 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
         createToaster(promise)
     }, [address, createToaster])
 
-    const renderTypes = (type: string) => {
-        const types = type.split(',').filter((a) => a !== '');
+    const renderPropeties = (address: Address) => {
+        const keys = Object.keys(address);
+        let matchedProperties: string[] = [];
+        keys.forEach((aKey: string) => {
+            if (address[aKey] === true) {
+                matchedProperties.push(aKey);
+            }
+        })
         return (
-            <div className='flex gap-2 flex-wrap'>
-                {types.map((a) => (
-                    <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
-                        <Trans i18nKey={`contact:${a}`} />
-                    </div>
-                ))}
+            <div className='w-full flex flex-wrap'>
+                {matchedProperties.map((a, idx) => {
+                    return (
+                        <div>
+                            <Trans key={idx} i18nKey={`contact:${a}`} />{`${idx === matchedProperties.length - 1 ? '' : ','}`}
+                        </div>
+                    )
+                })}
             </div>
         )
     }
@@ -75,12 +87,25 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
         <>
             <ClientOnly>
                 <Card>
-                    <CardContent className='flex flex-col gap-2 p-2 px-4'>
-                        <div className='text-xl'>
-                            {address.address}
-                        </div>
-                        <div>
-                            {renderTypes(address.type)}
+                    <CardContent className='flex flex-col gap-4 p-2 px-4'>
+                        <div className='flex flex-col gap-4'>
+                            <div>{address.inCareOf}</div>
+                            <div>{address.address},{address.type}.{address.typeValue}</div>
+                            <div>{address.city},{address.province},{address.postalCode}</div>
+                            <div className='flex items-center gap-2'>
+                                <Flag country={address.country} />
+                                <div>{CountryForValue(address.country)}</div>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
+                                    {renderDate(new Date(JSON.parse(address.from).value), JSON.parse(address.from).mode)}
+                                </div>
+                                -
+                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
+                                    {renderDate(new Date(JSON.parse(address.to).value), JSON.parse(address.to).mode)}
+                                </div>
+                            </div>
+                            {renderPropeties(address)}
                         </div>
                         <div className='flex flex-wrap'>
                             <AddressForm
@@ -89,8 +114,8 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
                                         <Trans i18nKey={'common:edit'} />
                                     </Button>
                                 }
-                            // mode='edit'
-                            // number={phoneNumber}
+                                mode='edit'
+                                address={address}
                             />
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
@@ -103,7 +128,7 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
                                         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                         <AlertDialogDescription>
                                             This action cannot be undone. This will permanently delete your
-                                            phone number from our servers.
+                                            address from our servers.
                                         </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>

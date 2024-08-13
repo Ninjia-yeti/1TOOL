@@ -44,13 +44,16 @@ import { DateTypes } from '../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactAddress } from '../../_lib/server/server-actions';
+import { createPersonalContactAddress, editPersonalContactAddress } from '../../_lib/server/server-actions';
+import { PersonalContactAddressProps } from '.';
 
 export interface AddressFromProps {
-    trigger: ReactNode
+    trigger: ReactNode,
+    address?: PersonalContactAddressProps,
+    mode: 'edit' | 'create'
 }
 
-export function AddressForm({ trigger }: AddressFromProps) {
+export function AddressForm({ trigger, mode, address }: AddressFromProps) {
     const [error, setError] = useState(false);
     const [errorString, setErrorString] = useState('');
     const [openDlg, setOpenDlg] = useState(false);
@@ -63,7 +66,7 @@ export function AddressForm({ trigger }: AddressFromProps) {
     })
     const form = useForm<z.infer<typeof PersonalContactAddressSchema>>({
         resolver: zodResolver(PersonalContactAddressSchema),
-        defaultValues: {
+        defaultValues: address ? address : {
             from: defaultDateString,
             to: defaultDateString,
             currentPhysicalAddress: false,
@@ -85,7 +88,14 @@ export function AddressForm({ trigger }: AddressFromProps) {
         const promise = async () => {
             try {
                 setError(false);
-                await createPersonalContactAddress(data)
+                if (mode === 'create') {
+                    await createPersonalContactAddress(data)
+                }
+                if (mode === 'edit') {
+                    await editPersonalContactAddress({
+                        ...data, id: address?.id ?? 0
+                    })
+                }
                 setOpenDlg(false);
             }
             catch (e) {
@@ -100,9 +110,9 @@ export function AddressForm({ trigger }: AddressFromProps) {
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`${'create'}AddressrSuccess`),
-                error: t(`${'create'}AddressrError`),
-                loading: t(`${'create'}AddressrLoading`),
+                success: t(`${mode}AddressrSuccess`),
+                error: t(`${mode}AddressrError`),
+                loading: t(`${mode}AddressrLoading`),
             });
         },
         [t],

@@ -19,5 +19,16 @@
   "addresses": "Addresses",
   "addressesDescription": "Add or Edit Addresses",
   "address": "Address",
-  "addressDescription": "Make changes to your address here. Click save when you're done."
+  "addressDescription": "Make changes to your address here. Click save when you're done.",
+  "currentPhysicalAddress": "Physical",
+  "previousAddress": "Previous",
+  "mailingAddress": "Mailing",
+  "safeMailingAddress": "Safe mailing",
+  "foreignAddress": "Current foreign",
+  "intendedAddress": "Intented",
+  "investmentProperty": "Investment property",
+  "shareWithSpouse": "Shared",
+  "recentlyFearedPersecution": "Address at which recently feared persecution",
+  "recentForeignAddress": "Recent foreign",
+  "mostRecentForeignAddress": "Most recent foreign"
 }

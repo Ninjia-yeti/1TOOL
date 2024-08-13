@@ -11,6 +11,7 @@ export function AddressAdd() {
         <>
             <ClientOnly>
                 <AddressForm
+                    mode='create'
                     trigger={
                         <Button variant={'default'}>
                             <Trans i18nKey={'contact:add'} />

@@ -23,37 +23,37 @@ export interface ContactDateSelectorProps {
 }
 
 export const DateTypes = ['month-day-year', 'month-year', 'year', 'present']
+export const renderDate = (v: Date, mode: string) => {
+    const year = v.getFullYear();
+    const month = v.getMonth();
+    const day = v.getDate();
+    switch (mode) {
+        case "month-day-year":
+            return (
+                <div>{`${month}/${day}/${year}`}</div>
+            )
+        case "month-year":
+            return (
+                <div>{`${month}/${year}`}</div>
+            )
+        case "year":
+            return (
+                <div>{`${year}`}</div>
+            )
+        case "present":
+            return (
+                <div>{`Present`}</div>
+            )
+        default:
+            break;
+    }
 
+}
 export function ContactDateSelector({ value, onChange }: ContactDateSelectorProps) {
     const [mode, setMode] = useState(JSON.parse(value).mode);
     const [dateValue, setDateValue] = useState<Date>(JSON.parse(value).mode === 'present' ? new Date() : new Date(JSON.parse(value).value));
 
-    const renderDate = (v: Date) => {
-        const year = v.getFullYear();
-        const month = v.getMonth();
-        const day = v.getDate();
-        switch (mode) {
-            case "month-day-year":
-                return (
-                    <div>{`${month}/${day}/${year}`}</div>
-                )
-            case "month-year":
-                return (
-                    <div>{`${month}/${year}`}</div>
-                )
-            case "year":
-                return (
-                    <div>{`${year}`}</div>
-                )
-            case "present":
-                return (
-                    <div>{`Present`}</div>
-                )
-            default:
-                break;
-        }
 
-    }
     useEffect(() => {
         if (mode === 'present') {
             const formStringValue = JSON.stringify({
@@ -76,7 +76,7 @@ export function ContactDateSelector({ value, onChange }: ContactDateSelectorProp
                         )}
                     >
                         {dateValue ? (
-                            renderDate(dateValue)
+                            renderDate(dateValue, mode)
                         ) : (
                             <span>Pick a date</span>
                         )}

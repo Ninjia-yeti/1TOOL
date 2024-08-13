@@ -14,6 +14,11 @@ import { Trans } from '@kit/ui/trans';
 import { AddressList } from './address-list';
 import { AddressAdd } from './address-add';
 
+import { z } from 'zod';
+import { PersonalContactAddressSchema, IdSchema } from '../../_lib/schema/personal-contact-schema';
+const PersonalContactAddressSafeSchema = PersonalContactAddressSchema.merge(IdSchema)
+export type PersonalContactAddressProps = z.infer<typeof PersonalContactAddressSafeSchema>;
+
 export async function ContactAddress() {
     return (
         <Card>

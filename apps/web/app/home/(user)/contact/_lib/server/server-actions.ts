@@ -10,7 +10,8 @@ import {
   PersonalContactPhoneSchema,
   PersonalContactPhoneDeleteSchema,
   PersonalContactPhoneEditSchema,
-  PersonalContactAddressSchema
+  PersonalContactAddressSchema,
+  IdSchema
 } from '../schema/personal-contact-schema';
 
 
@@ -82,7 +83,7 @@ export const deletePersonalContactPhone = enhanceAction(
         throw new Error(`Failed to delete number`);
       }
     } catch (error) {
-      throw new Error(`Failed to delete number. error:${error}`);
+      throw new Error(`Failed to delete number error:${error}`);
     } finally {
       return redirect('/home/contact');
     }
@@ -127,4 +128,52 @@ export const createPersonalContactAddress = enhanceAction(
     schema: PersonalContactAddressSchema,
   },
 );
+
+export const editPersonalContactAddress = enhanceAction(
+  async function (payload) {
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_addresses')
+        .update({
+          ...payload
+        })
+        .eq('id', payload.id)
+      if (error) {
+        throw new Error(`Failed to edit address`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to edit address error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactAddressSchema.merge(IdSchema),
+  },
+);
+
+export const deletePersonalContactAddress = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_addresses')
+        .delete()
+        .eq('id', payload.id)
+        .select();
+      if (error) {
+        throw new Error(`Failed to delete address`);
+      }
+    } catch (error) {
+      throw new Error(`Failed to delete address error:${error}`);
+    } finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactPhoneDeleteSchema
+  }
+)
 

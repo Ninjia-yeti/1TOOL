@@ -33,12 +33,22 @@ type AddressCountrySelectProps = {
     onChange: (value: string) => void,
 }
 
+export const CountryForValue = (value: string) => {
+    return formattedCountries.find((a) => a.value === value)?.label ?? ''
+}
+const CountryForLabel = (value: string) => {
+    return formattedCountries.find((a) => a.label === value)?.value ?? ''
+}
 
 export function AddressCountrySelect({ onChange, value }: AddressCountrySelectProps) {
     const [open, setOpen] = React.useState(false)
-    const [selectedCountry, setSelectedCountry] = React.useState<string | null>(value)
+    const [selectedCountry, setSelectedCountry] = React.useState<string | null>(CountryForValue(value ?? ''))
     const { t } = useTranslation();
-
+    React.useEffect(() => {
+        if (value) {
+            setSelectedCountry(CountryForValue(value));
+        }
+    }, [value])
     return (
         <div className="flex items-center space-x-4 w-full">
             <Popover open={open} onOpenChange={setOpen}>
@@ -48,9 +58,10 @@ export function AddressCountrySelect({ onChange, value }: AddressCountrySelectPr
                         className="w-full justify-start"
                     >
                         {selectedCountry ? (
-                            <span>
-                                {selectedCountry}
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <Flag country={CountryForLabel(selectedCountry)} />
+                                <span>{selectedCountry}</span>
+                            </div>
                         ) : (
                             <span className="text-slate-400">{t('Country')}</span>
                         )}
@@ -68,12 +79,14 @@ export function AddressCountrySelect({ onChange, value }: AddressCountrySelectPr
                                         value={country.label}
                                         onSelect={(value: string) => {
                                             setSelectedCountry(value)
-                                            onChange(value)
+                                            onChange(country.value)
                                             setOpen(false)
                                         }}
                                     >
-                                        {/* <Flag country={country.flag.trim().toUpperCase()} /> */}
-                                        <span>{country.label}</span>
+                                        <div className="flex items-center gap-2">
+                                            <Flag country={country.value} />
+                                            <span>{country.label}</span>
+                                        </div>
                                     </CommandItem>
                                 ))}
                             </CommandGroup>
