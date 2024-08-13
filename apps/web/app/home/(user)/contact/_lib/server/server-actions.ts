@@ -108,12 +108,13 @@ export const createPersonalContactAddress = enhanceAction(
         .insert(
           {
             ...payload,
+            countrys: '',
             user: userId
           }
         );
 
       if (error) {
-        throw new Error(`Failed to save address`);
+        throw new Error(error.message);
       }
     }
     catch (error) {

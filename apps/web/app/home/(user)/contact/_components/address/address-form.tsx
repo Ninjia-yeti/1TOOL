@@ -85,12 +85,13 @@ export function AddressForm({ trigger }: AddressFromProps) {
         const promise = async () => {
             try {
                 setError(false);
-                setOpenDlg(false);
                 await createPersonalContactAddress(data)
+                setOpenDlg(false);
             }
             catch (e) {
                 setError(true);
-                setErrorString('Something went wrong.')
+                setErrorString('something went wrong');
+                throw new Error(`something went wrong${e}`);
             }
         }
         createToaster(promise);
@@ -126,7 +127,7 @@ export function AddressForm({ trigger }: AddressFromProps) {
                         </DialogDescription>
                     </DialogHeader>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-2  max-h-[80vh] overflow-y-scroll'>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-2  max-h-[70vh] overflow-y-auto'>
                             <div className='flex justify-between gap-2'>
                                 <FormField
                                     name='address'

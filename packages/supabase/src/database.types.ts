@@ -252,13 +252,14 @@ export type Database = {
         Row: {
           address: string | null
           city: string | null
+          country: string | null
           county: string | null
           created_at: string
           currentPhysicalAddress: boolean | null
           foreignAddress: boolean | null
           from: string | null
           id: number
-          inCareOF: string | null
+          inCareOf: string | null
           intendedAddress: boolean | null
           investmentProperty: boolean | null
           mailingAddress: boolean | null
@@ -280,13 +281,14 @@ export type Database = {
         Insert: {
           address?: string | null
           city?: string | null
+          country?: string | null
           county?: string | null
           created_at?: string
           currentPhysicalAddress?: boolean | null
           foreignAddress?: boolean | null
           from?: string | null
           id?: number
-          inCareOF?: string | null
+          inCareOf?: string | null
           intendedAddress?: boolean | null
           investmentProperty?: boolean | null
           mailingAddress?: boolean | null
@@ -308,13 +310,14 @@ export type Database = {
         Update: {
           address?: string | null
           city?: string | null
+          country?: string | null
           county?: string | null
           created_at?: string
           currentPhysicalAddress?: boolean | null
           foreignAddress?: boolean | null
           from?: string | null
           id?: number
-          inCareOF?: string | null
+          inCareOf?: string | null
           intendedAddress?: boolean | null
           investmentProperty?: boolean | null
           mailingAddress?: boolean | null
