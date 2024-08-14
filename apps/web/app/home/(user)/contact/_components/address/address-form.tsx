@@ -66,7 +66,7 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
     })
     const form = useForm<z.infer<typeof PersonalContactAddressSchema>>({
         resolver: zodResolver(PersonalContactAddressSchema),
-        defaultValues: address ? address : {
+        defaultValues: address && mode === 'edit' ? address : {
             from: defaultDateString,
             to: defaultDateString,
             currentPhysicalAddress: false,

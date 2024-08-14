@@ -90,8 +90,8 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
                     <CardContent className='flex flex-col gap-4 p-2 px-4'>
                         <div className='flex flex-col gap-4'>
                             <div>{address.inCareOf}</div>
-                            <div>{address.address},{address.type}.{address.typeValue}</div>
-                            <div>{address.city},{address.province},{address.postalCode}</div>
+                            <div>{address.address}, {address.type}.{address.typeValue}</div>
+                            <div>{address.city}, {address.province}, {address.postalCode}</div>
                             <div className='flex items-center gap-2'>
                                 <Flag country={address.country} />
                                 <div>{CountryForValue(address.country)}</div>
