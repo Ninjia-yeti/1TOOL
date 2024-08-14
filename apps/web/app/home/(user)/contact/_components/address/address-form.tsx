@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useCallback, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { Trans } from '@kit/ui/trans';
 import { Button } from '@kit/ui/button';
 import { Checkbox } from '@kit/ui/checkbox';
@@ -63,25 +63,27 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
         mode: DateTypes[0],
         value: today.toISOString()
     })
+    const defaultFormValue = address && mode === 'edit' ? address : {
+        from: defaultDateString,
+        to: defaultDateString,
+        currentPhysicalAddress: false,
+        previousAddress: false,
+        mailingAddress: false,
+        safeMailingAddress: false,
+        foreignAddress: false,
+        intendedAddress: false,
+        investmentProperty: false,
+        shareWithSpouse: false,
+        recentlyFearedPersecution: false,
+        recentForeignAddress: false,
+        mostRecentForeignAddress: false,
+
+    }
     const form = useForm<z.infer<typeof PersonalContactAddressSchema>>({
         resolver: zodResolver(PersonalContactAddressSchema),
-        defaultValues: address && mode === 'edit' ? address : {
-            from: defaultDateString,
-            to: defaultDateString,
-            currentPhysicalAddress: false,
-            previousAddress: false,
-            mailingAddress: false,
-            safeMailingAddress: false,
-            foreignAddress: false,
-            intendedAddress: false,
-            investmentProperty: false,
-            shareWithSpouse: false,
-            recentlyFearedPersecution: false,
-            recentForeignAddress: false,
-            mostRecentForeignAddress: false,
-
-        }
+        defaultValues: defaultFormValue
     })
+
 
     async function onSubmit(data: z.infer<typeof PersonalContactAddressSchema>) {
         const promise = async () => {
@@ -121,7 +123,10 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
         <div>
             <Dialog
                 open={openDlg}
-                onOpenChange={(v: boolean) => setOpenDlg(v)}
+                onOpenChange={(v: boolean) => {
+                    form.reset(defaultFormValue);
+                    setOpenDlg(v)
+                }}
             >
                 <DialogTrigger>
                     {trigger}
