@@ -20,13 +20,13 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { deletePersonalContactAddress } from '../../_lib/server/server-actions';
-import { AddressForm } from './address-form';
+import { AddressForm } from './stay-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 import { renderDate } from '../common/contact-date-selector';
 import Flag from 'react-flagkit';
 
-import { CountryForValue } from '../common/contact-country-select';
+import { CountryForValue } from './address-country-select';
 import { PersonalContactAddressProps } from '.'
 
 

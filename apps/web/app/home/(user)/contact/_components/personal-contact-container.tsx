@@ -8,7 +8,7 @@ import {
 } from "@kit/ui/tabs";
 import { ContactPhoneNumber } from './phone-number';
 import { ContactAddress } from "./address";
-
+import { ContactStay } from "./periods-of-stay";
 
 const contactList = [
   {
@@ -21,7 +21,7 @@ const contactList = [
   },
   {
     label: 'Periods of Stay',
-    component: null,
+    component: <ContactStay />,
   },
   {
     label: 'Trips Abroad',

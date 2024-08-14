@@ -71,7 +71,7 @@ export function ContactDateSelector({ value, onChange }: ContactDateSelectorProp
                     <Button
                         variant={"outline"}
                         className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
+                            "w-[240px] grow pl-3 text-left font-normal",
                             !value && "text-muted-foreground"
                         )}
                     >

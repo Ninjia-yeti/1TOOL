@@ -28,8 +28,9 @@ const formattedCountries = countries.map((country) => ({
     label: country.name.common
 }))
 
-type AddressCountrySelectProps = {
+type CountrySelectProps = {
     value: string | null,
+    placeholder?: string,
     onChange: (value: string) => void,
 }
 
@@ -40,7 +41,7 @@ const CountryForLabel = (value: string) => {
     return formattedCountries.find((a) => a.label === value)?.value ?? ''
 }
 
-export function AddressCountrySelect({ onChange, value }: AddressCountrySelectProps) {
+export function CountrySelect({ onChange, value, placeholder }: CountrySelectProps) {
     const [open, setOpen] = React.useState(false)
     const [selectedCountry, setSelectedCountry] = React.useState<string | null>(CountryForValue(value ?? ''))
     const { t } = useTranslation();
@@ -63,7 +64,7 @@ export function AddressCountrySelect({ onChange, value }: AddressCountrySelectPr
                                 <span>{selectedCountry}</span>
                             </div>
                         ) : (
-                            <span className="text-slate-400">{t('Country')}</span>
+                            <span className="text-slate-400">{t(placeholder ?? 'country')}</span>
                         )}
                     </Button>
                 </PopoverTrigger>

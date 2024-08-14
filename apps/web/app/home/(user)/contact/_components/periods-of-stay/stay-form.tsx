@@ -33,7 +33,6 @@ import { Label } from '@kit/ui/label';
 import { PersonalContactAddressSchema } from '../../_lib/schema/personal-contact-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { CountrySelect } from '../common/contact-country-select';
 import { If } from '@kit/ui/if';
 import { ErrorAlert } from '../errorAlert';
 import { toast } from 'sonner';
@@ -41,18 +40,21 @@ import { useTranslation } from 'react-i18next';
 import { ContactDateSelector } from '../common/contact-date-selector';
 import { DateTypes } from '../common/contact-date-selector';
 
+import { CountrySelect } from '../common/contact-country-select';
+import { ComboElement } from '../common/contact-combo-element';
+
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { createPersonalContactAddress, editPersonalContactAddress } from '../../_lib/server/server-actions';
 import { PersonalContactAddressProps } from '.';
 
-export interface AddressFromProps {
+export interface StayFormProps {
     trigger: ReactNode,
     address?: PersonalContactAddressProps,
     mode: 'edit' | 'create'
 }
 
-export function AddressForm({ trigger, mode, address }: AddressFromProps) {
+export function StayForm({ trigger, mode, address }: StayFormProps) {
     const [error, setError] = useState(false);
     const [errorString, setErrorString] = useState('');
     const [openDlg, setOpenDlg] = useState(false);
@@ -129,68 +131,81 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                 <DialogContent className="max-w-[45%]">
                     <DialogHeader>
                         <DialogTitle>
-                            <Trans i18nKey={'contact:address'} />
+                            <Trans i18nKey={'contact:stay'} />
                         </DialogTitle>
                         <DialogDescription>
-                            <Trans i18nKey={'contact:addressDescription'} />
+                            <Trans i18nKey={'contact:stayDescription'} />
                         </DialogDescription>
                     </DialogHeader>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-2  max-h-[70vh] overflow-y-auto'>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-3  max-h-[80vh] overflow-y-auto'>
                             <div className='flex justify-between gap-2'>
                                 <FormField
-                                    name='address'
+                                    name='from'
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem className='w-full'>
-                                            <FormLabel>Address</FormLabel>
+                                            <FormLabel>Date of entry</FormLabel>
                                             <FormControl>
-                                                <Input placeholder='Address' maxLength={200} {...field} />
+                                                <ContactDateSelector value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-                                <div className='flex gap-1'>
-                                    <FormField
-                                        name='type'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className='opacity-0'>type</FormLabel>
-                                                <FormControl>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger>
-                                                                <SelectValue />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectItem value="Apt">Apt</SelectItem>
-                                                            <SelectItem value="Ste">Ste</SelectItem>
-                                                            <SelectItem value="Flr">Flr</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        name='typeValue'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Apt/Ste/Flr</FormLabel>
-                                                <FormControl>
-                                                    <Input placeholder='Apt/Ste/Flr' maxLength={200} {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
+                                <FormField
+                                    name='address'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem className='w-full'>
+                                            <FormLabel>1-94 Number</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='1-94 Number' {...field} type='number' />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
 
+                            </div>
+                            <div>
+                                <FormField
+                                    name='city'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Class of admission</FormLabel>
+                                            <FormControl>
+                                                <ComboElement placeholder='Class of admission' value={field.value} onChange={field.onChange} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <div>
+                                <FormField
+                                    name='city'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Manner of entry</FormLabel>
+                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                <FormControl>
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Manner of entry" />
+                                                    </SelectTrigger>
+                                                </FormControl>
+                                                <SelectContent>
+                                                    <SelectItem value="m@example.com">m@example.com</SelectItem>
+                                                    <SelectItem value="m@google.com">m@google.com</SelectItem>
+                                                    <SelectItem value="m@support.com">m@support.com</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                             <div className='grid grid-cols-3 gap-2'>
                                 <FormField
@@ -198,9 +213,50 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>City</FormLabel>
+                                            <FormLabel>Status after admission</FormLabel>
                                             <FormControl>
-                                                <Input placeholder='City' maxLength={200} {...field} />
+                                                <ComboElement placeholder='Status after admission' value={field.value} onChange={field.onChange} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='city'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Date status was granted</FormLabel>
+                                            <FormControl>
+                                                <ComboElement placeholder='Date status was granted' value={field.value} onChange={field.onChange} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='city'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Date statis expires</FormLabel>
+                                            <FormControl>
+                                                <ComboElement placeholder='Date statis expires' value={field.value} onChange={field.onChange} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <div className='grid grid-cols-3 gap-2'>
+                                <FormField
+                                    name='city'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Authorized stay expiry</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='Authorized stay expiry' maxLength={200} {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -211,9 +267,9 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>State</FormLabel>
+                                            <FormLabel>Purpose of stay</FormLabel>
                                             <FormControl>
-                                                <Input placeholder='State' maxLength={200} {...field} />
+                                                <Input placeholder='Purpose of stay' maxLength={200} {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -224,9 +280,9 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>County</FormLabel>
+                                            <FormLabel>Mode of travel</FormLabel>
                                             <FormControl>
-                                                <Input placeholder='County' maxLength={200} {...field} />
+                                                <Input placeholder='Mode of travel' maxLength={200} {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -239,9 +295,9 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Zip Code</FormLabel>
+                                            <FormLabel>Passport number</FormLabel>
                                             <FormControl>
-                                                <Input placeholder='Zip Code' maxLength={200} {...field} />
+                                                <Input placeholder='Passport number' maxLength={200} {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -252,7 +308,7 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Province</FormLabel>
+                                            <FormLabel>Travel document number</FormLabel>
                                             <FormControl>
                                                 <Input placeholder='Province' maxLength={200} {...field} />
                                             </FormControl>
@@ -265,24 +321,9 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Postal Code</FormLabel>
+                                            <FormLabel>Passport/travel doc country</FormLabel>
                                             <FormControl>
-                                                <Input placeholder='Postal Code' maxLength={200} {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-                            <div className='w-full'>
-                                <FormField
-                                    name='country'
-                                    control={form.control}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Country</FormLabel>
-                                            <FormControl>
-                                                <CountrySelect value={field.value} onChange={field.onChange} />
+                                                <CountrySelect placeholder='Passport/travel doc country' value={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -290,52 +331,129 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                 />
                             </div>
                             <div className='grid grid-cols-3 gap-2'>
-                                <div>
-                                    <FormField
-                                        name='from'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>From</FormLabel>
-                                                <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div>
-                                    <FormField
-                                        name='to'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>To</FormLabel>
-                                                <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div>
-                                    <FormField
-                                        name='inCareOf'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>In Care Of</FormLabel>
-                                                <FormControl>
-                                                    <Input placeholder='In Care Of' maxLength={200} {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Passport/travel doc issued</FormLabel>
+                                            <FormControl>
+                                                <CountrySelect placeholder='Passport/travel doc issued' value={field.value} onChange={field.onChange} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Passport/travel doc expires</FormLabel>
+                                            <FormControl>
+                                                <CountrySelect placeholder='Passport/travel doc expires' value={field.value} onChange={field.onChange} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>City of residence in the US</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='City of residence in the US' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
+                            <div className='grid grid-cols-3 gap-2'>
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>First name used</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='First name used' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Middle name used</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='Middle name used' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Last name used</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='Last name used' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <div className='grid grid-cols-3 gap-2'>
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>City of exit</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='City of exit' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='postalCode'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>State of exit</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='State of exit' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    name='to'
+                                    control={form.control}
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Date of exit</FormLabel>
+                                            <FormControl>
+                                                <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+
                             <div>
                                 <FormField
                                     name='currentPhysicalAddress'
@@ -350,7 +468,7 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                             </FormControl>
                                             <div className="space-y-1 leading-none">
                                                 <FormLabel>
-                                                    This is current physical address
+                                                    This is most recent entry
                                                 </FormLabel>
                                             </div>
                                         </FormItem>
@@ -383,7 +501,7 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                                 </FormControl>
                                                 <div className="space-y-1 leading-none">
                                                     <FormLabel>
-                                                        This is previous address
+                                                        This entry was planned stay
                                                     </FormLabel>
                                                 </div>
                                             </FormItem>
@@ -404,7 +522,7 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                                 </FormControl>
                                                 <div className="space-y-1 leading-none">
                                                     <FormLabel>
-                                                        {`This is mailing address(and is not physical address)`}
+                                                        This entry was on H or L status
                                                     </FormLabel>
                                                 </div>
                                             </FormItem>
@@ -425,7 +543,7 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                                 </FormControl>
                                                 <div className="space-y-1 leading-none">
                                                     <FormLabel>
-                                                        {`This is safe mailing address(and is not physical address)`}
+                                                        This entry was on R status
                                                     </FormLabel>
                                                 </div>
                                             </FormItem>
@@ -447,135 +565,7 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
                                                 </FormControl>
                                                 <div className="space-y-1 leading-none">
                                                     <FormLabel>
-                                                        {`This is current foreign address`}
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                    <FormField
-                                        name='intendedAddress'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        {`This is intended  address for moving to the US`}
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                </div>
-                                <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                    <FormField
-                                        name='investmentProperty'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        {`This is investment property`}
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                    <FormField
-                                        name='shareWithSpouse'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        {`Share this address with spouse`}
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                </div>
-                                <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                    <FormField
-                                        name='recentlyFearedPersecution'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        {`This is address at which most recently feared persecution(for asylum applicants)`}
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                    <FormField
-                                        name='recentForeignAddress'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        {`This is most recent foreign address`}
-                                                    </FormLabel>
-                                                </div>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                    <FormField
-                                        name='mostRecentForeignAddress'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        {`This is most recent foreign address for over one year`}
+                                                        This entry was granted duration of status
                                                     </FormLabel>
                                                 </div>
                                             </FormItem>
