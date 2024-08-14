@@ -7,10 +7,14 @@ export async function PhoneNumberList() {
 
     const supabase = getSupabaseServerComponentClient();
     const { user } = await loadUserWorkspace();
-    const { data, error } = await supabase.from('contact_phone_numbers').select('*').eq("user", user.id);
+    const { data, error } = await supabase.from('contact_phone_numbers')
+        .select('*')
+        .eq("user", user.id)
+        .order('id', { ascending: true });
     if (error) {
         return <ErrorAlert error='An error occured while fetching contact informatioin' />
     }
+    console.log('fetched phone number', data);
 
     return (
         <div className='grid grid-cols-2 gap-4'>

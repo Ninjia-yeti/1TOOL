@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useCallback, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { Trans } from '@kit/ui/trans';
 import { Button } from '@kit/ui/button';
 import {
@@ -36,7 +36,9 @@ export function PhoneNumberForm({ mode, number, trigger }: PhoneNumberFormProps)
     const [currentNumber, setCurrentNumber] = useState<NumberSafeProps>(number);
     const [openDlg, setOpenDlg] = useState(false);
     const { t } = useTranslation('');
-
+    useEffect(() => {
+        setCurrentNumber(number);
+    }, [number])
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {

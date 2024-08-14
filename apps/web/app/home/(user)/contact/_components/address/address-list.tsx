@@ -7,7 +7,10 @@ export async function AddressList() {
 
     const supabase = getSupabaseServerComponentClient();
     const { user } = await loadUserWorkspace();
-    const { data, error } = await supabase.from('contact_addresses').select('*').eq("user", user.id);
+    const { data, error } = await supabase.from('contact_addresses')
+        .select('*')
+        .eq("user", user.id)
+        .order('id', { ascending: true });
     if (error) {
         return <ErrorAlert error='An error occured while fetching contact informatioin' />
     }
