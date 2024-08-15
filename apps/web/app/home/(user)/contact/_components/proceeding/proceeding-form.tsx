@@ -43,7 +43,7 @@ import { DateTypes } from '../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactProceeding, editPersonalContactTripsAbroad, } from '../../_lib/server/server-actions';
+import { createPersonalContactProceeding, editPersonalContactProceeding, } from '../../_lib/server/server-actions';
 import { PersonalContactProceedingProps } from '.';
 
 export interface TripsAbroadFromProps {
@@ -89,11 +89,11 @@ export function ProceedingForm({ trigger, mode, proceeding }: TripsAbroadFromPro
                 if (mode === 'create') {
                     await createPersonalContactProceeding(data)
                 }
-                // if (mode === 'edit') {
-                //     await editPersonalContactTripsAbroad({
-                //         ...data, id: trip?.id ?? 0
-                //     })
-                // }
+                if (mode === 'edit') {
+                    await editPersonalContactProceeding({
+                        ...data, id: proceeding?.id ?? 0
+                    })
+                }
                 setOpenDlg(false);
             }
             catch (e) {

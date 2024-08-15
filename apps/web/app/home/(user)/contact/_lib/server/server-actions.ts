@@ -386,3 +386,52 @@ export const createPersonalContactProceeding = enhanceAction(
     schema: PersonalContactProceedingSchema,
   },
 )
+
+
+export const editPersonalContactProceeding = enhanceAction(
+  async function (payload) {
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_proceedings')
+        .update({
+          ...payload
+        })
+        .eq('id', payload.id)
+      if (error) {
+        throw new Error(`Failed to edit proceeding info`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to edit proceeding info error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactProceedingSchema.merge(IdSchema),
+  },
+);
+
+export const deletePersonalContactProceeding = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_proceedings')
+        .delete()
+        .eq('id', payload.id)
+        .select();
+      if (error) {
+        throw new Error(`Failed to delete proceeding info`);
+      }
+    } catch (error) {
+      throw new Error(`Failed to delete proceeding info error:${error}`);
+    } finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: IdSchema
+  }
+)
