@@ -19,7 +19,7 @@ import {
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { deletePersonalContactTripsAbroad } from '../../_lib/server/server-actions';
+import { deletePersonalContactProceeding } from '../../_lib/server/server-actions';
 import { ProceedingForm } from './proceeding-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
@@ -45,10 +45,10 @@ export function ProceedingItem({ proceeding }: { proceeding: PersonalContactProc
         [t],
     );
 
-    const deleteAddress = useCallback(() => {
+    const deleteProceeding = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContactTripsAbroad({ id: proceeding.id })
+                await deletePersonalContactProceeding({ id: proceeding.id })
             }
             catch (e) {
                 setError(true);
@@ -101,7 +101,7 @@ export function ProceedingItem({ proceeding }: { proceeding: PersonalContactProc
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={deleteAddress}>Continue</AlertDialogAction>
+                                        <AlertDialogAction onClick={deleteProceeding}>Continue</AlertDialogAction>
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>
