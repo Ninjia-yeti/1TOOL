@@ -55,14 +55,11 @@ export function ContactDateSelector({ value, onChange }: ContactDateSelectorProp
 
 
     useEffect(() => {
-        if (mode === 'present') {
-            const formStringValue = JSON.stringify({
-                mode: mode,
-                value: mode
-            })
-            onChange(formStringValue);
-            return;
-        }
+        const formStringValue = JSON.stringify({
+            mode: mode,
+            value: mode === 'present' ? mode : dateValue.toISOString()
+        })
+        onChange(formStringValue);
     }, [mode])
     return (
         <div className="flex gap-1">

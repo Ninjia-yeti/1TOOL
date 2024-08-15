@@ -24,16 +24,12 @@ import { StayForm } from './stay-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 import { renderDate } from '../common/contact-date-selector';
-import Flag from 'react-flagkit';
 
-import { CountryForValue } from '../common/contact-country-select';
 import { PersonalContactStayProps } from '.'
 
 
 
-type Stay = {
-    [key: string]: string | number | boolean;
-};
+
 
 export function StayListItem({ stay }: { stay: PersonalContactStayProps }) {
     const [error, setError] = useState(false);
@@ -63,26 +59,7 @@ export function StayListItem({ stay }: { stay: PersonalContactStayProps }) {
         createToaster(promise)
     }, [stay, createToaster])
 
-    const renderPropeties = (stay: Stay) => {
-        const keys = Object.keys(stay);
-        let matchedProperties: string[] = [];
-        keys.forEach((aKey: string) => {
-            if (stay[aKey] === true) {
-                matchedProperties.push(aKey);
-            }
-        })
-        return (
-            <div className='w-full flex flex-wrap'>
-                {matchedProperties.map((a, idx) => {
-                    return (
-                        <div>
-                            <Trans key={idx} i18nKey={`contact:${a}`} />{`${idx === matchedProperties.length - 1 ? '' : ','}`}
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
+
     const renderNumberOfDays = () => {
         const startDateString = JSON.parse(stay.dateOfEntry).value;
         const endDateString = JSON.parse(stay.dateOfExit).value;
