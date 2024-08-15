@@ -23,57 +23,19 @@ type ComboValueType = {
     label: string
 }
 
-const values: ComboValueType[] = [
-    {
-        value: "all",
-        label: "All",
-    },
-    {
-        value: "facebook",
-        label: "Facebook",
-    },
-    {
-        value: "instagram",
-        label: "Instagram",
-    },
-    {
-        value: "linkedin",
-        label: "LinkedIn",
-    },
-    {
-        value: "youtube",
-        label: "YouTube",
-    },
-    {
-        value: "tiktok",
-        label: "TikTok",
-    },
-    {
-        value: "wordpress",
-        label: "Wordpress",
-    },
-    {
-        value: "contao",
-        label: "Contao",
-    },
-    {
-        value: "joomla",
-        label: "Joomla",
-    },
-]
-
 type Props = {
     onChange: (value: string) => void,
     value: string,
     comboValues?: ComboValueType[],
-    placeholder: string
+    placeholder: string,
+    values: ComboValueType[]
 }
 
 
 export function ComboElement(props: Props) {
     const [open, setOpen] = React.useState(false)
     const [selectedValue, setSelectedValue] = React.useState<ComboValueType | null>(
-        null
+        props.values.find((a) => a.value === props.value) ?? null
     )
     const { t } = useTranslation();
 
@@ -86,30 +48,27 @@ export function ComboElement(props: Props) {
                         className="w-full grow justify-start"
                     >
                         {selectedValue ? (
-                            <>
+                            <span className="w-full text-left text-ellipsis overflow-hidden">
                                 {selectedValue.label}
-                            </>
+                            </span>
                         ) : (
-                            <span className="text-slate-400">{t(props.placeholder)}</span>
+                            <span className="text-slate-400 text-left w-full text-ellipsis">{t(props.placeholder)}</span>
                         )}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="p-0" side="bottom" align="start">
+                <PopoverContent className="max-w-full p-0" side="bottom" align="start">
                     <Command>
                         <CommandInput placeholder="type to select..." />
                         <CommandList>
                             <CommandEmpty>{t('No results found.')}</CommandEmpty>
                             <CommandGroup>
-                                {values.map((aValue) => (
+                                {props.values.map((aValue) => (
                                     <CommandItem
                                         key={aValue.value}
-                                        value={aValue.value}
-                                        onSelect={(value) => {
-                                            setSelectedValue(
-                                                values.find((priority) => priority.value === value) ||
-                                                null
-                                            )
-                                            props.onChange(value)
+                                        value={aValue.label}
+                                        onSelect={(_) => {
+                                            setSelectedValue(aValue)
+                                            props.onChange(aValue.value)
                                             setOpen(false)
                                         }}
                                     >

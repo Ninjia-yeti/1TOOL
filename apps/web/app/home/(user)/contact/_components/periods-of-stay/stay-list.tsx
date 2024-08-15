@@ -1,16 +1,17 @@
 import { getSupabaseServerComponentClient } from '@kit/supabase/server-component-client';
-import { AddressListItem } from './stay-list-item';
+import { StayListItem } from './stay-list-item';
 import { ErrorAlert } from '../errorAlert';
 import { loadUserWorkspace } from '~/home/(user)/_lib/server/load-user-workspace';
 
-export async function AddressList() {
+export async function StayList() {
 
     const supabase = getSupabaseServerComponentClient();
     const { user } = await loadUserWorkspace();
-    const { data, error } = await supabase.from('contact_addresses')
+    const { data, error } = await supabase.from('contact_periods_of_stay')
         .select('*')
         .eq("user", user.id)
         .order('id', { ascending: true });
+
     if (error) {
         return <ErrorAlert error='An error occured while fetching contact informatioin' />
     }
@@ -20,8 +21,8 @@ export async function AddressList() {
             {data.map((a, idx) => (
                 <div key={idx}>
                     <div>
-                        <AddressListItem
-                            address={a}
+                        <StayListItem
+                            stay={a}
                         />
                     </div>
                 </div>

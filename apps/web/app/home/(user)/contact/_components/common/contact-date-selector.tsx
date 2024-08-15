@@ -25,7 +25,7 @@ export interface ContactDateSelectorProps {
 export const DateTypes = ['month-day-year', 'month-year', 'year', 'present']
 export const renderDate = (v: Date, mode: string) => {
     const year = v.getFullYear();
-    const month = v.getMonth();
+    const month = v.getMonth() + 1;
     const day = v.getDate();
     switch (mode) {
         case "month-day-year":
@@ -100,7 +100,6 @@ export function ContactDateSelector({ value, onChange }: ContactDateSelectorProp
                                 value: update
                             }));
                         }}
-                        initialFocus
                     />
                 </PopoverContent>
             </Popover>

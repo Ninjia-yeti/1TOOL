@@ -360,6 +360,136 @@ export type Database = {
           },
         ]
       }
+      contact_periods_of_stay: {
+        Row: {
+          authorizedStayExpiry: string
+          cityOfEntry: string
+          cityOfExit: string
+          cityOfResidenceInUs: string
+          classOfAdmission: string
+          created_at: string
+          dateOfEntry: string
+          dateOfExit: string
+          dateStatusExpires: string
+          dateStatusWasGranted: string
+          firstNameUsed: string
+          grantedDurationOfStatus: boolean
+          id: number
+          lastNameUsed: string
+          mannerOfEntry: string
+          middleNameUsed: string
+          modeOfTravel: string
+          mostRecentEntry: boolean
+          number_1_94: string
+          onH_LStatus: boolean
+          onRStatus: boolean
+          passport_travelDocCountry: string
+          passport_travelDocExpires: string
+          passport_travelDocIssued: string
+          passportNumber: string
+          plannedStay: boolean
+          portOfEntry: string
+          purposeOfStay: string
+          stateOfEntry: string
+          stateOfExit: string
+          statusAfterAdmission: string
+          travelDocumentNumber: string
+          user: string
+        }
+        Insert: {
+          authorizedStayExpiry: string
+          cityOfEntry: string
+          cityOfExit: string
+          cityOfResidenceInUs: string
+          classOfAdmission: string
+          created_at?: string
+          dateOfEntry: string
+          dateOfExit: string
+          dateStatusExpires: string
+          dateStatusWasGranted: string
+          firstNameUsed: string
+          grantedDurationOfStatus: boolean
+          id?: number
+          lastNameUsed: string
+          mannerOfEntry: string
+          middleNameUsed: string
+          modeOfTravel: string
+          mostRecentEntry: boolean
+          number_1_94: string
+          onH_LStatus: boolean
+          onRStatus: boolean
+          passport_travelDocCountry: string
+          passport_travelDocExpires: string
+          passport_travelDocIssued: string
+          passportNumber: string
+          plannedStay: boolean
+          portOfEntry: string
+          purposeOfStay: string
+          stateOfEntry: string
+          stateOfExit: string
+          statusAfterAdmission: string
+          travelDocumentNumber: string
+          user?: string
+        }
+        Update: {
+          authorizedStayExpiry?: string
+          cityOfEntry?: string
+          cityOfExit?: string
+          cityOfResidenceInUs?: string
+          classOfAdmission?: string
+          created_at?: string
+          dateOfEntry?: string
+          dateOfExit?: string
+          dateStatusExpires?: string
+          dateStatusWasGranted?: string
+          firstNameUsed?: string
+          grantedDurationOfStatus?: boolean
+          id?: number
+          lastNameUsed?: string
+          mannerOfEntry?: string
+          middleNameUsed?: string
+          modeOfTravel?: string
+          mostRecentEntry?: boolean
+          number_1_94?: string
+          onH_LStatus?: boolean
+          onRStatus?: boolean
+          passport_travelDocCountry?: string
+          passport_travelDocExpires?: string
+          passport_travelDocIssued?: string
+          passportNumber?: string
+          plannedStay?: boolean
+          portOfEntry?: string
+          purposeOfStay?: string
+          stateOfEntry?: string
+          stateOfExit?: string
+          statusAfterAdmission?: string
+          travelDocumentNumber?: string
+          user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_periods_of_stay_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_periods_of_stay_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_periods_of_stay_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_phone_numbers: {
         Row: {
           created_at: string

@@ -11,7 +11,8 @@ import {
   PersonalContactPhoneDeleteSchema,
   PersonalContactPhoneEditSchema,
   PersonalContactAddressSchema,
-  IdSchema
+  IdSchema,
+  PersonalContactStaySchema
 } from '../schema/personal-contact-schema';
 
 
@@ -177,3 +178,87 @@ export const deletePersonalContactAddress = enhanceAction(
   }
 )
 
+export const createPersonalContactStay = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    const auth = await requireUser(client);
+    const userId = auth.data?.id;
+    try {
+      console.log({
+        ...payload,
+        user: userId
+      });
+
+      const { error } = await client.from('contact_periods_of_stay')
+        .insert(
+          {
+            ...payload,
+            user: userId
+          }
+        );
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to save stau data error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactStaySchema,
+  },
+);
+
+
+export const editPersonalContactStay = enhanceAction(
+  async function (payload) {
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_periods_of_stay')
+        .update({
+          ...payload
+        })
+        .eq('id', payload.id)
+      if (error) {
+        throw new Error(`Failed to edit stay info`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to edit stay info error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactStaySchema.merge(IdSchema),
+  },
+);
+
+export const deletePersonalContactStay = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_periods_of_stay')
+        .delete()
+        .eq('id', payload.id)
+        .select();
+      if (error) {
+        throw new Error(`Failed to delete stay info`);
+      }
+    } catch (error) {
+      throw new Error(`Failed to delete stay info error:${error}`);
+    } finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: IdSchema
+  }
+)

@@ -19,23 +19,23 @@ import {
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { deletePersonalContactAddress } from '../../_lib/server/server-actions';
-import { AddressForm } from './stay-form';
+import { deletePersonalContactStay } from '../../_lib/server/server-actions';
+import { StayForm } from './stay-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 import { renderDate } from '../common/contact-date-selector';
 import Flag from 'react-flagkit';
 
-import { CountryForValue } from './address-country-select';
-import { PersonalContactAddressProps } from '.'
+import { CountryForValue } from '../common/contact-country-select';
+import { PersonalContactStayProps } from '.'
 
 
 
-type Address = {
+type Stay = {
     [key: string]: string | number | boolean;
 };
 
-export function AddressListItem({ address }: { address: PersonalContactAddressProps }) {
+export function StayListItem({ stay }: { stay: PersonalContactStayProps }) {
     const [error, setError] = useState(false);
 
     const { t } = useTranslation('');
@@ -51,23 +51,23 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
         [t],
     );
 
-    const deleteAddress = useCallback(() => {
+    const deleteStay = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContactAddress({ id: address.id })
+                await deletePersonalContactStay({ id: stay.id })
             }
             catch (e) {
                 setError(true);
             }
         }
         createToaster(promise)
-    }, [address, createToaster])
+    }, [stay, createToaster])
 
-    const renderPropeties = (address: Address) => {
-        const keys = Object.keys(address);
+    const renderPropeties = (stay: Stay) => {
+        const keys = Object.keys(stay);
         let matchedProperties: string[] = [];
         keys.forEach((aKey: string) => {
-            if (address[aKey] === true) {
+            if (stay[aKey] === true) {
                 matchedProperties.push(aKey);
             }
         })
@@ -83,39 +83,50 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
             </div>
         )
     }
+    const renderNumberOfDays = () => {
+        const startDateString = JSON.parse(stay.dateOfEntry).value;
+        const endDateString = JSON.parse(stay.dateOfExit).value;
+
+        const startDate = new Date(startDateString);
+        const endDate = new Date(endDateString);
+
+        const diffInTime = Math.abs(endDate.getTime() - startDate.getTime());
+
+        const diffInDays = Math.floor(diffInTime / (1000 * 60 * 60 * 24));
+
+        return diffInDays > 0 ? diffInDays : 1;
+    }
     return (
         <>
             <ClientOnly>
                 <Card>
                     <CardContent className='flex flex-col gap-4 p-2 px-4'>
                         <div className='flex flex-col gap-4'>
-                            <div>{address.inCareOf}</div>
-                            <div>{address.address}, {address.type}.{address.typeValue}</div>
-                            <div>{address.city}, {address.province}, {address.postalCode}</div>
-                            <div className='flex items-center gap-2'>
-                                <Flag country={address.country} />
-                                <div>{CountryForValue(address.country)}</div>
+                            <div className='flex gap-2'>Date of entry: {
+                                renderDate(new Date(JSON.parse(stay.dateOfEntry).value), JSON.parse(stay.dateOfEntry).mode)
+                            }</div>
+                            <div className='flex gap-2'>Place of entry:{
+                                `${stay.portOfEntry}, ${stay.cityOfEntry}, ${stay.stateOfEntry}`
+                            }
                             </div>
-                            <div className='flex items-center gap-2'>
-                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
-                                    {renderDate(new Date(JSON.parse(address.from).value), JSON.parse(address.from).mode)}
-                                </div>
-                                -
-                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
-                                    {renderDate(new Date(JSON.parse(address.to).value), JSON.parse(address.to).mode)}
-                                </div>
+                            <div className='flex gap-2'>1-94 Number:{
+                                stay.number_1_94
+                            }
                             </div>
-                            {renderPropeties(address)}
+                            <div className='flex gap-2'>Number of days:{
+                                renderNumberOfDays()
+                            }
+                            </div>
                         </div>
                         <div className='flex flex-wrap'>
-                            <AddressForm
+                            <StayForm
                                 trigger={
                                     <Button variant={'ghost'}>
                                         <Trans i18nKey={'common:edit'} />
                                     </Button>
                                 }
                                 mode='edit'
-                                address={address}
+                                stay={stay}
                             />
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
@@ -133,7 +144,7 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={deleteAddress}>Continue</AlertDialogAction>
+                                        <AlertDialogAction onClick={deleteStay}>Continue</AlertDialogAction>
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>
