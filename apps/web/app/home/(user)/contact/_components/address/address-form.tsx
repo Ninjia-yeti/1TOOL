@@ -111,9 +111,9 @@ export function AddressForm({ trigger, mode, address }: AddressFromProps) {
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`${mode}AddressrSuccess`),
-                error: t(`${mode}AddressrError`),
-                loading: t(`${mode}AddressrLoading`),
+                success: t(`${mode}AddressSuccess`),
+                error: t(`${mode}AddressError`),
+                loading: t(`${mode}AddressLoading`),
             });
         },
         [t],

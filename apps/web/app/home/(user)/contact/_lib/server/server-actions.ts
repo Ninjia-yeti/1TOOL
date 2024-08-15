@@ -12,6 +12,7 @@ import {
   PersonalContactPhoneEditSchema,
   PersonalContactAddressSchema,
   PersonalContactTripsAbroadSchema,
+  PersonalContactProceedingSchema,
   IdSchema,
   PersonalContactStaySchema
 } from '../schema/personal-contact-schema';
@@ -347,4 +348,41 @@ export const deletePersonalContactTripsAbroad = enhanceAction(
   {
     schema: IdSchema
   }
+)
+
+
+export const createPersonalContactProceeding = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    const auth = await requireUser(client);
+    const userId = auth.data?.id;
+    try {
+      console.log({
+        ...payload,
+        user: userId
+      });
+
+      const { error } = await client.from('contact_proceedings')
+        .insert(
+          {
+            ...payload,
+            user: userId
+          }
+        );
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to save address error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactProceedingSchema,
+  },
 )

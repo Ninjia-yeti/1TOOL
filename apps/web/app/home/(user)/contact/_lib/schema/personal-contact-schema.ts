@@ -90,3 +90,18 @@ export const PersonalContactTripsAbroadSchema = z.object({
   tripPurpose: z.string(),
   inspectedToReturnUS: z.boolean(),
 })
+export const PersonalContactProceedingSchema = z.object({
+  locationCity: z.string(),
+  locationState: z.string(),
+  dateStarted: z.string(),
+  dateEnded: z.string(),
+  office: z.string(),
+  status: z.string(),
+  current: z.boolean(),
+  hearing: z.boolean(),
+  removal: z.boolean(),
+  exclusion: z.boolean(),
+  deportation: z.boolean(),
+  rescission: z.boolean(),
+  otherJudicial: z.boolean(),
+})

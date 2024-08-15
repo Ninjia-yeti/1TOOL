@@ -10,6 +10,7 @@ import { ContactPhoneNumber } from './phone-number';
 import { ContactAddress } from "./address";
 import { ContactStay } from "./periods-of-stay";
 import { ContactTripsAbroad } from "./trips-abroad";
+import { ContactProceeding } from "./proceeding";
 
 const contactList = [
   {
@@ -30,7 +31,7 @@ const contactList = [
   },
   {
     label: 'Proceedings',
-    component: null,
+    component: <ContactProceeding />,
   },
   {
     label: 'Family',

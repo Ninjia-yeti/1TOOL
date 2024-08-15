@@ -37,6 +37,10 @@
   "stayDescription": "Make changes to your periods of stay here. Click save when you're done.",
   "tripsAbroads": "Trips of Abroads",
   "tripsAbroadsDescription": "Add or Edit Trips of Abroads",
-  "tripsAbroad": "Trips of Abroads",
-  "tripsAbroadDescription": "Make changes to your trips here. Click save when you're done."
+  "tripsAbroad": "Trips of Abroad",
+  "tripsAbroadDescription": "Make changes to your trips here. Click save when you're done.",
+  "proceedings": "Proceedings",
+  "proceedingsDescription": "Add or Edit Proceedings",
+  "proceeding": "Proceeding",
+  "proceedingDescription": "Make changes to your proceedings here. Click save when you're done."
 }

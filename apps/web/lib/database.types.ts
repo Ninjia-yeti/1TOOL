@@ -536,6 +536,85 @@ export type Database = {
           },
         ]
       }
+      contact_proceedings: {
+        Row: {
+          created_at: string
+          current: boolean
+          dateEnded: string
+          dateStarted: string
+          deportation: boolean
+          exclusion: boolean
+          hearing: boolean
+          id: number
+          locationCity: string
+          locationState: string
+          office: string
+          otherJudicial: boolean
+          removal: boolean
+          rescission: boolean
+          status: string
+          user: string
+        }
+        Insert: {
+          created_at?: string
+          current: boolean
+          dateEnded: string
+          dateStarted: string
+          deportation: boolean
+          exclusion: boolean
+          hearing: boolean
+          id?: number
+          locationCity: string
+          locationState: string
+          office: string
+          otherJudicial: boolean
+          removal: boolean
+          rescission: boolean
+          status: string
+          user?: string
+        }
+        Update: {
+          created_at?: string
+          current?: boolean
+          dateEnded?: string
+          dateStarted?: string
+          deportation?: boolean
+          exclusion?: boolean
+          hearing?: boolean
+          id?: number
+          locationCity?: string
+          locationState?: string
+          office?: string
+          otherJudicial?: boolean
+          removal?: boolean
+          rescission?: boolean
+          status?: string
+          user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_proceeding_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_proceeding_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_proceeding_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_trips_abroads: {
         Row: {
           countriesVisited: string

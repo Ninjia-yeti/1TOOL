@@ -21,19 +21,10 @@ import {
     FormMessage,
 } from '@kit/ui/form';
 import { Input } from '@kit/ui/input';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@kit/ui/select"
-import { Label } from '@kit/ui/label';
 
 import { PersonalContactTripsAbroadSchema } from '../../_lib/schema/personal-contact-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { CountrySelect } from '../common/contact-country-select';
 import { If } from '@kit/ui/if';
 import { ErrorAlert } from '../errorAlert';
 import { toast } from 'sonner';
@@ -101,9 +92,9 @@ export function TripsAbroadForm({ trigger, mode, trip }: TripsAbroadFromProps) {
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`${mode}AddressrSuccess`),
-                error: t(`${mode}AddressrError`),
-                loading: t(`${mode}AddressrLoading`),
+                success: t(`${mode}TripsSuccess`),
+                error: t(`${mode}TripsError`),
+                loading: t(`${mode}TripsLoading`),
             });
         },
         [t],
