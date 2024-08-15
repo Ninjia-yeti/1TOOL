@@ -43,9 +43,9 @@ export function AddressListItem({ address }: { address: PersonalContactAddressPr
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`deletePhoneNumberSuccess`),
-                error: t(`deletePhoneNumberError`),
-                loading: t(`deletePhoneNumberLoading`),
+                success: t(`deleteAddressSuccess`),
+                error: t(`deleteAddressError`),
+                loading: t(`deleteAddressLoading`),
             });
         },
         [t],

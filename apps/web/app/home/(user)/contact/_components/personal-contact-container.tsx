@@ -9,6 +9,7 @@ import {
 import { ContactPhoneNumber } from './phone-number';
 import { ContactAddress } from "./address";
 import { ContactStay } from "./periods-of-stay";
+import { ContactTripsAbroad } from "./trips-abroad";
 
 const contactList = [
   {
@@ -25,7 +26,7 @@ const contactList = [
   },
   {
     label: 'Trips Abroad',
-    component: null,
+    component: <ContactTripsAbroad />,
   },
   {
     label: 'Proceedings',

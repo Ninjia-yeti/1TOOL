@@ -19,23 +19,17 @@ import {
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { deletePersonalContactStay } from '../../_lib/server/server-actions';
-import { StayForm } from './stay-form';
+import { deletePersonalContactTripsAbroad } from '../../_lib/server/server-actions';
+import { TripsAbroadForm } from './trips-abroad-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 import { renderDate } from '../common/contact-date-selector';
-import Flag from 'react-flagkit';
 
-import { CountryForValue } from '../common/contact-country-select';
-import { PersonalContactStayProps } from '.'
+import { PersonalContactTripsAbroadProps } from '.'
 
 
 
-type Stay = {
-    [key: string]: string | number | boolean;
-};
-
-export function StayListItem({ stay }: { stay: PersonalContactStayProps }) {
+export function TripsAbroadListItem({ trip }: { trip: PersonalContactTripsAbroadProps }) {
     const [error, setError] = useState(false);
 
     const { t } = useTranslation('');
@@ -43,90 +37,55 @@ export function StayListItem({ stay }: { stay: PersonalContactStayProps }) {
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`deleteStayInfoSuccess`),
-                error: t(`deleteStayInfoError`),
-                loading: t(`deleteStayInfoLoading`),
+                success: t(`deleteTriprSuccess`),
+                error: t(`deleteTriprError`),
+                loading: t(`deleteTriprLoading`),
             });
         },
         [t],
     );
 
-    const deleteStay = useCallback(() => {
+    const deleteAddress = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContactStay({ id: stay.id })
+                await deletePersonalContactTripsAbroad({ id: trip.id })
             }
             catch (e) {
                 setError(true);
             }
         }
         createToaster(promise)
-    }, [stay, createToaster])
+    }, [trip, createToaster])
 
-    const renderPropeties = (stay: Stay) => {
-        const keys = Object.keys(stay);
-        let matchedProperties: string[] = [];
-        keys.forEach((aKey: string) => {
-            if (stay[aKey] === true) {
-                matchedProperties.push(aKey);
-            }
-        })
-        return (
-            <div className='w-full flex flex-wrap'>
-                {matchedProperties.map((a, idx) => {
-                    return (
-                        <div>
-                            <Trans key={idx} i18nKey={`contact:${a}`} />{`${idx === matchedProperties.length - 1 ? '' : ','}`}
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
-    const renderNumberOfDays = () => {
-        const startDateString = JSON.parse(stay.dateOfEntry).value;
-        const endDateString = JSON.parse(stay.dateOfExit).value;
 
-        const startDate = new Date(startDateString);
-        const endDate = new Date(endDateString);
-
-        const diffInTime = Math.abs(endDate.getTime() - startDate.getTime());
-
-        const diffInDays = Math.floor(diffInTime / (1000 * 60 * 60 * 24));
-
-        return diffInDays > 0 ? diffInDays : 1;
-    }
     return (
         <>
             <ClientOnly>
                 <Card>
                     <CardContent className='flex flex-col gap-4 p-2 px-4'>
                         <div className='flex flex-col gap-4'>
-                            <div className='flex gap-2'>Date of entry: {
-                                renderDate(new Date(JSON.parse(stay.dateOfEntry).value), JSON.parse(stay.dateOfEntry).mode)
-                            }</div>
-                            <div className='flex gap-2'>Place of entry:{
-                                `${stay.portOfEntry}, ${stay.cityOfEntry}, ${stay.stateOfEntry}`
-                            }
+                            <div>{trip.countriesVisited}</div>
+                            <div>{trip.tripPurpose}</div>
+                            <div className='flex items-center gap-2'>
+                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
+                                    {renderDate(new Date(JSON.parse(trip.departureDate).value), JSON.parse(trip.departureDate).mode)}
+                                </div>
+                                -
+                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
+                                    {renderDate(new Date(JSON.parse(trip.ReturnDate).value), JSON.parse(trip.ReturnDate).mode)}
+                                </div>
                             </div>
-                            <div className='flex gap-2'>1-94 Number:{
-                                stay.number_1_94
-                            }
-                            </div>
-                            <div className='flex gap-2'>Number of days:{
-                                renderNumberOfDays()
-                            }
-                            </div>
+                            <div>{`${trip.departureCity},${trip.departureState} - ${trip.departureCity},${trip.departureState}`}</div>
                         </div>
                         <div className='flex flex-wrap'>
-                            <StayForm
+                            <TripsAbroadForm
                                 trigger={
                                     <Button variant={'ghost'}>
                                         <Trans i18nKey={'common:edit'} />
                                     </Button>
                                 }
                                 mode='edit'
-                                stay={stay}
+                                trip={trip}
                             />
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
@@ -139,12 +98,12 @@ export function StayListItem({ stay }: { stay: PersonalContactStayProps }) {
                                         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                         <AlertDialogDescription>
                                             This action cannot be undone. This will permanently delete your
-                                            address from our servers.
+                                            trips abroads information from our servers.
                                         </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={deleteStay}>Continue</AlertDialogAction>
+                                        <AlertDialogAction onClick={deleteAddress}>Continue</AlertDialogAction>
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>

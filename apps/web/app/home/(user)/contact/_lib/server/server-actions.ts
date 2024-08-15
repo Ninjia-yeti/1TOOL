@@ -11,6 +11,7 @@ import {
   PersonalContactPhoneDeleteSchema,
   PersonalContactPhoneEditSchema,
   PersonalContactAddressSchema,
+  PersonalContactTripsAbroadSchema,
   IdSchema,
   PersonalContactStaySchema
 } from '../schema/personal-contact-schema';
@@ -254,6 +255,91 @@ export const deletePersonalContactStay = enhanceAction(
       }
     } catch (error) {
       throw new Error(`Failed to delete stay info error:${error}`);
+    } finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: IdSchema
+  }
+)
+
+
+export const createPersonalContactTripsAbroad = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    const auth = await requireUser(client);
+    const userId = auth.data?.id;
+    try {
+      console.log({
+        ...payload,
+        user: userId
+      });
+
+      const { error } = await client.from('contact_trips_abroads')
+        .insert(
+          {
+            ...payload,
+            user: userId
+          }
+        );
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to save address error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactTripsAbroadSchema,
+  },
+);
+
+export const editPersonalContactTripsAbroad = enhanceAction(
+  async function (payload) {
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_trips_abroads')
+        .update({
+          ...payload
+        })
+        .eq('id', payload.id)
+      if (error) {
+        throw new Error(`Failed to edit trip info`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to edit trip info error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactTripsAbroadSchema.merge(IdSchema),
+  },
+);
+
+export const deletePersonalContactTripsAbroad = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_trips_abroads')
+        .delete()
+        .eq('id', payload.id)
+        .select();
+      if (error) {
+        throw new Error(`Failed to delete trip info`);
+      }
+    } catch (error) {
+      throw new Error(`Failed to delete trip info error:${error}`);
     } finally {
       return redirect('/home/contact');
     }

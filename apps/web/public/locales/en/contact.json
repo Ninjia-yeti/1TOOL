@@ -34,5 +34,9 @@
   "stays": "Periods of Stay",
   "staysDescription": "Add or Edit Periods of Stay",
   "stay": "Period of Stay",
-  "stayDescription": "Make changes to your periods of stay here. Click save when you're done."
+  "stayDescription": "Make changes to your periods of stay here. Click save when you're done.",
+  "tripsAbroads": "Trips of Abroads",
+  "tripsAbroadsDescription": "Add or Edit Trips of Abroads",
+  "tripsAbroad": "Trips of Abroads",
+  "tripsAbroadDescription": "Make changes to your trips here. Click save when you're done."
 }

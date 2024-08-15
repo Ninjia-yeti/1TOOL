@@ -536,6 +536,76 @@ export type Database = {
           },
         ]
       }
+      contact_trips_abroads: {
+        Row: {
+          countriesVisited: string
+          created_at: string
+          departureCity: string
+          departureDate: string
+          departureState: string
+          id: number
+          inspectedToReturnUS: boolean
+          meansOfTransport: string
+          ReturnCity: string
+          ReturnDate: string
+          ReturnState: string
+          tripPurpose: string
+          user: string | null
+        }
+        Insert: {
+          countriesVisited: string
+          created_at?: string
+          departureCity: string
+          departureDate: string
+          departureState: string
+          id?: number
+          inspectedToReturnUS: boolean
+          meansOfTransport: string
+          ReturnCity: string
+          ReturnDate: string
+          ReturnState: string
+          tripPurpose: string
+          user?: string | null
+        }
+        Update: {
+          countriesVisited?: string
+          created_at?: string
+          departureCity?: string
+          departureDate?: string
+          departureState?: string
+          id?: number
+          inspectedToReturnUS?: boolean
+          meansOfTransport?: string
+          ReturnCity?: string
+          ReturnDate?: string
+          ReturnState?: string
+          tripPurpose?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_trips_abroads_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_trips_abroads_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_trips_abroads_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       conversations: {
         Row: {
           created_at: string

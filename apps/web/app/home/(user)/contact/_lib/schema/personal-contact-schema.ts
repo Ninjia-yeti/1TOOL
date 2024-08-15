@@ -77,3 +77,16 @@ export const PersonalContactStaySchema = z.object({
   onRStatus: z.boolean(),
   grantedDurationOfStatus: z.boolean()
 })
+
+export const PersonalContactTripsAbroadSchema = z.object({
+  departureDate: z.string(),
+  departureCity: z.string(),
+  departureState: z.string(),
+  ReturnDate: z.string(),
+  ReturnCity: z.string(),
+  ReturnState: z.string(),
+  countriesVisited: z.string(),
+  meansOfTransport: z.string(),
+  tripPurpose: z.string(),
+  inspectedToReturnUS: z.boolean(),
+})
