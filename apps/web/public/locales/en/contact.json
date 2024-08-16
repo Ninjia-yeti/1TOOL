@@ -6,7 +6,7 @@
   "phoneNumber": "Phone Number",
   "phoneNumbersDescription": "Add or Edit Phone numbers",
   "phoneNumberDescription": "Make changes to your phone number here. Click save when you're done.",
-  "add": "Create New",
+  "add": "Create",
   "phoneNumberType": "Phone number type(select all that apply)",
   "dayTime": "DayTime",
   "evening": "Evening",
@@ -55,5 +55,7 @@
   "refugeeStatus": "Refugee status",
   "employmentAuthorization": "Employment authorization",
   "reentryPermit": "Reentry permit",
-  "refugeeTravelDocument": "Refugee travel document"
+  "refugeeTravelDocument": "Refugee travel document",
+  "family": "Family",
+  "father": "Father"
 }

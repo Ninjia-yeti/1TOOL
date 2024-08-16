@@ -31,69 +31,67 @@ import { Label } from '@kit/ui/label';
 
 import { Input } from '@kit/ui/input';
 
-import { PersonalContactProceedingSchema } from '../../_lib/schema/personal-contact-schema';
+
+import { PersonalContactFamily_FatherSchema } from '../../../_lib/schema/personal-contact-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { If } from '@kit/ui/if';
-import { ErrorAlert } from '../errorAlert';
+import { ErrorAlert } from '../../errorAlert';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import { ContactDateSelector } from '../common/contact-date-selector';
-import { DateTypes } from '../common/contact-date-selector';
+import { ContactDateSelector } from '../../common/contact-date-selector';
+import { DateTypes } from '../../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactProceeding, editPersonalContactProceeding, } from '../../_lib/server/server-actions';
-import { PersonalContactProceedingProps } from '.';
+import { createPersonalContactPetition, editPersonalContactPetition, } from '../../../_lib/server/server-actions';
+import { PersonalContactFamily_FatherProps } from '.';
 
-export interface ProceedingFormProps {
+export interface FatherFormProps {
     trigger: ReactNode,
-    proceeding?: PersonalContactProceedingProps,
+    father?: PersonalContactFamily_FatherProps,
     mode: 'edit' | 'create'
 }
 
-export function ProceedingForm({ trigger, mode, proceeding }: ProceedingFormProps) {
+export function FatherForm({ trigger, mode, father }: FatherFormProps) {
     const [error, setError] = useState(false);
     const [errorString, setErrorString] = useState('');
     const [openDlg, setOpenDlg] = useState(false);
-    const [showMore, setShowMore] = useState(false);
     const { t } = useTranslation('');
     const today = new Date();
     const defaultDateString = JSON.stringify({
         mode: DateTypes[0],
         value: today.toISOString()
     })
-    const defaultFormValue = proceeding && mode === 'edit' ? proceeding : {
-        dateStarted: defaultDateString,
-        dateEnded: defaultDateString,
-        current: false,
-        hearing: false,
-        removal: false,
-        exclusion: false,
-        deportation: false,
-        rescission: false,
-        otherJudicial: false,
+    const defaultFormValue = father && mode === 'edit' ? father : {
+        liveTogetherSince: defaultDateString,
+        liveTogetherUntil: defaultDateString,
+        householdMember: false,
+        headOfHousehold: false,
+        derivativeApplicant: false,
+        principalApplicant: false,
+
     }
-    const form = useForm<z.infer<typeof PersonalContactProceedingSchema>>({
-        resolver: zodResolver(PersonalContactProceedingSchema),
+    const form = useForm<z.infer<typeof PersonalContactFamily_FatherSchema>>({
+        resolver: zodResolver(PersonalContactFamily_FatherSchema),
         defaultValues: defaultFormValue
     })
 
 
-    async function onSubmit(data: z.infer<typeof PersonalContactProceedingSchema>) {
+    async function onSubmit(data: z.infer<typeof PersonalContactFamily_FatherSchema>) {
         console.log(data);
 
         const promise = async () => {
             try {
-                setError(false);
-                if (mode === 'create') {
-                    await createPersonalContactProceeding(data)
-                }
-                if (mode === 'edit') {
-                    await editPersonalContactProceeding({
-                        ...data, id: proceeding?.id ?? 0
-                    })
-                }
+                // setError(false);
+                // if (mode === 'create') {
+                //     await createPersonalContactPetition(data)
+                // }
+                // if (mode === 'edit') {
+                //     await editPersonalContactPetition({
+                //         ...data, id: petition?.id ?? 0
+                //     })
+                // }
                 setOpenDlg(false);
             }
             catch (e) {
@@ -108,9 +106,9 @@ export function ProceedingForm({ trigger, mode, proceeding }: ProceedingFormProp
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`${mode}ProceedingSuccess`),
-                error: t(`${mode}ProceedingError`),
-                loading: t(`${mode}ProceedingLoading`),
+                success: t(`${mode}PetitionSuccess`),
+                error: t(`${mode}PetitionError`),
+                loading: t(`${mode}PetitionLoading`),
             });
         },
         [t],
@@ -131,66 +129,50 @@ export function ProceedingForm({ trigger, mode, proceeding }: ProceedingFormProp
                 <DialogContent className="max-w-[45%]">
                     <DialogHeader>
                         <DialogTitle>
-                            <Trans i18nKey={'contact:proceeding'} />
+                            <Trans i18nKey={'contact:petition'} />
                         </DialogTitle>
                         <DialogDescription>
-                            <Trans i18nKey={'contact:proceedingDescription'} />
+                            <Trans i18nKey={'contact:petitionDescription'} />
                         </DialogDescription>
                     </DialogHeader>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} >
                             <div className='max-h-[80vh] overflow-y-auto flex flex-col gap-2 py-2'>
-                                <div className='grid grid-cols-2 gap-2'>
+                                <div className='grid grid-cols-3 gap-2'>
                                     <FormField
-                                        name='locationCity'
+                                        name='firstName'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
-                                                <FormLabel>Location - City</FormLabel>
+                                                <FormLabel>First name</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='Departure City' maxLength={200} {...field} />
+                                                    <Input placeholder='First name' maxLength={200} {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
                                     <FormField
-                                        name='locationState'
+                                        name='middleName'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
-                                                <FormLabel>Location - State</FormLabel>
+                                                <FormLabel>Middle name</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='Location - State' maxLength={200} {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                </div>
-                                <div className='grid grid-cols-2 gap-2'>
-                                    <FormField
-                                        name='dateStarted'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className='w-full'>
-                                                <FormLabel>Date Started</FormLabel>
-                                                <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                    <Input placeholder='Middle name' maxLength={200} {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
                                     <FormField
-                                        name='dateEnded'
+                                        name='lastName'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
-                                                <FormLabel>Date Ended</FormLabel>
+                                                <FormLabel>Last name</FormLabel>
                                                 <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                    <Input placeholder='Last name' maxLength={200} {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -198,23 +180,37 @@ export function ProceedingForm({ trigger, mode, proceeding }: ProceedingFormProp
                                     />
 
                                 </div>
-                                <div className='grid grid-cols-2 gap-2'>
+                                <div className='grid grid-cols-3 gap-2'>
                                     <FormField
-                                        name='office'
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Email</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='Last name' maxLength={200} {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='relationType'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Office</FormLabel>
+                                                <FormLabel>Relation type</FormLabel>
                                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                     <FormControl>
                                                         <SelectTrigger>
-                                                            <SelectValue placeholder="Office" />
+                                                            <SelectValue placeholder="Relation type" />
                                                         </SelectTrigger>
                                                     </FormControl>
                                                     <SelectContent>
-                                                        <SelectItem value="imigratioinCourt">Imigratioin Court</SelectItem>
-                                                        <SelectItem value="boardOfImigrationAppeals">Board of Imigration Appeals</SelectItem>
-                                                        <SelectItem value="federalCourt">Federal Court</SelectItem>
+                                                        <SelectItem value="approved">Biological</SelectItem>
+                                                        <SelectItem value="denied">Stepparent Stepchild</SelectItem>
+                                                        <SelectItem value="withrawn">Legally Adopted</SelectItem>
+                                                        <SelectItem value="other">Other</SelectItem>
                                                     </SelectContent>
                                                 </Select>
                                                 <FormMessage />
@@ -222,183 +218,145 @@ export function ProceedingForm({ trigger, mode, proceeding }: ProceedingFormProp
                                         )}
                                     />
                                     <FormField
-                                        name='status'
+                                        name='liveTogetherSince'
                                         control={form.control}
                                         render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Status</FormLabel>
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Live together since</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='Means of transport' maxLength={200} {...field} />
+                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
+
                                 </div>
-                                <div>
+                                <div className='grid grid-cols-2 gap-2'>
                                     <FormField
-                                        name='current'
+                                        name='liveTogetherUntil'
                                         control={form.control}
                                         render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Live together until</FormLabel>
                                                 <FormControl>
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
+                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
                                                 </FormControl>
-                                                <div className="space-y-1 leading-none">
-                                                    <FormLabel>
-                                                        This proceeding is current
-                                                    </FormLabel>
-                                                </div>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='DependentStatus'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Dependent status</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger>
+                                                            <SelectValue placeholder="Relation type" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        <SelectItem value="approved">Whelly Dependent</SelectItem>
+                                                        <SelectItem value="denied">Partially Dependent</SelectItem>
+                                                        <SelectItem value="withrawn">No dependent</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                                <FormMessage />
                                             </FormItem>
                                         )}
                                     />
                                 </div>
-                                <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                    <Checkbox onCheckedChange={(v: boolean) => setShowMore(v)} />
-                                    <div className="space-y-1 leading-none">
-                                        <Label className='text-slate-400'>
-                                            Show more optoins
-                                        </Label>
+                                <div className='flex flex-col pt-2 gap-4'>
+                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
+                                        <FormField
+                                            name='householdMember'
+                                            control={form.control}
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
+                                                    <FormControl>
+                                                        <Checkbox
+                                                            checked={field.value}
+                                                            onCheckedChange={field.onChange}
+                                                        />
+                                                    </FormControl>
+                                                    <div className="space-y-1 leading-none">
+                                                        <FormLabel>
+                                                            Household member
+                                                        </FormLabel>
+                                                    </div>
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
+                                        <FormField
+                                            name='headOfHousehold'
+                                            control={form.control}
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
+                                                    <FormControl>
+                                                        <Checkbox
+                                                            checked={field.value}
+                                                            onCheckedChange={field.onChange}
+                                                        />
+                                                    </FormControl>
+                                                    <div className="space-y-1 leading-none">
+                                                        <FormLabel>
+                                                            Head of Household
+                                                        </FormLabel>
+                                                    </div>
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
+                                        <FormField
+                                            name='derivativeApplicant'
+                                            control={form.control}
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
+                                                    <FormControl>
+                                                        <Checkbox
+                                                            checked={field.value}
+                                                            onCheckedChange={field.onChange}
+                                                        />
+                                                    </FormControl>
+                                                    <div className="space-y-1 leading-none">
+                                                        <FormLabel>
+                                                            Derivative applicant
+                                                        </FormLabel>
+                                                    </div>
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                    </div>
+                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
+                                        <FormField
+                                            name='principalApplicant'
+                                            control={form.control}
+                                            render={({ field }) => (
+                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
+                                                    <FormControl>
+                                                        <Checkbox
+                                                            checked={field.value}
+                                                            onCheckedChange={field.onChange}
+                                                        />
+                                                    </FormControl>
+                                                    <div className="space-y-1 leading-none">
+                                                        <FormLabel>
+                                                            Principal applicant
+                                                        </FormLabel>
+                                                    </div>
+                                                </FormItem>
+                                            )}
+                                        />
+
                                     </div>
                                 </div>
-                                {showMore && <div className='flex flex-col pt-2 gap-4'>
-                                    <Label className='pt-2'>
-                                        More optoins
-                                    </Label>
-                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                        <FormField
-                                            name='hearing'
-                                            control={form.control}
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value}
-                                                            onCheckedChange={field.onChange}
-                                                        />
-                                                    </FormControl>
-                                                    <div className="space-y-1 leading-none">
-                                                        <FormLabel>
-                                                            This is a hearing proceeding
-                                                        </FormLabel>
-                                                    </div>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
-                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                        <FormField
-                                            name='removal'
-                                            control={form.control}
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value}
-                                                            onCheckedChange={field.onChange}
-                                                        />
-                                                    </FormControl>
-                                                    <div className="space-y-1 leading-none">
-                                                        <FormLabel>
-                                                            This is a removal proceeding
-                                                        </FormLabel>
-                                                    </div>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
-                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                        <FormField
-                                            name='exclusion'
-                                            control={form.control}
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value}
-                                                            onCheckedChange={field.onChange}
-                                                        />
-                                                    </FormControl>
-                                                    <div className="space-y-1 leading-none">
-                                                        <FormLabel>
-                                                            This is a exclusion proceeding
-                                                        </FormLabel>
-                                                    </div>
-                                                </FormItem>
-                                            )}
-                                        />
-
-                                    </div>
-                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                        <FormField
-                                            name='deportation'
-                                            control={form.control}
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value}
-                                                            onCheckedChange={field.onChange}
-                                                        />
-                                                    </FormControl>
-                                                    <div className="space-y-1 leading-none">
-                                                        <FormLabel>
-                                                            This is a deportation proceeding
-                                                        </FormLabel>
-                                                    </div>
-                                                </FormItem>
-                                            )}
-                                        />
-
-                                    </div>
-                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                        <FormField
-                                            name='rescission'
-                                            control={form.control}
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value}
-                                                            onCheckedChange={field.onChange}
-                                                        />
-                                                    </FormControl>
-                                                    <div className="space-y-1 leading-none">
-                                                        <FormLabel>
-                                                            This is a rescission proceeding
-                                                        </FormLabel>
-                                                    </div>
-                                                </FormItem>
-                                            )}
-                                        />
-
-                                    </div>
-                                    <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
-                                        <FormField
-                                            name='otherJudicial'
-                                            control={form.control}
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value}
-                                                            onCheckedChange={field.onChange}
-                                                        />
-                                                    </FormControl>
-                                                    <div className="space-y-1 leading-none">
-                                                        <FormLabel>
-                                                            This is an other judicial proceeding
-                                                        </FormLabel>
-                                                    </div>
-                                                </FormItem>
-                                            )}
-                                        />
-
-                                    </div>
-                                </div>}
                             </div>
                             <DialogFooter>
                                 <Button type="submit">Save changes</Button>

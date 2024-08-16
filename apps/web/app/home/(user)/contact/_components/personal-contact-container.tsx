@@ -12,6 +12,7 @@ import { ContactStay } from "./periods-of-stay";
 import { ContactTripsAbroad } from "./trips-abroad";
 import { ContactProceeding } from "./proceeding";
 import { ContactPetition } from "./petition";
+import { ContactFamily } from "./family";
 
 const contactList = [
   {
@@ -40,7 +41,7 @@ const contactList = [
   },
   {
     label: 'Family',
-    component: null,
+    component: <ContactFamily />,
   },
   {
     label: 'Work & School',

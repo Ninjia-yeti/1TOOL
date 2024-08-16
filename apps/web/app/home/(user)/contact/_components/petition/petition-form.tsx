@@ -48,13 +48,13 @@ import { useForm } from "react-hook-form"
 import { createPersonalContactPetition, editPersonalContactPetition, } from '../../_lib/server/server-actions';
 import { PersonalContactPetitionProps } from '.';
 
-export interface TripsAbroadFromProps {
+export interface PetitionFormProps {
     trigger: ReactNode,
     petition?: PersonalContactPetitionProps,
     mode: 'edit' | 'create'
 }
 
-export function PetitionForm({ trigger, mode, petition }: TripsAbroadFromProps) {
+export function PetitionForm({ trigger, mode, petition }: PetitionFormProps) {
     const [error, setError] = useState(false);
     const [errorString, setErrorString] = useState('');
     const [openDlg, setOpenDlg] = useState(false);
