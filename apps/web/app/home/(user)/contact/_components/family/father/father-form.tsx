@@ -44,7 +44,7 @@ import { DateTypes } from '../../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactPetition, editPersonalContactPetition, } from '../../../_lib/server/server-actions';
+import { createPersonalContactFamily_Father, editPersonalContactPetition, } from '../../../_lib/server/server-actions';
 import { PersonalContactFamily_FatherProps } from '.';
 
 export interface FatherFormProps {
@@ -83,10 +83,10 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
 
         const promise = async () => {
             try {
-                // setError(false);
-                // if (mode === 'create') {
-                //     await createPersonalContactPetition(data)
-                // }
+                setError(false);
+                if (mode === 'create') {
+                    await createPersonalContactFamily_Father(data)
+                }
                 // if (mode === 'edit') {
                 //     await editPersonalContactPetition({
                 //         ...data, id: petition?.id ?? 0
@@ -106,9 +106,9 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`${mode}PetitionSuccess`),
-                error: t(`${mode}PetitionError`),
-                loading: t(`${mode}PetitionLoading`),
+                success: t(`${mode}FatherSuccess`),
+                error: t(`${mode}FatherError`),
+                loading: t(`${mode}FatherLoading`),
             });
         },
         [t],
