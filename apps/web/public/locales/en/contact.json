@@ -42,5 +42,9 @@
   "proceedings": "Proceedings",
   "proceedingsDescription": "Add or Edit Proceedings",
   "proceeding": "Proceeding",
-  "proceedingDescription": "Make changes to your proceedings here. Click save when you're done."
+  "proceedingDescription": "Make changes to your proceedings here. Click save when you're done.",
+  "petitions": "Petitions",
+  "petitionsDescription": "Add or Edit Petitions",
+  "petition": "Petition",
+  "petitionDescription": "Make changes to your petition here. Click save when you're done."
 }

@@ -11,6 +11,7 @@ import { ContactAddress } from "./address";
 import { ContactStay } from "./periods-of-stay";
 import { ContactTripsAbroad } from "./trips-abroad";
 import { ContactProceeding } from "./proceeding";
+import { ContactPetition } from "./petition";
 
 const contactList = [
   {
@@ -32,6 +33,10 @@ const contactList = [
   {
     label: 'Proceedings',
     component: <ContactProceeding />,
+  },
+  {
+    label: 'Petition',
+    component: <ContactPetition />,
   },
   {
     label: 'Family',

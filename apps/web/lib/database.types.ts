@@ -490,6 +490,121 @@ export type Database = {
           },
         ]
       }
+      contact_petitions: {
+        Row: {
+          advancePermissionToEnter: boolean
+          affidavitOfSupport: boolean
+          asyleeStatus: boolean
+          cityFilled: string
+          cityGranted: string
+          countryFilled: string
+          created_at: string
+          dateFilled: string
+          dateGranted: string
+          employmentAuthorization: boolean
+          firstName: string
+          id: number
+          imigrantVisa: boolean
+          lastName: string
+          middleName: string
+          nonImigrantVisa: boolean
+          officeFilled: string
+          officeGranted: string
+          provinceFilled: string
+          provinceGranted: string
+          receiptNumber: string
+          reentryPermit: boolean
+          refugeeStatus: boolean
+          refugeeTravelDocument: boolean
+          result: string
+          stateFilled: string
+          stateGranted: string
+          user: string | null
+        }
+        Insert: {
+          advancePermissionToEnter: boolean
+          affidavitOfSupport: boolean
+          asyleeStatus: boolean
+          cityFilled: string
+          cityGranted: string
+          countryFilled: string
+          created_at?: string
+          dateFilled: string
+          dateGranted: string
+          employmentAuthorization: boolean
+          firstName: string
+          id?: number
+          imigrantVisa: boolean
+          lastName: string
+          middleName: string
+          nonImigrantVisa: boolean
+          officeFilled: string
+          officeGranted: string
+          provinceFilled: string
+          provinceGranted: string
+          receiptNumber: string
+          reentryPermit: boolean
+          refugeeStatus: boolean
+          refugeeTravelDocument: boolean
+          result: string
+          stateFilled: string
+          stateGranted: string
+          user?: string | null
+        }
+        Update: {
+          advancePermissionToEnter?: boolean
+          affidavitOfSupport?: boolean
+          asyleeStatus?: boolean
+          cityFilled?: string
+          cityGranted?: string
+          countryFilled?: string
+          created_at?: string
+          dateFilled?: string
+          dateGranted?: string
+          employmentAuthorization?: boolean
+          firstName?: string
+          id?: number
+          imigrantVisa?: boolean
+          lastName?: string
+          middleName?: string
+          nonImigrantVisa?: boolean
+          officeFilled?: string
+          officeGranted?: string
+          provinceFilled?: string
+          provinceGranted?: string
+          receiptNumber?: string
+          reentryPermit?: boolean
+          refugeeStatus?: boolean
+          refugeeTravelDocument?: boolean
+          result?: string
+          stateFilled?: string
+          stateGranted?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_petitions_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_petitions_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_petitions_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_phone_numbers: {
         Row: {
           created_at: string
