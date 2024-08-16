@@ -45,7 +45,7 @@ import { DateTypes } from '../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactProceeding, editPersonalContactProceeding, } from '../../_lib/server/server-actions';
+import { createPersonalContactPetition, editPersonalContactPetition, } from '../../_lib/server/server-actions';
 import { PersonalContactPetitionProps } from '.';
 
 export interface TripsAbroadFromProps {
@@ -90,14 +90,14 @@ export function PetitionForm({ trigger, mode, petition }: TripsAbroadFromProps) 
         const promise = async () => {
             try {
                 setError(false);
-                // if (mode === 'create') {
-                //     await createPersonalContactProceeding(data)
-                // }
-                // if (mode === 'edit') {
-                //     await editPersonalContactProceeding({
-                //         ...data, id: proceeding?.id ?? 0
-                //     })
-                // }
+                if (mode === 'create') {
+                    await createPersonalContactPetition(data)
+                }
+                if (mode === 'edit') {
+                    await editPersonalContactPetition({
+                        ...data, id: petition?.id ?? 0
+                    })
+                }
                 setOpenDlg(false);
             }
             catch (e) {

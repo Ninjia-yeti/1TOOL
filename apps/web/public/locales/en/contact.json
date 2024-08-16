@@ -46,5 +46,14 @@
   "petitions": "Petitions",
   "petitionsDescription": "Add or Edit Petitions",
   "petition": "Petition",
-  "petitionDescription": "Make changes to your petition here. Click save when you're done."
+  "petitionDescription": "Make changes to your petition here. Click save when you're done.",
+  "nonImigrantVisa": "Non imigrant visa",
+  "imigrantVisa": "Imigrant visa",
+  "affidavitOfSupport": "Affidavit of support",
+  "advancePermissionToEnter": "Advanced permission to enter",
+  "asyleeStatus": "Asylee status",
+  "refugeeStatus": "Refugee status",
+  "employmentAuthorization": "Employment authorization",
+  "reentryPermit": "Reentry permit",
+  "refugeeTravelDocument": "Refugee travel document"
 }

@@ -37,9 +37,9 @@ export function TripsAbroadListItem({ trip }: { trip: PersonalContactTripsAbroad
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`deleteTriprSuccess`),
-                error: t(`deleteTriprError`),
-                loading: t(`deleteTriprLoading`),
+                success: t(`deleteTripSuccess`),
+                error: t(`deleteTripError`),
+                loading: t(`deleteTripLoading`),
             });
         },
         [t],

@@ -13,6 +13,7 @@ import {
   PersonalContactAddressSchema,
   PersonalContactTripsAbroadSchema,
   PersonalContactProceedingSchema,
+  PersonalContactPetitionSchema,
   IdSchema,
   PersonalContactStaySchema
 } from '../schema/personal-contact-schema';
@@ -291,7 +292,7 @@ export const createPersonalContactTripsAbroad = enhanceAction(
       }
     }
     catch (error) {
-      throw new Error(`Failed to save address error:${error}`);
+      throw new Error(`Failed to save trips error:${error}`);
     }
     finally {
       return redirect('/home/contact');
@@ -376,7 +377,7 @@ export const createPersonalContactProceeding = enhanceAction(
       }
     }
     catch (error) {
-      throw new Error(`Failed to save address error:${error}`);
+      throw new Error(`Failed to save proceeding error:${error}`);
     }
     finally {
       return redirect('/home/contact');
@@ -427,6 +428,92 @@ export const deletePersonalContactProceeding = enhanceAction(
       }
     } catch (error) {
       throw new Error(`Failed to delete proceeding info error:${error}`);
+    } finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: IdSchema
+  }
+)
+
+
+export const createPersonalContactPetition = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    const auth = await requireUser(client);
+    const userId = auth.data?.id;
+    try {
+      console.log({
+        ...payload,
+        user: userId
+      });
+
+      const { error } = await client.from('contact_petitions')
+        .insert(
+          {
+            ...payload,
+            user: userId
+          }
+        );
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to save petition error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactPetitionSchema
+  },
+)
+
+
+export const editPersonalContactPetition = enhanceAction(
+  async function (payload) {
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_petitions')
+        .update({
+          ...payload
+        })
+        .eq('id', payload.id)
+      if (error) {
+        throw new Error(`Failed to edit petition info`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to edit petition info error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactPetitionSchema.merge(IdSchema),
+  },
+);
+
+export const deletePersonalContacPetition = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_petitions')
+        .delete()
+        .eq('id', payload.id)
+        .select();
+      if (error) {
+        throw new Error(`Failed to delete petition info`);
+      }
+    } catch (error) {
+      throw new Error(`Failed to delete petition info error:${error}`);
     } finally {
       return redirect('/home/contact');
     }

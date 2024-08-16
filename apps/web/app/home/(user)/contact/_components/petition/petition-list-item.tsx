@@ -19,17 +19,19 @@ import {
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { deletePersonalContactProceeding } from '../../_lib/server/server-actions';
-import { ProceedingForm } from './petition-form';
+import { deletePersonalContacPetition } from '../../_lib/server/server-actions';
+import { PetitionForm } from './petition-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 import { renderDate } from '../common/contact-date-selector';
 
-import { PersonalContactProceedingProps } from '.'
+import { PersonalContactPetitionProps } from '.'
 
+type Petition = {
+    [key: string]: string | number | boolean;
+};
 
-
-export function ProceedingItem({ proceeding }: { proceeding: PersonalContactProceedingProps }) {
+export function PetitionItem({ petition }: { petition: PersonalContactPetitionProps }) {
     const [error, setError] = useState(false);
 
     const { t } = useTranslation('');
@@ -37,26 +39,45 @@ export function ProceedingItem({ proceeding }: { proceeding: PersonalContactProc
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`deleteTriprSuccess`),
-                error: t(`deleteTriprError`),
-                loading: t(`deleteTriprLoading`),
+                success: t(`deletePetitionSuccess`),
+                error: t(`deletePetitionError`),
+                loading: t(`deletePetitionLoading`),
             });
         },
         [t],
     );
 
-    const deleteProceeding = useCallback(() => {
+    const deletePetition = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContactProceeding({ id: proceeding.id })
+                await deletePersonalContacPetition({ id: petition.id })
             }
             catch (e) {
                 setError(true);
             }
         }
         createToaster(promise)
-    }, [proceeding, createToaster])
-
+    }, [petition, createToaster])
+    const renderPropeties = (petition: Petition) => {
+        const keys = Object.keys(petition);
+        let matchedProperties: string[] = [];
+        keys.forEach((aKey: string) => {
+            if (petition[aKey] === true) {
+                matchedProperties.push(aKey);
+            }
+        })
+        return (
+            <div className='w-full flex flex-wrap'>
+                {matchedProperties.map((a, idx) => {
+                    return (
+                        <div>
+                            <Trans key={idx} i18nKey={`contact:${a}`} />{`${idx === matchedProperties.length - 1 ? '' : ','}`}
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
 
     return (
         <>
@@ -64,26 +85,22 @@ export function ProceedingItem({ proceeding }: { proceeding: PersonalContactProc
                 <Card>
                     <CardContent className='flex flex-col gap-4 p-2 px-4'>
                         <div className='flex flex-col gap-4'>
-                            <div>{`${proceeding.locationCity},${proceeding.locationState},${proceeding.office}`}</div>
+                            {renderPropeties(petition)}
+                            {renderDate(new Date(JSON.parse(petition.dateFilled).value), JSON.parse(petition.dateFilled).mode)}
                             <div className='flex gap-2 items-center'>
-                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
-                                    {renderDate(new Date(JSON.parse(proceeding.dateStarted).value), JSON.parse(proceeding.dateStarted).mode)}
-                                </div>
-                                -
-                                <div className='bg-neutral-300 dark:bg-slate-800 text-white p-1 px-2 rounded-[30px] shadow-md'>
-                                    {renderDate(new Date(JSON.parse(proceeding.dateEnded).value), JSON.parse(proceeding.dateEnded).mode)}
-                                </div>
+                                {petition.cityFilled},
+                                {petition.stateFilled}
                             </div>
                         </div>
                         <div className='flex flex-wrap'>
-                            <ProceedingForm
+                            <PetitionForm
                                 trigger={
                                     <Button variant={'ghost'}>
                                         <Trans i18nKey={'common:edit'} />
                                     </Button>
                                 }
                                 mode='edit'
-                                proceeding={proceeding}
+                                petition={petition}
                             />
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
@@ -96,12 +113,12 @@ export function ProceedingItem({ proceeding }: { proceeding: PersonalContactProc
                                         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                         <AlertDialogDescription>
                                             This action cannot be undone. This will permanently delete your
-                                            proceeding information from our servers.
+                                            petition information from our servers.
                                         </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={deleteProceeding}>Continue</AlertDialogAction>
+                                        <AlertDialogAction onClick={deletePetition}>Continue</AlertDialogAction>
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>

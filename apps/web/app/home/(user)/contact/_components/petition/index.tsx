@@ -11,7 +11,7 @@ import { Trans } from '@kit/ui/trans';
 
 
 
-// import { PetitionList } from './petition-list';
+import { PetitionList } from './petition-list';
 import { PetitionAdd } from './petition-add';
 
 import { z } from 'zod';
@@ -33,7 +33,7 @@ export async function ContactPetition() {
             </CardHeader>
             <CardContent className={'space-y-4'}>
                 <PetitionAdd />
-                {/* <PetitionList /> */}
+                <PetitionList />
 
             </CardContent>
         </Card>

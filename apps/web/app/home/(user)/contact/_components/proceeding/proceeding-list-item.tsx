@@ -37,9 +37,9 @@ export function ProceedingItem({ proceeding }: { proceeding: PersonalContactProc
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`deleteTriprSuccess`),
-                error: t(`deleteTriprError`),
-                loading: t(`deleteTriprLoading`),
+                success: t(`deleteProceedingSuccess`),
+                error: t(`deleteProceedingError`),
+                loading: t(`deleteProceedingLoading`),
             });
         },
         [t],
