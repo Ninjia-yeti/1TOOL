@@ -248,6 +248,898 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_addresses: {
+        Row: {
+          address: string
+          city: string
+          country: string
+          county: string
+          created_at: string
+          currentPhysicalAddress: boolean
+          foreignAddress: boolean
+          from: string
+          id: number
+          inCareOf: string
+          intendedAddress: boolean
+          investmentProperty: boolean
+          mailingAddress: boolean
+          mostRecentForeignAddress: boolean
+          postalCode: string
+          previousAddress: boolean
+          province: string
+          recentForeignAddress: boolean
+          recentlyFearedPersecution: boolean
+          safeMailingAddress: boolean
+          shareWithSpouse: boolean
+          state: string
+          to: string
+          type: string
+          typeValue: string
+          user: string | null
+          zipCode: string
+        }
+        Insert: {
+          address?: string
+          city?: string
+          country?: string
+          county?: string
+          created_at?: string
+          currentPhysicalAddress: boolean
+          foreignAddress: boolean
+          from?: string
+          id?: number
+          inCareOf?: string
+          intendedAddress: boolean
+          investmentProperty: boolean
+          mailingAddress: boolean
+          mostRecentForeignAddress: boolean
+          postalCode?: string
+          previousAddress: boolean
+          province?: string
+          recentForeignAddress: boolean
+          recentlyFearedPersecution: boolean
+          safeMailingAddress: boolean
+          shareWithSpouse: boolean
+          state?: string
+          to?: string
+          type?: string
+          typeValue?: string
+          user?: string | null
+          zipCode?: string
+        }
+        Update: {
+          address?: string
+          city?: string
+          country?: string
+          county?: string
+          created_at?: string
+          currentPhysicalAddress?: boolean
+          foreignAddress?: boolean
+          from?: string
+          id?: number
+          inCareOf?: string
+          intendedAddress?: boolean
+          investmentProperty?: boolean
+          mailingAddress?: boolean
+          mostRecentForeignAddress?: boolean
+          postalCode?: string
+          previousAddress?: boolean
+          province?: string
+          recentForeignAddress?: boolean
+          recentlyFearedPersecution?: boolean
+          safeMailingAddress?: boolean
+          shareWithSpouse?: boolean
+          state?: string
+          to?: string
+          type?: string
+          typeValue?: string
+          user?: string | null
+          zipCode?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_contact_address_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_contact_address_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_contact_address_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_family_children: {
+        Row: {
+          created_at: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user: string | null
+        }
+        Insert: {
+          created_at?: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id?: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user?: string | null
+        }
+        Update: {
+          created_at?: string
+          DependentStatus?: string
+          derivativeApplicant?: boolean
+          email?: string
+          firstName?: string
+          headOfHousehold?: boolean
+          householdMember?: boolean
+          id?: number
+          lastName?: string
+          liveTogetherSince?: string
+          liveTogetherUntil?: string
+          middleName?: string
+          principalApplicant?: boolean
+          relationType?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_family_children_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_children_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_children_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_family_father: {
+        Row: {
+          created_at: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user: string | null
+        }
+        Insert: {
+          created_at?: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id?: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user?: string | null
+        }
+        Update: {
+          created_at?: string
+          DependentStatus?: string
+          derivativeApplicant?: boolean
+          email?: string
+          firstName?: string
+          headOfHousehold?: boolean
+          householdMember?: boolean
+          id?: number
+          lastName?: string
+          liveTogetherSince?: string
+          liveTogetherUntil?: string
+          middleName?: string
+          principalApplicant?: boolean
+          relationType?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_family_father_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_father_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_father_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_family_mother: {
+        Row: {
+          created_at: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user: string | null
+        }
+        Insert: {
+          created_at?: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id?: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user?: string | null
+        }
+        Update: {
+          created_at?: string
+          DependentStatus?: string
+          derivativeApplicant?: boolean
+          email?: string
+          firstName?: string
+          headOfHousehold?: boolean
+          householdMember?: boolean
+          id?: number
+          lastName?: string
+          liveTogetherSince?: string
+          liveTogetherUntil?: string
+          middleName?: string
+          principalApplicant?: boolean
+          relationType?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_family_mother_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_mother_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_mother_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_family_spouse: {
+        Row: {
+          citymarriageEnded: string | null
+          cityOfMarriage: string | null
+          countryMarriageEnded: string | null
+          countryOfMarriage: string | null
+          created_at: string
+          dateMarriageEnded: string | null
+          dateOfMarriage: string | null
+          dateOfSeperation: string | null
+          DependentStatus: string | null
+          derivativeApplicant: boolean | null
+          email: string | null
+          firstName: string
+          headOfHousehold: boolean | null
+          householdMember: boolean | null
+          howMarriageEnded: string | null
+          id: number
+          lastName: string
+          liveTogetherSince: string | null
+          liveTogetherUntil: string | null
+          middleName: string | null
+          principalApplicant: boolean | null
+          provinceMarriageEnded: string | null
+          provinceOfMarriage: string | null
+          reasonMarriageEnded: string | null
+          stateMarriageEnded: string | null
+          stateOfMarriage: string | null
+          user: string | null
+        }
+        Insert: {
+          citymarriageEnded?: string | null
+          cityOfMarriage?: string | null
+          countryMarriageEnded?: string | null
+          countryOfMarriage?: string | null
+          created_at?: string
+          dateMarriageEnded?: string | null
+          dateOfMarriage?: string | null
+          dateOfSeperation?: string | null
+          DependentStatus?: string | null
+          derivativeApplicant?: boolean | null
+          email?: string | null
+          firstName: string
+          headOfHousehold?: boolean | null
+          householdMember?: boolean | null
+          howMarriageEnded?: string | null
+          id?: number
+          lastName: string
+          liveTogetherSince?: string | null
+          liveTogetherUntil?: string | null
+          middleName?: string | null
+          principalApplicant?: boolean | null
+          provinceMarriageEnded?: string | null
+          provinceOfMarriage?: string | null
+          reasonMarriageEnded?: string | null
+          stateMarriageEnded?: string | null
+          stateOfMarriage?: string | null
+          user?: string | null
+        }
+        Update: {
+          citymarriageEnded?: string | null
+          cityOfMarriage?: string | null
+          countryMarriageEnded?: string | null
+          countryOfMarriage?: string | null
+          created_at?: string
+          dateMarriageEnded?: string | null
+          dateOfMarriage?: string | null
+          dateOfSeperation?: string | null
+          DependentStatus?: string | null
+          derivativeApplicant?: boolean | null
+          email?: string | null
+          firstName?: string
+          headOfHousehold?: boolean | null
+          householdMember?: boolean | null
+          howMarriageEnded?: string | null
+          id?: number
+          lastName?: string
+          liveTogetherSince?: string | null
+          liveTogetherUntil?: string | null
+          middleName?: string | null
+          principalApplicant?: boolean | null
+          provinceMarriageEnded?: string | null
+          provinceOfMarriage?: string | null
+          reasonMarriageEnded?: string | null
+          stateMarriageEnded?: string | null
+          stateOfMarriage?: string | null
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_family_spouse_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_spouse_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_spouse_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_periods_of_stay: {
+        Row: {
+          authorizedStayExpiry: string
+          cityOfEntry: string
+          cityOfExit: string
+          cityOfResidenceInUs: string
+          classOfAdmission: string
+          created_at: string
+          dateOfEntry: string
+          dateOfExit: string
+          dateStatusExpires: string
+          dateStatusWasGranted: string
+          firstNameUsed: string
+          grantedDurationOfStatus: boolean
+          id: number
+          lastNameUsed: string
+          mannerOfEntry: string
+          middleNameUsed: string
+          modeOfTravel: string
+          mostRecentEntry: boolean
+          number_1_94: string
+          onH_LStatus: boolean
+          onRStatus: boolean
+          passport_travelDocCountry: string
+          passport_travelDocExpires: string
+          passport_travelDocIssued: string
+          passportNumber: string
+          plannedStay: boolean
+          portOfEntry: string
+          purposeOfStay: string
+          stateOfEntry: string
+          stateOfExit: string
+          statusAfterAdmission: string
+          travelDocumentNumber: string
+          user: string
+        }
+        Insert: {
+          authorizedStayExpiry: string
+          cityOfEntry: string
+          cityOfExit: string
+          cityOfResidenceInUs: string
+          classOfAdmission: string
+          created_at?: string
+          dateOfEntry: string
+          dateOfExit: string
+          dateStatusExpires: string
+          dateStatusWasGranted: string
+          firstNameUsed: string
+          grantedDurationOfStatus: boolean
+          id?: number
+          lastNameUsed: string
+          mannerOfEntry: string
+          middleNameUsed: string
+          modeOfTravel: string
+          mostRecentEntry: boolean
+          number_1_94: string
+          onH_LStatus: boolean
+          onRStatus: boolean
+          passport_travelDocCountry: string
+          passport_travelDocExpires: string
+          passport_travelDocIssued: string
+          passportNumber: string
+          plannedStay: boolean
+          portOfEntry: string
+          purposeOfStay: string
+          stateOfEntry: string
+          stateOfExit: string
+          statusAfterAdmission: string
+          travelDocumentNumber: string
+          user?: string
+        }
+        Update: {
+          authorizedStayExpiry?: string
+          cityOfEntry?: string
+          cityOfExit?: string
+          cityOfResidenceInUs?: string
+          classOfAdmission?: string
+          created_at?: string
+          dateOfEntry?: string
+          dateOfExit?: string
+          dateStatusExpires?: string
+          dateStatusWasGranted?: string
+          firstNameUsed?: string
+          grantedDurationOfStatus?: boolean
+          id?: number
+          lastNameUsed?: string
+          mannerOfEntry?: string
+          middleNameUsed?: string
+          modeOfTravel?: string
+          mostRecentEntry?: boolean
+          number_1_94?: string
+          onH_LStatus?: boolean
+          onRStatus?: boolean
+          passport_travelDocCountry?: string
+          passport_travelDocExpires?: string
+          passport_travelDocIssued?: string
+          passportNumber?: string
+          plannedStay?: boolean
+          portOfEntry?: string
+          purposeOfStay?: string
+          stateOfEntry?: string
+          stateOfExit?: string
+          statusAfterAdmission?: string
+          travelDocumentNumber?: string
+          user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_periods_of_stay_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_periods_of_stay_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_periods_of_stay_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_petitions: {
+        Row: {
+          advancePermissionToEnter: boolean
+          affidavitOfSupport: boolean
+          asyleeStatus: boolean
+          cityFilled: string
+          cityGranted: string
+          countryFilled: string
+          created_at: string
+          dateFilled: string
+          dateGranted: string
+          employmentAuthorization: boolean
+          firstName: string
+          id: number
+          imigrantVisa: boolean
+          lastName: string
+          middleName: string
+          nonImigrantVisa: boolean
+          officeFilled: string
+          officeGranted: string
+          provinceFilled: string
+          provinceGranted: string
+          receiptNumber: string
+          reentryPermit: boolean
+          refugeeStatus: boolean
+          refugeeTravelDocument: boolean
+          result: string
+          stateFilled: string
+          stateGranted: string
+          user: string | null
+        }
+        Insert: {
+          advancePermissionToEnter: boolean
+          affidavitOfSupport: boolean
+          asyleeStatus: boolean
+          cityFilled: string
+          cityGranted: string
+          countryFilled: string
+          created_at?: string
+          dateFilled: string
+          dateGranted: string
+          employmentAuthorization: boolean
+          firstName: string
+          id?: number
+          imigrantVisa: boolean
+          lastName: string
+          middleName: string
+          nonImigrantVisa: boolean
+          officeFilled: string
+          officeGranted: string
+          provinceFilled: string
+          provinceGranted: string
+          receiptNumber: string
+          reentryPermit: boolean
+          refugeeStatus: boolean
+          refugeeTravelDocument: boolean
+          result: string
+          stateFilled: string
+          stateGranted: string
+          user?: string | null
+        }
+        Update: {
+          advancePermissionToEnter?: boolean
+          affidavitOfSupport?: boolean
+          asyleeStatus?: boolean
+          cityFilled?: string
+          cityGranted?: string
+          countryFilled?: string
+          created_at?: string
+          dateFilled?: string
+          dateGranted?: string
+          employmentAuthorization?: boolean
+          firstName?: string
+          id?: number
+          imigrantVisa?: boolean
+          lastName?: string
+          middleName?: string
+          nonImigrantVisa?: boolean
+          officeFilled?: string
+          officeGranted?: string
+          provinceFilled?: string
+          provinceGranted?: string
+          receiptNumber?: string
+          reentryPermit?: boolean
+          refugeeStatus?: boolean
+          refugeeTravelDocument?: boolean
+          result?: string
+          stateFilled?: string
+          stateGranted?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_petitions_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_petitions_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_petitions_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_phone_numbers: {
+        Row: {
+          created_at: string
+          id: number
+          number: string | null
+          type: string | null
+          user: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          number?: string | null
+          type?: string | null
+          user?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          number?: string | null
+          type?: string | null
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "phone_numbers_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_numbers_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_numbers_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_proceedings: {
+        Row: {
+          created_at: string
+          current: boolean
+          dateEnded: string
+          dateStarted: string
+          deportation: boolean
+          exclusion: boolean
+          hearing: boolean
+          id: number
+          locationCity: string
+          locationState: string
+          office: string
+          otherJudicial: boolean
+          removal: boolean
+          rescission: boolean
+          status: string
+          user: string
+        }
+        Insert: {
+          created_at?: string
+          current: boolean
+          dateEnded: string
+          dateStarted: string
+          deportation: boolean
+          exclusion: boolean
+          hearing: boolean
+          id?: number
+          locationCity: string
+          locationState: string
+          office: string
+          otherJudicial: boolean
+          removal: boolean
+          rescission: boolean
+          status: string
+          user?: string
+        }
+        Update: {
+          created_at?: string
+          current?: boolean
+          dateEnded?: string
+          dateStarted?: string
+          deportation?: boolean
+          exclusion?: boolean
+          hearing?: boolean
+          id?: number
+          locationCity?: string
+          locationState?: string
+          office?: string
+          otherJudicial?: boolean
+          removal?: boolean
+          rescission?: boolean
+          status?: string
+          user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_proceeding_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_proceeding_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_proceeding_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_trips_abroads: {
+        Row: {
+          countriesVisited: string
+          created_at: string
+          departureCity: string
+          departureDate: string
+          departureState: string
+          id: number
+          inspectedToReturnUS: boolean
+          meansOfTransport: string
+          ReturnCity: string
+          ReturnDate: string
+          ReturnState: string
+          tripPurpose: string
+          user: string | null
+        }
+        Insert: {
+          countriesVisited: string
+          created_at?: string
+          departureCity: string
+          departureDate: string
+          departureState: string
+          id?: number
+          inspectedToReturnUS: boolean
+          meansOfTransport: string
+          ReturnCity: string
+          ReturnDate: string
+          ReturnState: string
+          tripPurpose: string
+          user?: string | null
+        }
+        Update: {
+          countriesVisited?: string
+          created_at?: string
+          departureCity?: string
+          departureDate?: string
+          departureState?: string
+          id?: number
+          inspectedToReturnUS?: boolean
+          meansOfTransport?: string
+          ReturnCity?: string
+          ReturnDate?: string
+          ReturnState?: string
+          tripPurpose?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_trips_abroads_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_trips_abroads_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_trips_abroads_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       conversations: {
         Row: {
           created_at: string
@@ -316,53 +1208,6 @@ export type Database = {
           metadata?: Json
         }
         Relationships: []
-      }
-      feedback_submissions: {
-        Row: {
-          attachment_url: string | null
-          created_at: string
-          device_info: Json | null
-          email: string | null
-          id: number
-          metadata: Json | null
-          screen_name: string | null
-          text: string
-          type: Database["public"]["Enums"]["feedback_type"]
-          user_id: string | null
-        }
-        Insert: {
-          attachment_url?: string | null
-          created_at?: string
-          device_info?: Json | null
-          email?: string | null
-          id?: number
-          metadata?: Json | null
-          screen_name?: string | null
-          text: string
-          type: Database["public"]["Enums"]["feedback_type"]
-          user_id?: string | null
-        }
-        Update: {
-          attachment_url?: string | null
-          created_at?: string
-          device_info?: Json | null
-          email?: string | null
-          id?: number
-          metadata?: Json | null
-          screen_name?: string | null
-          text?: string
-          type?: Database["public"]["Enums"]["feedback_type"]
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "feedback_submissions_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       invitations: {
         Row: {
@@ -1136,7 +1981,6 @@ export type Database = {
         | "members.manage"
         | "invites.manage"
       billing_provider: "stripe" | "lemon-squeezy" | "paddle"
-      feedback_type: "question" | "bug" | "feedback"
       message_type: "ai" | "db" | "user"
       notification_channel: "in_app" | "email"
       notification_type: "info" | "warning" | "error"

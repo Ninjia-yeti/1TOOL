@@ -1,4 +1,4 @@
-import { CreditCard, Home, User } from 'lucide-react';
+import { CreditCard, Home, User, Contact } from 'lucide-react';
 
 import { NavigationConfigSchema } from '@kit/ui/navigation-schema';
 
@@ -18,6 +18,11 @@ const routes = [
     label: 'account:accountTabLabel',
     path: pathsConfig.app.personalAccountSettings,
     Icon: <User className={iconClasses} />,
+  },
+  {
+    label: 'contact:contactTabLabel',
+    path: pathsConfig.app.personalContactSettings,
+    Icon: <Contact className={iconClasses} />,
   },
 ];
 

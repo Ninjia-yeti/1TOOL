@@ -72,7 +72,7 @@ export function ImageUploader(
   return (
     <div className={'flex items-center space-x-4'}>
       <label className={'relative h-20 w-20 animate-in fade-in zoom-in-50'}>
-        <Image fill className={'h-20 w-20 rounded-full'} src={image} alt={''} />
+        <Image layout='fill' className={'h-20 w-20 rounded-full'} src={image} alt={''} />
 
         <Input />
       </label>

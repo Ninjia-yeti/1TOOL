@@ -66,12 +66,14 @@
     "next-themes": "0.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-flagkit": "^2.0.4",
     "react-hook-form": "^7.52.1",
     "react-i18next": "^15.0.0",
     "react-slick": "^0.30.2",
     "recharts": "^2.12.7",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",
+    "world-countries": "^5.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
