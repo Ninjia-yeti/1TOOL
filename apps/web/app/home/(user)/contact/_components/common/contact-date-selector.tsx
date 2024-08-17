@@ -18,7 +18,7 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 
 
 export interface ContactDateSelectorProps {
-    value: string | null,
+    value?: string,
     onChange: (value: string) => void
 }
 
@@ -50,8 +50,8 @@ export const renderDate = (v: Date, mode: string) => {
 
 }
 export function ContactDateSelector({ value, onChange }: ContactDateSelectorProps) {
-    const [mode, setMode] = useState(JSON.parse(value).mode);
-    const [dateValue, setDateValue] = useState<Date>(JSON.parse(value).mode === 'present' ? new Date() : new Date(JSON.parse(value).value));
+    const [mode, setMode] = useState(value ? JSON.parse(value).mode : 'present');
+    const [dateValue, setDateValue] = useState<Date>(value ? JSON.parse(value).mode === 'present' ? new Date() : new Date(JSON.parse(value).value) : new Date());
 
 
     useEffect(() => {
@@ -72,7 +72,7 @@ export function ContactDateSelector({ value, onChange }: ContactDateSelectorProp
                             !value && "text-muted-foreground"
                         )}
                     >
-                        {dateValue ? (
+                        {dateValue && value ? (
                             renderDate(dateValue, mode)
                         ) : (
                             <span>Pick a date</span>

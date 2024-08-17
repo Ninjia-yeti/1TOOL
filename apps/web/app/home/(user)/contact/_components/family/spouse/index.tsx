@@ -7,7 +7,7 @@ import {
 } from '@kit/ui/card';
 import { Trans } from '@kit/ui/trans';
 
-import { ChildrenList } from './spouse-list';
+import { SpouseList } from './spouse-list';
 import { SpouseAdd } from './spouse-add';
 
 import { z } from 'zod';
@@ -25,7 +25,7 @@ export async function ContactFamily_Spouse() {
                 </CardTitle>
             </CardHeader>
             <CardContent className={'space-y-4'}>
-                {/* <ChildrenList /> */}
+                <SpouseList />
             </CardContent>
         </Card>
     );

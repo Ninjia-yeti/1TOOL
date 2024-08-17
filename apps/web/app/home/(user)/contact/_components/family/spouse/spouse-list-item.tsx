@@ -14,15 +14,15 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { deletePersonalContacFamily_Children } from '../../../_lib/server/server-actions';
-import { ChildrenForm } from './spouse-form';
+import { deletePersonalContacFamily_Spouse } from '../../../_lib/server/server-actions';
+import { SpouseForm } from './spouse-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 
-import { PersonalContactFamily_ChildrenProps } from '.'
+import { PersonalContactFamily_SpouseProps } from '.'
 
 
-export function ChildItem({ child }: { child: PersonalContactFamily_ChildrenProps }) {
+export function SpouseItem({ spouse }: { spouse: PersonalContactFamily_SpouseProps }) {
     const [error, setError] = useState(false);
 
     const { t } = useTranslation('');
@@ -30,9 +30,9 @@ export function ChildItem({ child }: { child: PersonalContactFamily_ChildrenProp
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`deleteChildSuccess`),
-                error: t(`deleteChildError`),
-                loading: t(`deleteChildLoading`),
+                success: t(`deleteSpouseSuccess`),
+                error: t(`deleteSpouseError`),
+                loading: t(`deleteSpouseLoading`),
             });
         },
         [t],
@@ -41,14 +41,14 @@ export function ChildItem({ child }: { child: PersonalContactFamily_ChildrenProp
     const deleteChild = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContacFamily_Children({ id: child.id })
+                await deletePersonalContacFamily_Spouse({ id: spouse.id })
             }
             catch (e) {
                 setError(true);
             }
         }
         createToaster(promise)
-    }, [child, createToaster])
+    }, [spouse, createToaster])
 
 
     return (
@@ -56,14 +56,14 @@ export function ChildItem({ child }: { child: PersonalContactFamily_ChildrenProp
             <ClientOnly>
                 <div className='flex flex-col gap-4 p-2 px-4'>
                     <div className='flex gap-4 items-center w-full'>
-                        {child.firstName}{` `}
-                        {child.lastName}
-                        <ChildrenForm
+                        {spouse.firstName}{` `}
+                        {spouse.lastName}
+                        <SpouseForm
                             trigger={
                                 <Pencil color='#707070' size={17} />
                             }
                             mode='edit'
-                            child={child}
+                            spouse={spouse}
                         />
                         <div className='flex flex-wrap'>
 

@@ -44,7 +44,7 @@ import { DateTypes } from '../../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactFamily_Children, editPersonalContactFamily_Children } from '../../../_lib/server/server-actions';
+import { createPersonalContactFamily_Spouse, editPersonalContactFamily_Children, editPersonalContactFamily_Spouse } from '../../../_lib/server/server-actions';
 import { PersonalContactFamily_SpouseProps } from '.';
 
 export interface SpouseFormProps {
@@ -64,17 +64,28 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
         value: today.toISOString()
     })
     const defaultFormValue = spouse && mode === 'edit' ? spouse : {
-        dateOfMarriage: defaultDateString,
-        dateMarriageEnded: defaultDateString,
-        liveTogetherSince: defaultDateString,
-        liveTogetherUntil: defaultDateString,
-        dateOfSeperation: defaultDateString,
         middleName: null,
-        householdMember: false,
-        headOfHousehold: false,
-        derivativeApplicant: false,
-        principalApplicant: false,
-
+        email: null,
+        DependentStatus: null,
+        dateOfMarriage: null,
+        cityOfMarriage: null,
+        stateOfMarriage: null,
+        provinceOfMarriage: null,
+        countryOfMarriage: null,
+        liveTogetherSince: null,
+        liveTogetherUntil: null,
+        reasonMarriageEnded: null,
+        dateMarriageEnded: null,
+        citymarriageEnded: null,
+        stateMarriageEnded: null,
+        provinceMarriageEnded: null,
+        countryMarriageEnded: null,
+        dateOfSeperation: null,
+        howMarriageEnded: null,
+        householdMember: null,
+        headOfHousehold: null,
+        derivativeApplicant: null,
+        principalApplicant: null,
     }
     const form = useForm<z.infer<typeof PersonalContactFamily_SpouseSchema>>({
         resolver: zodResolver(PersonalContactFamily_SpouseSchema),
@@ -88,14 +99,14 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
         const promise = async () => {
             try {
                 setError(false);
-                // if (mode === 'create') {
-                //     await createPersonalContactFamily_Children(data)
-                // }
-                // if (mode === 'edit') {
-                //     await editPersonalContactFamily_Children({
-                //         ...data, id: spouse?.id ?? 0
-                //     })
-                // }
+                if (mode === 'create') {
+                    await createPersonalContactFamily_Spouse(data)
+                }
+                if (mode === 'edit') {
+                    await editPersonalContactFamily_Spouse({
+                        ...data, id: spouse?.id ?? 0
+                    })
+                }
                 setOpenDlg(false);
             }
             catch (e) {
@@ -227,7 +238,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Date of marriage</FormLabel>
                                                 <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                    <ContactDateSelector value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -297,7 +308,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Live together since</FormLabel>
                                                 <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                    <ContactDateSelector value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -310,7 +321,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Live together until</FormLabel>
                                                 <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                    <ContactDateSelector value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -350,7 +361,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Date marriage ended</FormLabel>
                                                 <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                    <ContactDateSelector value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -419,7 +430,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Date of seperation</FormLabel>
                                                 <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                    <ContactDateSelector value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -449,7 +460,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                                 <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
                                                     <FormControl>
                                                         <Checkbox
-                                                            checked={field.value}
+                                                            checked={field.value ?? undefined}
                                                             onCheckedChange={field.onChange}
                                                         />
                                                     </FormControl>
@@ -470,7 +481,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                                 <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
                                                     <FormControl>
                                                         <Checkbox
-                                                            checked={field.value}
+                                                            checked={field.value ?? undefined}
                                                             onCheckedChange={field.onChange}
                                                         />
                                                     </FormControl>
@@ -491,7 +502,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                                 <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
                                                     <FormControl>
                                                         <Checkbox
-                                                            checked={field.value}
+                                                            checked={field.value ?? undefined}
                                                             onCheckedChange={field.onChange}
                                                         />
                                                     </FormControl>
@@ -513,7 +524,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                                 <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md pt-2">
                                                     <FormControl>
                                                         <Checkbox
-                                                            checked={field.value}
+                                                            checked={field.value ?? undefined}
                                                             onCheckedChange={field.onChange}
                                                         />
                                                     </FormControl>

@@ -599,18 +599,18 @@ export type Database = {
           dateOfMarriage: string | null
           dateOfSeperation: string | null
           DependentStatus: string | null
-          derivativeApplicant: boolean
+          derivativeApplicant: boolean | null
           email: string | null
           firstName: string
-          headOfHousehold: boolean
-          householdMember: boolean
+          headOfHousehold: boolean | null
+          householdMember: boolean | null
           howMarriageEnded: string | null
           id: number
           lastName: string
           liveTogetherSince: string | null
           liveTogetherUntil: string | null
           middleName: string | null
-          principalApplicant: boolean
+          principalApplicant: boolean | null
           provinceMarriageEnded: string | null
           provinceOfMarriage: string | null
           reasonMarriageEnded: string | null
@@ -628,18 +628,18 @@ export type Database = {
           dateOfMarriage?: string | null
           dateOfSeperation?: string | null
           DependentStatus?: string | null
-          derivativeApplicant: boolean
+          derivativeApplicant?: boolean | null
           email?: string | null
           firstName: string
-          headOfHousehold: boolean
-          householdMember: boolean
+          headOfHousehold?: boolean | null
+          householdMember?: boolean | null
           howMarriageEnded?: string | null
           id?: number
           lastName: string
           liveTogetherSince?: string | null
           liveTogetherUntil?: string | null
           middleName?: string | null
-          principalApplicant: boolean
+          principalApplicant?: boolean | null
           provinceMarriageEnded?: string | null
           provinceOfMarriage?: string | null
           reasonMarriageEnded?: string | null
@@ -657,18 +657,18 @@ export type Database = {
           dateOfMarriage?: string | null
           dateOfSeperation?: string | null
           DependentStatus?: string | null
-          derivativeApplicant?: boolean
+          derivativeApplicant?: boolean | null
           email?: string | null
           firstName?: string
-          headOfHousehold?: boolean
-          householdMember?: boolean
+          headOfHousehold?: boolean | null
+          householdMember?: boolean | null
           howMarriageEnded?: string | null
           id?: number
           lastName?: string
           liveTogetherSince?: string | null
           liveTogetherUntil?: string | null
           middleName?: string | null
-          principalApplicant?: boolean
+          principalApplicant?: boolean | null
           provinceMarriageEnded?: string | null
           provinceOfMarriage?: string | null
           reasonMarriageEnded?: string | null

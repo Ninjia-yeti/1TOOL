@@ -179,9 +179,9 @@ export const PersonalContactFamily_ChildrenSchema = z.object({
 })
 
 export const PersonalContactFamily_SpouseSchema = z.object({
-  firstName: z.string(),
+  firstName: z.string().min(1, { message: 'First name is required.' }),
   middleName: z.string().nullable(),
-  lastName: z.string(),
+  lastName: z.string().min(1, { message: 'Last name is required.' }),
   email: z.string().nullable(),
   DependentStatus: z.string().nullable(),
   dateOfMarriage: z.string().nullable(),
@@ -199,8 +199,8 @@ export const PersonalContactFamily_SpouseSchema = z.object({
   countryMarriageEnded: z.string().nullable(),
   dateOfSeperation: z.string().nullable(),
   howMarriageEnded: z.string().nullable(),
-  householdMember: z.boolean(),
-  headOfHousehold: z.boolean(),
-  derivativeApplicant: z.boolean(),
-  principalApplicant: z.boolean(),
+  householdMember: z.boolean().nullable(),
+  headOfHousehold: z.boolean().nullable(),
+  derivativeApplicant: z.boolean().nullable(),
+  principalApplicant: z.boolean().nullable(),
 })
