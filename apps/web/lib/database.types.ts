@@ -588,6 +588,118 @@ export type Database = {
           },
         ]
       }
+      contact_family_spouse: {
+        Row: {
+          citymarriageEnded: string | null
+          cityOfMarriage: string | null
+          countryMarriageEnded: string | null
+          countryOfMarriage: string | null
+          created_at: string
+          dateMarriageEnded: string | null
+          dateOfMarriage: string | null
+          dateOfSeperation: string | null
+          DependentStatus: string | null
+          derivativeApplicant: boolean
+          email: string | null
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          howMarriageEnded: string | null
+          id: number
+          lastName: string
+          liveTogetherSince: string | null
+          liveTogetherUntil: string | null
+          middleName: string | null
+          principalApplicant: boolean
+          provinceMarriageEnded: string | null
+          provinceOfMarriage: string | null
+          reasonMarriageEnded: string | null
+          stateMarriageEnded: string | null
+          stateOfMarriage: string | null
+          user: string | null
+        }
+        Insert: {
+          citymarriageEnded?: string | null
+          cityOfMarriage?: string | null
+          countryMarriageEnded?: string | null
+          countryOfMarriage?: string | null
+          created_at?: string
+          dateMarriageEnded?: string | null
+          dateOfMarriage?: string | null
+          dateOfSeperation?: string | null
+          DependentStatus?: string | null
+          derivativeApplicant: boolean
+          email?: string | null
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          howMarriageEnded?: string | null
+          id?: number
+          lastName: string
+          liveTogetherSince?: string | null
+          liveTogetherUntil?: string | null
+          middleName?: string | null
+          principalApplicant: boolean
+          provinceMarriageEnded?: string | null
+          provinceOfMarriage?: string | null
+          reasonMarriageEnded?: string | null
+          stateMarriageEnded?: string | null
+          stateOfMarriage?: string | null
+          user?: string | null
+        }
+        Update: {
+          citymarriageEnded?: string | null
+          cityOfMarriage?: string | null
+          countryMarriageEnded?: string | null
+          countryOfMarriage?: string | null
+          created_at?: string
+          dateMarriageEnded?: string | null
+          dateOfMarriage?: string | null
+          dateOfSeperation?: string | null
+          DependentStatus?: string | null
+          derivativeApplicant?: boolean
+          email?: string | null
+          firstName?: string
+          headOfHousehold?: boolean
+          householdMember?: boolean
+          howMarriageEnded?: string | null
+          id?: number
+          lastName?: string
+          liveTogetherSince?: string | null
+          liveTogetherUntil?: string | null
+          middleName?: string | null
+          principalApplicant?: boolean
+          provinceMarriageEnded?: string | null
+          provinceOfMarriage?: string | null
+          reasonMarriageEnded?: string | null
+          stateMarriageEnded?: string | null
+          stateOfMarriage?: string | null
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_family_spouse_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_spouse_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_spouse_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_periods_of_stay: {
         Row: {
           authorizedStayExpiry: string

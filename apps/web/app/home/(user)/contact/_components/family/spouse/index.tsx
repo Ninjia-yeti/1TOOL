@@ -11,9 +11,9 @@ import { ChildrenList } from './spouse-list';
 import { SpouseAdd } from './spouse-add';
 
 import { z } from 'zod';
-import { PersonalContactFamily_ChildrenSchema, IdSchema } from '../../../_lib/schema/personal-contact-schema';
-const PersonalContactFamily_ChildrenSafeSchema = PersonalContactFamily_ChildrenSchema.merge(IdSchema)
-export type PersonalContactFamily_ChildrenProps = z.infer<typeof PersonalContactFamily_ChildrenSafeSchema>;
+import { PersonalContactFamily_SpouseSchema, IdSchema } from '../../../_lib/schema/personal-contact-schema';
+const PersonalContactFamily_SpouseSafeSchema = PersonalContactFamily_SpouseSchema.merge(IdSchema)
+export type PersonalContactFamily_SpouseProps = z.infer<typeof PersonalContactFamily_SpouseSafeSchema>;
 
 export async function ContactFamily_Spouse() {
     return (

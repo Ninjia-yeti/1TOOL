@@ -31,7 +31,7 @@ import {
 import { Input } from '@kit/ui/input';
 
 
-import { PersonalContactFamily_ChildrenSchema } from '../../../_lib/schema/personal-contact-schema';
+import { PersonalContactFamily_SpouseSchema } from '../../../_lib/schema/personal-contact-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { If } from '@kit/ui/if';
@@ -45,11 +45,11 @@ import { DateTypes } from '../../common/contact-date-selector';
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { createPersonalContactFamily_Children, editPersonalContactFamily_Children } from '../../../_lib/server/server-actions';
-import { PersonalContactFamily_ChildrenProps } from '.';
+import { PersonalContactFamily_SpouseProps } from '.';
 
 export interface SpouseFormProps {
     trigger: ReactNode,
-    spouse?: PersonalContactFamily_ChildrenProps,
+    spouse?: PersonalContactFamily_SpouseProps,
     mode: 'edit' | 'create',
 }
 
@@ -64,34 +64,37 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
         value: today.toISOString()
     })
     const defaultFormValue = spouse && mode === 'edit' ? spouse : {
+        dateOfMarriage: defaultDateString,
+        dateMarriageEnded: defaultDateString,
         liveTogetherSince: defaultDateString,
         liveTogetherUntil: defaultDateString,
+        dateOfSeperation: defaultDateString,
         householdMember: false,
         headOfHousehold: false,
         derivativeApplicant: false,
         principalApplicant: false,
 
     }
-    const form = useForm<z.infer<typeof PersonalContactFamily_ChildrenSchema>>({
-        resolver: zodResolver(PersonalContactFamily_ChildrenSchema),
+    const form = useForm<z.infer<typeof PersonalContactFamily_SpouseSchema>>({
+        resolver: zodResolver(PersonalContactFamily_SpouseSchema),
         defaultValues: defaultFormValue
     })
 
 
-    async function onSubmit(data: z.infer<typeof PersonalContactFamily_ChildrenSchema>) {
+    async function onSubmit(data: z.infer<typeof PersonalContactFamily_SpouseSchema>) {
         console.log(data);
 
         const promise = async () => {
             try {
                 setError(false);
-                if (mode === 'create') {
-                    await createPersonalContactFamily_Children(data)
-                }
-                if (mode === 'edit') {
-                    await editPersonalContactFamily_Children({
-                        ...data, id: spouse?.id ?? 0
-                    })
-                }
+                // if (mode === 'create') {
+                //     await createPersonalContactFamily_Children(data)
+                // }
+                // if (mode === 'edit') {
+                //     await editPersonalContactFamily_Children({
+                //         ...data, id: spouse?.id ?? 0
+                //     })
+                // }
                 setOpenDlg(false);
             }
             catch (e) {
@@ -233,7 +236,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                 </div>
                                 <div className='grid grid-cols-3 gap-2'>
                                     <FormField
-                                        name='email'
+                                        name='cityOfMarriage'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -246,7 +249,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='email'
+                                        name='stateOfMarriage'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -259,7 +262,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='email'
+                                        name='provinceOfMarriage'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -274,7 +277,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                 </div>
                                 <div className='grid grid-cols-3 gap-2'>
                                     <FormField
-                                        name='email'
+                                        name='countryOfMarriage'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -287,7 +290,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='liveTogetherUntil'
+                                        name='liveTogetherSince'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -315,7 +318,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                 </div>
                                 <div className='grid grid-cols-3 gap-2'>
                                     <FormField
-                                        name='email'
+                                        name='reasonMarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem>
@@ -340,7 +343,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='liveTogetherUntil'
+                                        name='dateMarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -353,7 +356,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='email'
+                                        name='citymarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -368,7 +371,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                 </div>
                                 <div className='grid grid-cols-3 gap-2'>
                                     <FormField
-                                        name='email'
+                                        name='stateMarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -381,7 +384,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='email'
+                                        name='provinceMarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -394,7 +397,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='email'
+                                        name='CountryMarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -409,7 +412,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                 </div>
                                 <div className='grid grid-cols-2 gap-2'>
                                     <FormField
-                                        name='liveTogetherUntil'
+                                        name='dateOfSeperation'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -422,7 +425,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='email'
+                                        name='howMarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
