@@ -258,9 +258,9 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
                                                         </SelectTrigger>
                                                     </FormControl>
                                                     <SelectContent>
-                                                        <SelectItem value="approved">Whelly Dependent</SelectItem>
-                                                        <SelectItem value="denied">Partially Dependent</SelectItem>
-                                                        <SelectItem value="withrawn">No dependent</SelectItem>
+                                                        <SelectItem value="whollyDependent">Wholly Dependent</SelectItem>
+                                                        <SelectItem value="partiallyDependent">Partially Dependent</SelectItem>
+                                                        <SelectItem value="noDependent">No dependent</SelectItem>
                                                     </SelectContent>
                                                 </Select>
                                                 <FormMessage />

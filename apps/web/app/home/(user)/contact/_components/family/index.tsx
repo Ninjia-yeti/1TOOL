@@ -10,6 +10,7 @@ import { Trans } from '@kit/ui/trans';
 import { ContactFamily_Father } from './father';
 import { ContactFamily_Mother } from './mother';
 import { ContactFamily_Children } from './children';
+import { ContactFamily_Spouse } from './spouse';
 
 export async function ContactFamily() {
     return (
@@ -24,6 +25,7 @@ export async function ContactFamily() {
                     <ContactFamily_Father />
                     <ContactFamily_Mother />
                     <ContactFamily_Children />
+                    <ContactFamily_Spouse />
                 </div>
             </CardContent>
         </Card>

@@ -39,6 +39,7 @@ import { ErrorAlert } from '../../errorAlert';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import { ContactDateSelector } from '../../common/contact-date-selector';
+import { CountrySelect } from '../../common/contact-country-select';
 import { DateTypes } from '../../common/contact-date-selector';
 
 import { z } from "zod"
@@ -46,13 +47,13 @@ import { useForm } from "react-hook-form"
 import { createPersonalContactFamily_Children, editPersonalContactFamily_Children } from '../../../_lib/server/server-actions';
 import { PersonalContactFamily_ChildrenProps } from '.';
 
-export interface ChildrenFormProps {
+export interface SpouseFormProps {
     trigger: ReactNode,
-    child?: PersonalContactFamily_ChildrenProps,
+    spouse?: PersonalContactFamily_ChildrenProps,
     mode: 'edit' | 'create',
 }
 
-export function ChildrenForm({ trigger, mode, child }: ChildrenFormProps) {
+export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
     const [error, setError] = useState(false);
     const [errorString, setErrorString] = useState('');
     const [openDlg, setOpenDlg] = useState(false);
@@ -62,7 +63,7 @@ export function ChildrenForm({ trigger, mode, child }: ChildrenFormProps) {
         mode: DateTypes[0],
         value: today.toISOString()
     })
-    const defaultFormValue = child && mode === 'edit' ? child : {
+    const defaultFormValue = spouse && mode === 'edit' ? spouse : {
         liveTogetherSince: defaultDateString,
         liveTogetherUntil: defaultDateString,
         householdMember: false,
@@ -88,7 +89,7 @@ export function ChildrenForm({ trigger, mode, child }: ChildrenFormProps) {
                 }
                 if (mode === 'edit') {
                     await editPersonalContactFamily_Children({
-                        ...data, id: child?.id ?? 0
+                        ...data, id: spouse?.id ?? 0
                     })
                 }
                 setOpenDlg(false);
@@ -128,7 +129,7 @@ export function ChildrenForm({ trigger, mode, child }: ChildrenFormProps) {
                 <DialogContent className="max-w-[45%]">
                     <DialogHeader>
                         <DialogTitle>
-                            <Trans i18nKey={'contact:children'} />
+                            <Trans i18nKey={'contact:spouse'} />
                         </DialogTitle>
                         <DialogDescription>
                             <Trans i18nKey={'contact:familyDescription'} />
@@ -194,58 +195,6 @@ export function ChildrenForm({ trigger, mode, child }: ChildrenFormProps) {
                                         )}
                                     />
                                     <FormField
-                                        name='relationType'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Relation type</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <FormControl>
-                                                        <SelectTrigger>
-                                                            <SelectValue placeholder="Relation type" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
-                                                    <SelectContent>
-                                                        <SelectItem value="approved">Biological</SelectItem>
-                                                        <SelectItem value="denied">Stepparent Stepchild</SelectItem>
-                                                        <SelectItem value="withrawn">Legally Adopted</SelectItem>
-                                                        <SelectItem value="other">Other</SelectItem>
-                                                    </SelectContent>
-                                                </Select>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        name='liveTogetherSince'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className='w-full'>
-                                                <FormLabel>Live together since</FormLabel>
-                                                <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-
-                                </div>
-                                <div className='grid grid-cols-2 gap-2'>
-                                    <FormField
-                                        name='liveTogetherUntil'
-                                        control={form.control}
-                                        render={({ field }) => (
-                                            <FormItem className='w-full'>
-                                                <FormLabel>Live together until</FormLabel>
-                                                <FormControl>
-                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
                                         name='DependentStatus'
                                         control={form.control}
                                         render={({ field }) => (
@@ -267,6 +216,225 @@ export function ChildrenForm({ trigger, mode, child }: ChildrenFormProps) {
                                             </FormItem>
                                         )}
                                     />
+                                    <FormField
+                                        name='liveTogetherSince'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Date of marriage</FormLabel>
+                                                <FormControl>
+                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                </div>
+                                <div className='grid grid-cols-3 gap-2'>
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>City of marriage</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='City of marriage' maxLength={200} {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>State of marriage</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='State of marriage' maxLength={200} {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Province of marriage</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='Province of marriage' maxLength={200} {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className='grid grid-cols-3 gap-2'>
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Country of marriage</FormLabel>
+                                                <FormControl>
+                                                    <CountrySelect value={field.value} onChange={field.onChange} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='liveTogetherUntil'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Live together since</FormLabel>
+                                                <FormControl>
+                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='liveTogetherUntil'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Live together until</FormLabel>
+                                                <FormControl>
+                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className='grid grid-cols-3 gap-2'>
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel >Reason marriage ended</FormLabel>
+                                                <FormControl>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <FormControl>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Reason marriage ended" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            <SelectItem value="divorce">Divorce</SelectItem>
+                                                            <SelectItem value="death">Death</SelectItem>
+                                                            <SelectItem value="annulment">Annulment</SelectItem>
+                                                            <SelectItem value="other">Other</SelectItem>
+                                                        </SelectContent>
+                                                    </Select>
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='liveTogetherUntil'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Date marriage ended</FormLabel>
+                                                <FormControl>
+                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>City marriage ended</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='City marriage ended' {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className='grid grid-cols-3 gap-2'>
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>State marriage ended</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='State marriage ended' {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Province marriage ended</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='Province marriage ended' {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Country marriage ended</FormLabel>
+                                                <FormControl>
+                                                    <CountrySelect value={field.value} onChange={field.onChange} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className='grid grid-cols-2 gap-2'>
+                                    <FormField
+                                        name='liveTogetherUntil'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>Date of seperation</FormLabel>
+                                                <FormControl>
+                                                    <ContactDateSelector value={field.value} onChange={field.onChange} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        name='email'
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className='w-full'>
+                                                <FormLabel>How marriage ended</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='How marriage ended' {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
                                 </div>
                                 <div className='flex flex-col pt-2 gap-4'>
                                     <div className="flex flex-row items-center space-x-3 space-y-0 rounded-md ">
@@ -368,7 +536,7 @@ export function ChildrenForm({ trigger, mode, child }: ChildrenFormProps) {
                     </Form>
                 </DialogContent>
             </Dialog>
-        </div>
+        </div >
     );
 }
 

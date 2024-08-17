@@ -60,5 +60,6 @@
   "father": "Father",
   "mother": "Mother",
   "children": "Children",
+  "spouse": "Spouse",
   "familyDescription": "Make changes to your family information"
 }
