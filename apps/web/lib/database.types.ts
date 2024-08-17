@@ -360,6 +360,82 @@ export type Database = {
           },
         ]
       }
+      contact_family_children: {
+        Row: {
+          created_at: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user: string | null
+        }
+        Insert: {
+          created_at?: string
+          DependentStatus: string
+          derivativeApplicant: boolean
+          email: string
+          firstName: string
+          headOfHousehold: boolean
+          householdMember: boolean
+          id?: number
+          lastName: string
+          liveTogetherSince: string
+          liveTogetherUntil: string
+          middleName: string
+          principalApplicant: boolean
+          relationType: string
+          user?: string | null
+        }
+        Update: {
+          created_at?: string
+          DependentStatus?: string
+          derivativeApplicant?: boolean
+          email?: string
+          firstName?: string
+          headOfHousehold?: boolean
+          householdMember?: boolean
+          id?: number
+          lastName?: string
+          liveTogetherSince?: string
+          liveTogetherUntil?: string
+          middleName?: string
+          principalApplicant?: boolean
+          relationType?: string
+          user?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_family_children_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_children_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_account_workspace"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_family_children_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "user_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_family_father: {
         Row: {
           created_at: string
