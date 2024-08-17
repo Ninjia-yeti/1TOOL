@@ -16,6 +16,7 @@ import {
   PersonalContactPetitionSchema,
   PersonalContactFamily_FatherSchema,
   PersonalContactFamily_MotherSchema,
+  PersonalContactFamily_ChildrenSchema,
   IdSchema,
   PersonalContactStaySchema
 } from '../schema/personal-contact-schema';
@@ -676,6 +677,90 @@ export const deletePersonalContacFamily_Mother = enhanceAction(
     const client = getSupabaseServerActionClient();
     try {
       const { error } = await client.from('contact_family_mother')
+        .delete()
+        .eq('id', payload.id)
+        .select();
+      if (error) {
+        throw new Error(`Failed to delete family info`);
+      }
+    } catch (error) {
+      throw new Error(`Failed to delete family info error:${error}`);
+    } finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: IdSchema
+  }
+)
+export const createPersonalContactFamily_Children = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    const auth = await requireUser(client);
+    const userId = auth.data?.id;
+    try {
+      console.log({
+        ...payload,
+        user: userId
+      });
+
+      const { error } = await client.from('contact_family_children')
+        .insert(
+          {
+            ...payload,
+            user: userId
+          }
+        );
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to save family error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactFamily_MotherSchema
+  },
+)
+
+
+export const editPersonalContactFamily_Children = enhanceAction(
+  async function (payload) {
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_family_children')
+        .update({
+          ...payload
+        })
+        .eq('id', payload.id)
+      if (error) {
+        throw new Error(`Failed to edit family info`);
+      }
+    }
+    catch (error) {
+      throw new Error(`Failed to edit family info error:${error}`);
+    }
+    finally {
+      return redirect('/home/contact');
+    }
+  },
+  {
+    schema: PersonalContactFamily_ChildrenSchema.merge(IdSchema),
+  },
+);
+
+export const deletePersonalContacFamily_Children = enhanceAction(
+  async function (payload) {
+
+    const client = getSupabaseServerActionClient();
+    try {
+      const { error } = await client.from('contact_family_children')
         .delete()
         .eq('id', payload.id)
         .select();
