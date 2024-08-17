@@ -1,5 +1,4 @@
 'use client'
-
 import {
     AlertDialog,
     AlertDialogAction,
@@ -15,16 +14,15 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { deletePersonalContacFamily_Father } from '../../../_lib/server/server-actions';
-import { FatherForm } from './father-form';
+import { deletePersonalContacFamily_Children } from '../../../_lib/server/server-actions';
+import { ChildrenForm } from './children-form';
 
 import { ClientOnly } from '~/home/(user)/_components/client-only';
 
-import { PersonalContactFamily_FatherProps } from '.'
+import { PersonalContactFamily_ChildrenProps } from '.'
 
 
-
-export function FatherItem({ father }: { father: PersonalContactFamily_FatherProps }) {
+export function ChildItem({ child }: { child: PersonalContactFamily_ChildrenProps }) {
     const [error, setError] = useState(false);
 
     const { t } = useTranslation('');
@@ -32,25 +30,25 @@ export function FatherItem({ father }: { father: PersonalContactFamily_FatherPro
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`deleteFatherSuccess`),
-                error: t(`deleteFatherError`),
-                loading: t(`deleteFatherLoading`),
+                success: t(`deleteChildSuccess`),
+                error: t(`deleteChildError`),
+                loading: t(`deleteChildLoading`),
             });
         },
         [t],
     );
 
-    const deleteFather = useCallback(() => {
+    const deleteChild = useCallback(() => {
         const promise = async () => {
             try {
-                await deletePersonalContacFamily_Father({ id: father.id })
+                await deletePersonalContacFamily_Children({ id: child.id })
             }
             catch (e) {
                 setError(true);
             }
         }
         createToaster(promise)
-    }, [father, createToaster])
+    }, [child, createToaster])
 
 
     return (
@@ -58,14 +56,14 @@ export function FatherItem({ father }: { father: PersonalContactFamily_FatherPro
             <ClientOnly>
                 <div className='flex flex-col gap-4 p-2 px-4'>
                     <div className='flex gap-4 items-center w-full'>
-                        {father.firstName}{` `}
-                        {father.lastName}
-                        <FatherForm
+                        {child.firstName}{` `}
+                        {child.lastName}
+                        <ChildrenForm
                             trigger={
                                 <Pencil color='#707070' size={17} />
                             }
                             mode='edit'
-                            father={father}
+                            child={child}
                         />
                         <div className='flex flex-wrap'>
 
@@ -83,7 +81,7 @@ export function FatherItem({ father }: { father: PersonalContactFamily_FatherPro
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={deleteFather}>Continue</AlertDialogAction>
+                                        <AlertDialogAction onClick={deleteChild}>Continue</AlertDialogAction>
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>

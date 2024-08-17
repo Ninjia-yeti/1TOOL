@@ -69,7 +69,7 @@ export function MotherItem({ mother }: { mother: PersonalContactFamily_MotherPro
 
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
-                                    <Trash2 color='#707070' size={17} />
+                                    <Trash2 color='#ef4444' size={17} />
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
                                     <AlertDialogHeader>
