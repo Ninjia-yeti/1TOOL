@@ -69,6 +69,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
         liveTogetherSince: defaultDateString,
         liveTogetherUntil: defaultDateString,
         dateOfSeperation: defaultDateString,
+        middleName: null,
         householdMember: false,
         headOfHousehold: false,
         derivativeApplicant: false,
@@ -149,7 +150,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>First name</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='First name' maxLength={200} {...field} />
+                                                    <Input placeholder='First name' maxLength={200} value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -162,7 +163,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Middle name</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='Middle name' maxLength={200} {...field} />
+                                                    <Input value={field.value ?? undefined} onChange={field.onChange} placeholder='Middle name' maxLength={200} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -175,7 +176,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Last name</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='Last name' maxLength={200} {...field} />
+                                                    <Input placeholder='Last name' maxLength={200} value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -191,7 +192,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Email</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='email' maxLength={200} {...field} />
+                                                    <Input value={field.value ?? undefined} onChange={field.onChange} placeholder='email' maxLength={200} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -203,7 +204,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel>Dependent status</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value ?? undefined}>
                                                     <FormControl>
                                                         <SelectTrigger>
                                                             <SelectValue placeholder="Relation type" />
@@ -242,7 +243,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>City of marriage</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='City of marriage' maxLength={200} {...field} />
+                                                    <Input placeholder='City of marriage' maxLength={200} value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -255,7 +256,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>State of marriage</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='State of marriage' maxLength={200} {...field} />
+                                                    <Input placeholder='State of marriage' maxLength={200} value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -268,7 +269,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Province of marriage</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='Province of marriage' maxLength={200} {...field} />
+                                                    <Input placeholder='Province of marriage' maxLength={200} value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -324,7 +325,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem>
                                                 <FormLabel >Reason marriage ended</FormLabel>
                                                 <FormControl>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value ?? undefined}>
                                                         <FormControl>
                                                             <SelectTrigger>
                                                                 <SelectValue placeholder="Reason marriage ended" />
@@ -362,7 +363,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>City marriage ended</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='City marriage ended' {...field} />
+                                                    <Input placeholder='City marriage ended' value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -377,7 +378,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>State marriage ended</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='State marriage ended' {...field} />
+                                                    <Input placeholder='State marriage ended' value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -390,14 +391,14 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>Province marriage ended</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='Province marriage ended' {...field} />
+                                                    <Input placeholder='Province marriage ended' value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
                                     <FormField
-                                        name='CountryMarriageEnded'
+                                        name='countryMarriageEnded'
                                         control={form.control}
                                         render={({ field }) => (
                                             <FormItem className='w-full'>
@@ -431,7 +432,7 @@ export function SpouseForm({ trigger, mode, spouse }: SpouseFormProps) {
                                             <FormItem className='w-full'>
                                                 <FormLabel>How marriage ended</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder='How marriage ended' {...field} />
+                                                    <Input placeholder='How marriage ended' value={field.value ?? undefined} onChange={field.onChange} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>

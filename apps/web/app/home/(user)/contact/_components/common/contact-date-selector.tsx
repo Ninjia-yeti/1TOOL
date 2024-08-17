@@ -18,7 +18,7 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 
 
 export interface ContactDateSelectorProps {
-    value: string,
+    value: string | null,
     onChange: (value: string) => void
 }
 
