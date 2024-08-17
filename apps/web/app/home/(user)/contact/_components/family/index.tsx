@@ -8,6 +8,7 @@ import {
 import { Trans } from '@kit/ui/trans';
 
 import { ContactFamily_Father } from './father';
+import { ContactFamily_Mother } from './mother';
 
 export async function ContactFamily() {
     return (
@@ -20,6 +21,7 @@ export async function ContactFamily() {
             <CardContent className={'space-y-4'}>
                 <div className='grid grid-cols-4 gap-2'>
                     <ContactFamily_Father />
+                    <ContactFamily_Mother />
                 </div>
             </CardContent>
         </Card>

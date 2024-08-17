@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useState } from 'react';
 import { Trans } from '@kit/ui/trans';
 import { Button } from '@kit/ui/button';
 import { Checkbox } from '@kit/ui/checkbox';
@@ -31,7 +31,7 @@ import {
 import { Input } from '@kit/ui/input';
 
 
-import { PersonalContactFamily_FatherSchema } from '../../../_lib/schema/personal-contact-schema';
+import { PersonalContactFamily_MotherSchema } from '../../../_lib/schema/personal-contact-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { If } from '@kit/ui/if';
@@ -43,16 +43,16 @@ import { DateTypes } from '../../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactFamily_Father, editPersonalContactFamily_Father } from '../../../_lib/server/server-actions';
-import { PersonalContactFamily_FatherProps } from '.';
+import { createPersonalContactFamily_Mother, editPersonalContactFamily_Mother } from '../../../_lib/server/server-actions';
+import { PersonalContactFamily_MotherProps } from '.';
 
-export interface FatherFormProps {
+export interface MotherFormProps {
     trigger: ReactNode,
-    father?: PersonalContactFamily_FatherProps,
+    mother?: PersonalContactFamily_MotherProps,
     mode: 'edit' | 'create',
 }
 
-export function FatherForm({ trigger, mode, father }: FatherFormProps) {
+export function MotherForm({ trigger, mode, mother }: MotherFormProps) {
     const [error, setError] = useState(false);
     const [errorString, setErrorString] = useState('');
     const [openDlg, setOpenDlg] = useState(false);
@@ -62,7 +62,7 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
         mode: DateTypes[0],
         value: today.toISOString()
     })
-    const defaultFormValue = father && mode === 'edit' ? father : {
+    const defaultFormValue = mother && mode === 'edit' ? mother : {
         liveTogetherSince: defaultDateString,
         liveTogetherUntil: defaultDateString,
         householdMember: false,
@@ -71,24 +71,24 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
         principalApplicant: false,
 
     }
-    const form = useForm<z.infer<typeof PersonalContactFamily_FatherSchema>>({
-        resolver: zodResolver(PersonalContactFamily_FatherSchema),
+    const form = useForm<z.infer<typeof PersonalContactFamily_MotherSchema>>({
+        resolver: zodResolver(PersonalContactFamily_MotherSchema),
         defaultValues: defaultFormValue
     })
 
 
-    async function onSubmit(data: z.infer<typeof PersonalContactFamily_FatherSchema>) {
+    async function onSubmit(data: z.infer<typeof PersonalContactFamily_MotherSchema>) {
         console.log(data);
 
         const promise = async () => {
             try {
                 setError(false);
                 if (mode === 'create') {
-                    await createPersonalContactFamily_Father(data)
+                    await createPersonalContactFamily_Mother(data)
                 }
                 if (mode === 'edit') {
-                    await editPersonalContactFamily_Father({
-                        ...data, id: father?.id ?? 0
+                    await editPersonalContactFamily_Mother({
+                        ...data, id: mother?.id ?? 0
                     })
                 }
                 setOpenDlg(false);
@@ -105,9 +105,9 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
     const createToaster = useCallback(
         (promise: () => Promise<unknown>) => {
             return toast.promise(promise, {
-                success: t(`${mode}FatherSuccess`),
-                error: t(`${mode}FatherError`),
-                loading: t(`${mode}FatherLoading`),
+                success: t(`${mode}MotherSuccess`),
+                error: t(`${mode}MotherError`),
+                loading: t(`${mode}MotherLoading`),
             });
         },
         [t],
@@ -128,7 +128,7 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
                 <DialogContent className="max-w-[45%]">
                     <DialogHeader>
                         <DialogTitle>
-                            <Trans i18nKey={'contact:father'} />
+                            <Trans i18nKey={'contact:mother'} />
                         </DialogTitle>
                         <DialogDescription>
                             <Trans i18nKey={'contact:familyDescription'} />

@@ -148,3 +148,18 @@ export const PersonalContactFamily_FatherSchema = z.object({
   derivativeApplicant: z.boolean(),
   principalApplicant: z.boolean(),
 })
+
+export const PersonalContactFamily_MotherSchema = z.object({
+  firstName: z.string(),
+  middleName: z.string(),
+  lastName: z.string(),
+  email: z.string(),
+  relationType: z.string(),
+  liveTogetherSince: z.string(),
+  liveTogetherUntil: z.string(),
+  DependentStatus: z.string(),
+  householdMember: z.boolean(),
+  headOfHousehold: z.boolean(),
+  derivativeApplicant: z.boolean(),
+  principalApplicant: z.boolean(),
+})
