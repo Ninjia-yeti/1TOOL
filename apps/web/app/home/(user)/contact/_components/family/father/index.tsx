@@ -7,7 +7,7 @@ import {
 } from '@kit/ui/card';
 import { Trans } from '@kit/ui/trans';
 
-// import { PetitionList } from './father-list';
+import { FatherList } from './father-list';
 import { FatherAdd } from './father-add';
 
 import { z } from 'zod';
@@ -19,16 +19,13 @@ export async function ContactFamily_Father() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>
+                <CardTitle className='flex gap-2 items-center'>
                     <Trans i18nKey={'contact:father'} />
+                    <FatherAdd />
                 </CardTitle>
-
-
             </CardHeader>
             <CardContent className={'space-y-4'}>
-                <FatherAdd />
-                {/* <PetitionList /> */}
-
+                <FatherList />
             </CardContent>
         </Card>
     );

@@ -27,7 +27,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@kit/ui/select"
-import { Label } from '@kit/ui/label';
 
 import { Input } from '@kit/ui/input';
 
@@ -44,13 +43,13 @@ import { DateTypes } from '../../common/contact-date-selector';
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
-import { createPersonalContactFamily_Father, editPersonalContactPetition, } from '../../../_lib/server/server-actions';
+import { createPersonalContactFamily_Father, editPersonalContactFamily_Father } from '../../../_lib/server/server-actions';
 import { PersonalContactFamily_FatherProps } from '.';
 
 export interface FatherFormProps {
     trigger: ReactNode,
     father?: PersonalContactFamily_FatherProps,
-    mode: 'edit' | 'create'
+    mode: 'edit' | 'create',
 }
 
 export function FatherForm({ trigger, mode, father }: FatherFormProps) {
@@ -87,11 +86,11 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
                 if (mode === 'create') {
                     await createPersonalContactFamily_Father(data)
                 }
-                // if (mode === 'edit') {
-                //     await editPersonalContactPetition({
-                //         ...data, id: petition?.id ?? 0
-                //     })
-                // }
+                if (mode === 'edit') {
+                    await editPersonalContactFamily_Father({
+                        ...data, id: father?.id ?? 0
+                    })
+                }
                 setOpenDlg(false);
             }
             catch (e) {
@@ -123,16 +122,16 @@ export function FatherForm({ trigger, mode, father }: FatherFormProps) {
                     setOpenDlg(v)
                 }}
             >
-                <DialogTrigger>
+                <DialogTrigger className='flex items-center'>
                     {trigger}
                 </DialogTrigger>
                 <DialogContent className="max-w-[45%]">
                     <DialogHeader>
                         <DialogTitle>
-                            <Trans i18nKey={'contact:petition'} />
+                            <Trans i18nKey={'contact:father'} />
                         </DialogTitle>
                         <DialogDescription>
-                            <Trans i18nKey={'contact:petitionDescription'} />
+                            <Trans i18nKey={'contact:familyDescription'} />
                         </DialogDescription>
                     </DialogHeader>
                     <Form {...form}>

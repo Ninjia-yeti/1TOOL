@@ -1,8 +1,8 @@
 'use client'
-import { Trans } from '@kit/ui/trans';
-import { Button } from '@kit/ui/button';
 import { FatherForm } from './father-form';
 import { ClientOnly } from '~/home/(user)/_components/client-only';
+import { Plus } from 'lucide-react';
+
 
 
 
@@ -13,9 +13,7 @@ export function FatherAdd() {
                 <FatherForm
                     mode='create'
                     trigger={
-                        <Button variant={'default'}>
-                            <Trans i18nKey={'contact:add'} />
-                        </Button>
+                        <Plus color='#707070' />
                     }
                 />
             </ClientOnly>

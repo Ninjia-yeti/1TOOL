@@ -57,5 +57,6 @@
   "reentryPermit": "Reentry permit",
   "refugeeTravelDocument": "Refugee travel document",
   "family": "Family",
-  "father": "Father"
+  "father": "Father",
+  "familyDescription": "Make changes to your family information"
 }
